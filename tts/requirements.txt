@@ -1,0 +1,25 @@
+# ── Ekodi Bambara TTS (Meta MMS-TTS / VITS) ──────────────────
+# Core
+torch>=2.1.0
+torchaudio>=2.1.0
+transformers>=4.38.0
+datasets>=2.17.0
+accelerate>=0.27.0
+huggingface_hub>=0.21.0
+
+# Audio processing
+soundfile>=0.12.1
+librosa>=0.10.1
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Text normalization
+unicodedata2>=15.1.0
+
+# Inference server
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+python-multipart>=0.0.6
+
+# Configuration
+pyyaml>=6.0.1

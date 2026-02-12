@@ -1,0 +1,27 @@
+# Bambara (Bamanankan) test prompts for TTS evaluation
+# One prompt per line. Lines starting with # are comments.
+
+# ── Greetings ─────────────────────────────────────────────────
+I ni ce!
+I ni tile!
+Aw ni ce!
+I ka kɛnɛ wa?
+Tɔɔrɔ si tɛ.
+Hɛɛrɛ dɔrɔn.
+
+# ── Common phrases ────────────────────────────────────────────
+N bɛ bamanankan mɛn.
+A bɛ taa sugu la.
+Den misɛnw bɛ taa kalanso la.
+Bamanankan ye kan ɲuman ye.
+Mali ye jamana ɲuman ye.
+
+# ── Slightly longer sentences ─────────────────────────────────
+Ne bɛ fɛ ka bamanankan kalan, bari a ka di n ye kosɛbɛ.
+Sugu bɛ da kɛnɛma, mɔgɔw bɛ feere ni san ye.
+Tile bɛ bɔ kɔrɔn fɛ, a bɛ bin tlɛ fɛ.
+
+# ── Questions ─────────────────────────────────────────────────
+I tɔgɔ ye mun ye?
+E bɛ bɔ min?
+O ye mun ye?

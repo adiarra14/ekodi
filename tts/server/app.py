@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """
-Ekodi Bambara TTS – FastAPI inference server.
+Ekodi Bambara TTS – FastAPI inference server + voice platform UI.
 
 Endpoints:
-    POST /tts          → synthesize Bambara text, returns WAV audio
-    GET  /health       → health check
-    GET  /speakers     → list available speakers
+    GET  /              → Voice platform web interface
+    POST /tts           → synthesize Bambara text, returns WAV audio
+    GET  /health        → health check
+    GET  /speakers      → list available speakers
 
 Usage:
     cd tts
@@ -15,16 +16,16 @@ Usage:
 """
 
 import hashlib
-import io
 import logging
 import sys
-from functools import lru_cache
 from pathlib import Path
 
 import yaml
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import Response
+from fastapi.responses import HTMLResponse, Response
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
 
 # Add parent to path
@@ -35,6 +36,7 @@ logger = logging.getLogger(__name__)
 
 # ── Config ────────────────────────────────────────────────────
 CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "ekodi-port.yml"
+SERVER_DIR = Path(__file__).resolve().parent
 
 
 def load_config():
@@ -49,8 +51,8 @@ srv_cfg = cfg.get("server", {})
 # ── App ───────────────────────────────────────────────────────
 app = FastAPI(
     title="Ekodi Bambara TTS",
-    description="Text-to-Speech API for Bambara (Bamanankan)",
-    version="0.1.0",
+    description="Text-to-Speech API & Voice Platform for Bambara (Bamanankan)",
+    version="0.2.0",
 )
 
 app.add_middleware(
@@ -59,6 +61,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# ── Static files & Templates ─────────────────────────────────
+app.mount("/static", StaticFiles(directory=str(SERVER_DIR / "static")), name="static")
+templates = Jinja2Templates(directory=str(SERVER_DIR / "templates"))
 
 # ── Global model (lazy loaded) ────────────────────────────────
 _model = None
@@ -98,7 +104,14 @@ class SpeakerResponse(BaseModel):
     speakers: list[str]
 
 
-# ── Endpoints ─────────────────────────────────────────────────
+# ── Pages ─────────────────────────────────────────────────────
+@app.get("/", response_class=HTMLResponse)
+def index(request: Request):
+    """Serve the voice platform UI."""
+    return templates.TemplateResponse("index.html", {"request": request})
+
+
+# ── API Endpoints ─────────────────────────────────────────────
 @app.get("/health", response_model=HealthResponse)
 def health():
     model = get_model()

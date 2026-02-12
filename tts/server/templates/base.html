@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="bm" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ekodi — Bambara (Bamanankan) Voice Platform powered by Meta MMS-TTS">
+  <title>{% block title %}Ekodi — Bambara Voice Platform{% endblock %}</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/static/css/style.css">
+  {% block head %}{% endblock %}
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗣</text></svg>">
+</head>
+<body>
+  {% block body %}{% endblock %}
+
+  <!-- i18n must load before app -->
+  <script src="/static/js/i18n.js"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

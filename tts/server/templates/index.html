@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="app-container">
+
+  <!-- ── Header ──────────────────────────────────────────── -->
+  <header class="app-header">
+    <div class="app-logo">
+      <div class="app-logo-icon">&#9835;</div>
+      <h1 data-i18n="app_name">Ekodi</h1>
+    </div>
+    <p class="app-subtitle" data-i18n="app_subtitle">Bamanankan Kuma Baarakɛminɛn</p>
+  </header>
+
+  <!-- ── Toolbar: Language + Theme ───────────────────────── -->
+  <nav class="toolbar">
+    <!-- Language switcher -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn lang-btn active" data-lang="bm" data-i18n="lang_bm">Bamanankan</button>
+      <button class="toolbar-btn lang-btn" data-lang="fr" data-i18n="lang_fr">Faransikan</button>
+      <button class="toolbar-btn lang-btn" data-lang="en" data-i18n="lang_en">Angilɛkan</button>
+    </div>
+
+    <!-- Theme switcher -->
+    <div class="toolbar-group">
+      <button class="toolbar-btn theme-btn active" data-theme="light" data-i18n="theme_light">Yeelen</button>
+      <button class="toolbar-btn theme-btn" data-theme="dark" data-i18n="theme_dark">Dibi</button>
+    </div>
+  </nav>
+
+  <!-- ── Main Card ───────────────────────────────────────── -->
+  <main class="main-card">
+
+    <!-- Text input -->
+    <div class="input-section">
+      <textarea
+        id="text-input"
+        class="text-input"
+        data-i18n-placeholder="placeholder"
+        placeholder="I ka sɛbɛn kɛ yan bamanankan na..."
+        maxlength="2000"
+        autofocus
+      ></textarea>
+      <div class="input-footer">
+        <span id="char-count" class="char-count">0 sɛbɛn</span>
+        <span style="color: var(--text-muted); font-size: 0.75rem;">Ctrl+Enter</span>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls-section">
+      <button id="btn-speak" class="btn btn-primary">
+        <span id="btn-speak-text" data-i18n="btn_speak">Kuma</span>
+      </button>
+      <button id="btn-download" class="btn btn-secondary" disabled data-i18n="btn_download">
+        A jigin
+      </button>
+      <button id="btn-clear" class="btn btn-secondary" data-i18n="btn_clear">
+        A bɔ
+      </button>
+      <div class="controls-spacer"></div>
+    </div>
+
+    <!-- Status -->
+    <div class="status-bar">
+      <div class="status-indicator">
+        <span id="status-dot" class="status-dot"></span>
+        <span id="status-text" data-i18n="status_ready">A labɛnna</span>
+      </div>
+    </div>
+
+    <!-- Audio player / waveform -->
+    <div id="player-section" class="player-section">
+      <div class="waveform-container">
+        <canvas id="waveform-canvas" class="waveform-canvas"></canvas>
+      </div>
+      <div class="player-info">
+        <span id="player-duration">—</span>
+        <span id="player-size">—</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── History ─────────────────────────────────────────── -->
+  <section class="history-section">
+    <div class="section-header">
+      <span class="section-title" data-i18n="label_history">Kuma kɔrɔw</span>
+    </div>
+    <div id="history-list" class="history-list"></div>
+    <div id="history-empty" class="history-empty" data-i18n="history_empty">
+      Kuma kɔrɔ si tɛ yen
+    </div>
+  </section>
+
+  <!-- ── Footer ──────────────────────────────────────────── -->
+  <footer class="app-footer">
+    <span data-i18n="footer_powered">Baara kɛra ni Meta MMS-TTS ye</span>
+    &nbsp;&middot;&nbsp;
+    <a href="https://github.com/adiarra14/ekodi" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+</div>
+
+<!-- Toast notifications -->
+<div id="toast-container" class="toast-container"></div>
+{% endblock %}
+
+{% block scripts %}
+<script src="/static/js/app.js"></script>
+{% endblock %}

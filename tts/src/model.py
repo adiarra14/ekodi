@@ -99,5 +99,5 @@ class EkodiTTS:
 
     @property
     def sample_rate(self) -> int:
-        """MMS-TTS outputs 16 kHz audio."""
-        return 16_000
+        """Return the model's native sampling rate."""
+        return getattr(self.model.config, "sampling_rate", 16_000)

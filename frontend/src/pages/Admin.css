@@ -1,0 +1,109 @@
+/* ── Admin Dashboard ──────────────────── */
+.admin-page {
+  min-height: 100vh;
+  background: #0a0a0f;
+  padding: 5.5rem 1.5rem 3rem;
+}
+.admin-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c7c8a;
+  background: #0a0a0f;
+}
+.admin-container {
+  max-width: 1060px;
+  margin: 0 auto;
+}
+.admin-container h1 {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 1.6rem;
+  color: #fafafa;
+  margin-bottom: 1.8rem;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.85rem;
+  margin-bottom: 2rem;
+}
+.admin-stat {
+  text-align: center;
+  padding: 1.25rem 0.85rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.admin-stat .stat-icon { color: #ff7a2f; }
+.admin-stat .stat-icon.positive { color: #14b8a6; }
+.admin-stat .stat-icon.negative { color: #ef4444; }
+.stat-val { font-size: 1.8rem; font-weight: 800; color: #fafafa; }
+.stat-lbl { font-size: 0.75rem; color: #7c7c8a; text-transform: uppercase; letter-spacing: 0.04em; }
+
+.admin-tabs {
+  display: flex;
+  gap: 0.35rem;
+  margin-bottom: 1.25rem;
+}
+.admin-tabs button {
+  padding: 0.45rem 1.1rem;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255,255,255,0.03);
+  color: #7c7c8a;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  transition: all 0.2s;
+}
+.admin-tabs button.active {
+  background: rgba(255, 122, 47, 0.1);
+  color: #ff7a2f;
+}
+
+.admin-table-wrap {
+  overflow-x: auto;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.015);
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.admin-table th {
+  text-align: left;
+  padding: 0.75rem 0.9rem;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #7c7c8a;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.admin-table td {
+  padding: 0.65rem 0.9rem;
+  font-size: 0.85rem;
+  color: #e4e4e8;
+  border-bottom: 1px solid rgba(255,255,255,0.025);
+}
+.admin-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+.role-badge {
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.role-badge.admin { background: rgba(255, 122, 47, 0.1); color: #ff7a2f; }
+.role-badge.user { background: rgba(255,255,255,0.04); color: #7c7c8a; }
+
+.positive { color: #14b8a6; }
+.negative { color: #ef4444; }

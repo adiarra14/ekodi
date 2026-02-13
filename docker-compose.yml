@@ -1,0 +1,112 @@
+# ── Ekodi.ai Docker Compose ────────────────────────────────
+# Services: Traefik (reverse proxy), ekodi-web, PostgreSQL, Redis
+
+version: "3.8"
+
+services:
+  # ── Traefik: SSL + routing ──────────────────────────────
+  traefik:
+    image: traefik:v3.0
+    restart: always
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.le.acme.httpchallenge=true"
+      - "--certificatesresolvers.le.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.le.acme.email=${ACME_EMAIL:-admin@ekodi.ai}"
+      - "--certificatesresolvers.le.acme.storage=/letsencrypt/acme.json"
+      # HTTP → HTTPS redirect
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-certs:/letsencrypt
+    networks:
+      - ekodi-net
+
+  # ── Ekodi Web App ──────────────────────────────────────
+  ekodi-web:
+    build: .
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://${POSTGRES_USER:-ekodi}:${POSTGRES_PASSWORD:-ekodi_secret}@postgres:5432/${POSTGRES_DB:-ekodi}
+      - REDIS_URL=redis://redis:6379/0
+      - SECRET_KEY=${SECRET_KEY:-change-me-in-production}
+      - JWT_SECRET=${JWT_SECRET:-change-me-jwt-secret}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - HF_TOKEN=${HF_TOKEN}
+      - DEBUG=${DEBUG:-false}
+    labels:
+      # ekodi.ai → web app
+      - "traefik.enable=true"
+      - "traefik.http.routers.ekodi.rule=Host(`ekodi.ai`) || Host(`www.ekodi.ai`)"
+      - "traefik.http.routers.ekodi.entrypoints=websecure"
+      - "traefik.http.routers.ekodi.tls.certresolver=le"
+      - "traefik.http.services.ekodi.loadbalancer.server.port=8000"
+      # api.ekodi.ai → same app (API routes)
+      - "traefik.http.routers.ekodi-api.rule=Host(`api.ekodi.ai`)"
+      - "traefik.http.routers.ekodi-api.entrypoints=websecure"
+      - "traefik.http.routers.ekodi-api.tls.certresolver=le"
+      - "traefik.http.services.ekodi-api.loadbalancer.server.port=8000"
+    volumes:
+      - model-cache:/root/.cache
+    networks:
+      - ekodi-net
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ── PostgreSQL ─────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-ekodi}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-ekodi_secret}
+      - POSTGRES_DB=${POSTGRES_DB:-ekodi}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - ekodi-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-ekodi}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # ── Redis ──────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - redis-data:/data
+    networks:
+      - ekodi-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  traefik-certs:
+  postgres-data:
+  redis-data:
+  model-cache:
+
+networks:
+  ekodi-net:
+    driver: bridge

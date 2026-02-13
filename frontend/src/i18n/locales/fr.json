@@ -1,0 +1,152 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "chat": "Chat",
+    "api": "API",
+    "login": "Connexion",
+    "register": "Inscription",
+    "logout": "Deconnexion",
+    "admin": "Admin"
+  },
+  "hero": {
+    "badge": "Sambala ɲiɔ",
+    "title": "L'IA qui parle le Bamanankan",
+    "subtitle": "Posez vos questions par voix ou texte. Ekodi comprend, reflechit et repond — en Bamanankan.",
+    "leitmotiv": "Ekodi est la. Et il parle votre langue.",
+    "cta_try": "Essayer Ekodi Gratuitement",
+    "cta_api": "Acces API"
+  },
+  "features": {
+    "title": "Ce que Ekodi peut faire",
+    "voice_title": "Parlez a Ekodi",
+    "voice_desc": "Parlez en bamanankan ou en francais. Ekodi ecoute, comprend et repond naturellement en Bamanankan — comme une conversation.",
+    "translate_title": "Traduisez instantanement",
+    "translate_desc": "Passez du francais au bamanankan en un instant. Du texte en entree, du texte en sortie — precis et rapide.",
+    "tts_title": "Ecoutez le Bamanankan",
+    "tts_desc": "Ekodi ne se contente pas d'ecrire. Il parle. Une voix bamanankan naturelle, claire et expressive.",
+    "api_title": "Construisez avec Ekodi",
+    "api_desc": "Ajoutez la voix et la traduction bamanankan a vos applications, bots ou services avec une API simple."
+  },
+  "how": {
+    "title": "Simple comme parler",
+    "step1": "Vous parlez ou ecrivez",
+    "step1_desc": "En bamanankan ou en francais",
+    "step2": "Ekodi comprend",
+    "step2_desc": "Votre message est analyse instantanement",
+    "step3": "Ekodi reflechit",
+    "step3_desc": "Une reponse intelligente est generee",
+    "step4": "Ekodi repond",
+    "step4_desc": "En bamanankan — texte et voix"
+  },
+  "demo": {
+    "title": "Voyez par vous-meme",
+    "user_msg": "I ni ce, Ekodi! Bamako sigida jumɛn ka bon?",
+    "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
+    "input_placeholder": "Demandez a Ekodi..."
+  },
+  "api_showcase": {
+    "title": "Integrez l'IA Bamanankan",
+    "subtitle": "Une API REST simple pour ajouter la voix, la traduction et l'intelligence bamanankan a toute application.",
+    "get_key": "Obtenir votre cle API"
+  },
+  "story": {
+    "proverb": "Seme avant les autres ɲiɔ (mil), il grandit et les depasse tous.",
+    "desc": "En Bamanankan, Sambala ɲiɔ est le mil seme en premier — il pousse plus vite et se dresse plus haut que les autres. Ekodi porte cet esprit : la premiere IA qui parle veritablement le Bamanankan. Il est la, et il parle votre langue."
+  },
+  "stats": {
+    "languages": "Langues",
+    "responses": "Reponses Instantanees",
+    "free": "Prompts Gratuits",
+    "available": "Disponible"
+  },
+  "pricing": {
+    "title": "Commencez gratuitement",
+    "subtitle": "Decouvrez Ekodi avec 10 prompts gratuits. Sans carte, sans engagement.",
+    "free_tier": "Gratuit",
+    "free_prompts": "10 prompts",
+    "free_features": "Voix, traduction et texte",
+    "free_cta": "Commencer",
+    "pro_tier": "Pro",
+    "pro_prompts": "Illimite",
+    "pro_features": "Priorite, acces API, sans limites",
+    "pro_cta": "Bientot disponible",
+    "token_note": "Tarification par tokens"
+  },
+  "feedback_cta": {
+    "title": "Votre voix fait grandir Ekodi",
+    "subtitle": "Apres chaque reponse, dites-nous comment Ekodi s'en est sorti. Chaque evaluation aide l'IA a apprendre et s'ameliorer — pour tout le monde.",
+    "cta": "Tester et donner son avis",
+    "badge": "Aidez-nous a progresser"
+  },
+  "ynnov": {
+    "title": "Concu par Ynnov",
+    "desc": "Ynnov transforme les idees et les visions en realite grace a des solutions IA adaptees a l'Afrique et aux regions en developpement. De la R&D a l'intelligence des donnees, Ynnov accompagne les organisations vers une croissance durable.",
+    "mission": "De la vision a la realite — des solutions IA pour un impact concret.",
+    "visit": "Decouvrir ynnov.io"
+  },
+  "footer": {
+    "powered": "Un produit Ynnov",
+    "rights": "Tous droits reserves"
+  },
+  "auth": {
+    "login_title": "Bon retour",
+    "login_subtitle": "Connectez-vous pour continuer sur Ekodi",
+    "register_title": "Creer un compte",
+    "register_subtitle": "Rejoignez Ekodi — l'assistant IA Bamanankan",
+    "email": "Email",
+    "name": "Nom complet",
+    "password": "Mot de passe",
+    "confirm_password": "Confirmer le mot de passe",
+    "login_btn": "Se Connecter",
+    "register_btn": "Creer le Compte",
+    "no_account": "Pas encore de compte ?",
+    "has_account": "Deja un compte ?",
+    "or": "ou"
+  },
+  "chat": {
+    "new_chat": "Nouveau Chat",
+    "conversations": "Conversations",
+    "type_message": "Ecrivez un message...",
+    "send": "Envoyer",
+    "thinking": "Ekodi reflechit...",
+    "speak_in": "Parler en :",
+    "french": "Francais",
+    "bambara": "Bamanankan",
+    "welcome": "I ni ce ! Bienvenue sur Ekodi",
+    "welcome_hint": "Posez-moi une question — je parle bamanankan et francais !",
+    "no_conversations": "Aucune conversation",
+    "delete_confirm": "Supprimer cette conversation ?",
+    "mic_tap": "Appuyez pour parler",
+    "mic_recording": "Enregistrement...",
+    "mic_processing": "Traitement..."
+  },
+  "api_page": {
+    "title": "Cles API",
+    "create_key": "Creer une Nouvelle Cle",
+    "key_name": "Nom de la cle",
+    "no_keys": "Aucune cle API",
+    "usage": "Utilisation",
+    "revoke": "Revoquer",
+    "docs_title": "Documentation API",
+    "copy": "Copier"
+  },
+  "admin": {
+    "title": "Tableau de Bord Admin",
+    "users": "Utilisateurs",
+    "conversations": "Conversations",
+    "messages": "Messages",
+    "api_keys": "Cles API",
+    "api_usage": "Appels API",
+    "feedback": "Retours",
+    "positive": "Positifs",
+    "negative": "Negatifs"
+  },
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "close": "Fermer"
+  }
+}

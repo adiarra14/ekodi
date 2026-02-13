@@ -1,0 +1,43 @@
+/* ── Input ────────────────────────────── */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+.input-label {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #7c7c8a;
+}
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-wrapper:focus-within {
+  border-color: rgba(255, 122, 47, 0.5);
+  box-shadow: 0 0 0 3px rgba(255, 122, 47, 0.08);
+}
+.input-icon {
+  padding: 0 0.75rem;
+  color: #7c7c8a;
+  display: flex;
+}
+.input-field {
+  width: 100%;
+  padding: 0.65rem 0.85rem;
+  background: none;
+  border: none;
+  color: #fafafa;
+  font-size: 0.9rem;
+  font-family: inherit;
+  outline: none;
+}
+.input-field::placeholder { color: #555; }
+.input-icon + .input-field { padding-left: 0; }
+
+.input-error .input-wrapper { border-color: #ef4444; }
+.input-error-text { font-size: 0.78rem; color: #ef4444; }

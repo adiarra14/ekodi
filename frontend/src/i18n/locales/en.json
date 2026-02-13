@@ -1,0 +1,152 @@
+{
+  "nav": {
+    "home": "Home",
+    "chat": "Chat",
+    "api": "API",
+    "login": "Login",
+    "register": "Sign Up",
+    "logout": "Logout",
+    "admin": "Admin"
+  },
+  "hero": {
+    "badge": "Sambala ɲiɔ",
+    "title": "The AI that speaks Bamanankan",
+    "subtitle": "Ask anything by voice or text. Ekodi understands, thinks, and answers — in Bamanankan.",
+    "leitmotiv": "Ekodi is here. And it speaks your language.",
+    "cta_try": "Try Ekodi Free",
+    "cta_api": "API Access"
+  },
+  "features": {
+    "title": "What Ekodi can do",
+    "voice_title": "Talk to Ekodi",
+    "voice_desc": "Speak in Bamanankan or French. Ekodi listens, understands, and responds naturally in Bamanankan — like a conversation.",
+    "translate_title": "Translate instantly",
+    "translate_desc": "Switch between French and Bamanankan effortlessly. Text in, text out — accurate and fast.",
+    "tts_title": "Hear Bamanankan",
+    "tts_desc": "Ekodi doesn't just write. It speaks. Natural Bamanankan voice, clear and expressive.",
+    "api_title": "Build with Ekodi",
+    "api_desc": "Add Bamanankan voice and translation to your own apps, bots, or services with a simple API."
+  },
+  "how": {
+    "title": "Simple as speaking",
+    "step1": "You speak or type",
+    "step1_desc": "In Bamanankan or French",
+    "step2": "Ekodi understands",
+    "step2_desc": "Your message is analyzed instantly",
+    "step3": "Ekodi thinks",
+    "step3_desc": "An intelligent response is generated",
+    "step4": "Ekodi answers",
+    "step4_desc": "In Bamanankan — text and voice"
+  },
+  "demo": {
+    "title": "See it in action",
+    "user_msg": "I ni ce, Ekodi! Bamako sigida jumɛn ka bon?",
+    "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
+    "input_placeholder": "Ask Ekodi anything..."
+  },
+  "api_showcase": {
+    "title": "Integrate Bamanankan AI",
+    "subtitle": "A simple REST API to bring Bamanankan voice, translation, and intelligence into any application.",
+    "get_key": "Get Your API Key"
+  },
+  "story": {
+    "proverb": "Planted before the other ɲiɔ (millet), it grows and surpasses them all.",
+    "desc": "In Bamanankan, Sambala ɲiɔ is the millet sown first — it rises faster and stands taller than the rest. Ekodi carries that spirit: the first AI to truly speak Bamanankan. It is here, and it speaks your language."
+  },
+  "stats": {
+    "languages": "Languages",
+    "responses": "Instant Responses",
+    "free": "Free Prompts",
+    "available": "Available Now"
+  },
+  "pricing": {
+    "title": "Start for free",
+    "subtitle": "Discover Ekodi with 10 free prompts. No credit card, no commitment.",
+    "free_tier": "Free",
+    "free_prompts": "10 prompts",
+    "free_features": "Voice, translation, and text",
+    "free_cta": "Get Started",
+    "pro_tier": "Pro",
+    "pro_prompts": "Unlimited",
+    "pro_features": "Priority access, API, no limits",
+    "pro_cta": "Coming Soon",
+    "token_note": "Token-based pricing"
+  },
+  "feedback_cta": {
+    "title": "Your voice shapes Ekodi",
+    "subtitle": "After each response, tell us how Ekodi did. Every rating helps the AI learn and improve — for everyone.",
+    "cta": "Try & Give Feedback",
+    "badge": "Help us improve"
+  },
+  "ynnov": {
+    "title": "Built by Ynnov",
+    "desc": "Ynnov transforms ideas and visions into reality with AI-driven solutions customized for Africa and developing regions. From R&D to data intelligence, Ynnov empowers organizations to achieve sustainable growth.",
+    "mission": "From vision to reality — AI solutions for real-world impact.",
+    "visit": "Discover ynnov.io"
+  },
+  "footer": {
+    "powered": "A Ynnov Product",
+    "rights": "All rights reserved"
+  },
+  "auth": {
+    "login_title": "Welcome back",
+    "login_subtitle": "Sign in to continue to Ekodi",
+    "register_title": "Create account",
+    "register_subtitle": "Join Ekodi — the Bamanankan AI assistant",
+    "email": "Email",
+    "name": "Full name",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "login_btn": "Sign In",
+    "register_btn": "Create Account",
+    "no_account": "Don't have an account?",
+    "has_account": "Already have an account?",
+    "or": "or"
+  },
+  "chat": {
+    "new_chat": "New Chat",
+    "conversations": "Conversations",
+    "type_message": "Type a message...",
+    "send": "Send",
+    "thinking": "Ekodi is thinking...",
+    "speak_in": "Speak in:",
+    "french": "French",
+    "bambara": "Bamanankan",
+    "welcome": "I ni ce! Welcome to Ekodi",
+    "welcome_hint": "Ask me anything — I speak Bamanankan and French!",
+    "no_conversations": "No conversations yet",
+    "delete_confirm": "Delete this conversation?",
+    "mic_tap": "Tap to speak",
+    "mic_recording": "Recording...",
+    "mic_processing": "Processing..."
+  },
+  "api_page": {
+    "title": "API Keys",
+    "create_key": "Create New Key",
+    "key_name": "Key name",
+    "no_keys": "No API keys yet",
+    "usage": "Usage",
+    "revoke": "Revoke",
+    "docs_title": "API Documentation",
+    "copy": "Copy"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "users": "Users",
+    "conversations": "Conversations",
+    "messages": "Messages",
+    "api_keys": "API Keys",
+    "api_usage": "API Calls",
+    "feedback": "Feedback",
+    "positive": "Positive",
+    "negative": "Negative"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "close": "Close"
+  }
+}

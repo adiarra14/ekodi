@@ -1,0 +1,105 @@
+/* ── Navbar ────────────────────────────── */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.7);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.nav-container {
+  max-width: 1120px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.5rem;
+}
+
+/* Logo */
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.nav-logo-img {
+  height: 28px;
+  width: auto;
+  object-fit: contain;
+}
+.nav-logo-text { color: #fafafa; }
+.nav-logo-ai   { color: #ff7a2f; }
+
+/* Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem 0.75rem;
+  color: #7c7c8a;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border-radius: 8px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color 0.2s, background 0.2s;
+}
+.nav-link:hover {
+  color: #e4e4e8;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.nav-cta {
+  background: #ff7a2f;
+  color: #fff !important;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.nav-cta:hover {
+  background: #ff9e5c !important;
+  transform: none;
+  box-shadow: none;
+}
+
+.nav-logout { color: #ef4444; }
+.nav-logout:hover { background: rgba(239, 68, 68, 0.08); }
+
+.nav-menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #fafafa;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .nav-menu-toggle { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(10, 10, 15, 0.96);
+    backdrop-filter: blur(16px);
+    flex-direction: column;
+    padding: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+  .nav-links.open { display: flex; }
+  .nav-link { width: 100%; justify-content: center; }
+}

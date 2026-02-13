@@ -1,0 +1,152 @@
+{
+  "nav": {
+    "home": "So",
+    "chat": "Kuma",
+    "api": "API",
+    "login": "Don",
+    "register": "Tɔgɔ sɛbɛn",
+    "logout": "Bɔ",
+    "admin": "Ɲɛmɔgɔ"
+  },
+  "hero": {
+    "badge": "Sambala ɲiɔ",
+    "title": "IA min bɛ Bamanankan kuma",
+    "subtitle": "Ɲininkali kɛ ni kuma ye walima ni sɛbɛnni ye. Ekodi bɛ faamu, bɛ miiri, ka jaabi — Bamanankan na.",
+    "leitmotiv": "Ekodi bɛ yan. A bɛ i ka kan kuma.",
+    "cta_try": "Ekodi dɛmɛ gansan",
+    "cta_api": "API sɔrɔ"
+  },
+  "features": {
+    "title": "Ekodi bɛ se ka mun kɛ",
+    "voice_title": "Kuma Ekodi fɛ",
+    "voice_desc": "Kuma bamanankan walima tubabukan na. Ekodi bɛ lamɛn, bɛ faamu, ka jaabi Bamanankan na — i ko kumaɲɔgɔnya.",
+    "translate_title": "Bayɛlɛmani joona",
+    "translate_desc": "Tubabukan ni bamanankan cɛ tɛmɛni ka nɔgɔn. Sɛbɛnni don, sɛbɛnni bɔ — tiɲɛ ni teliya.",
+    "tts_title": "Bamanankan lamɛn",
+    "tts_desc": "Ekodi tɛ sɛbɛnni dɔrɔn kɛ. A bɛ kuma. Bamanankan kuma jɛlen, ɲuman.",
+    "api_title": "Jɔ ni Ekodi ye",
+    "api_desc": "Bamanankan kuma ni bayɛlɛmani fara i ka porogaramuw kan ni API nɔgɔman ye."
+  },
+  "how": {
+    "title": "A man gɛlɛn i ko kumaɲɔgɔnya",
+    "step1": "I bɛ kuma walima sɛbɛn",
+    "step1_desc": "Bamanankan walima tubabukan na",
+    "step2": "Ekodi bɛ faamu",
+    "step2_desc": "I ka ciden bɛ sɛgɛsɛgɛ joona",
+    "step3": "Ekodi bɛ miiri",
+    "step3_desc": "Jaabi hakilitigiya bɛ labɛn",
+    "step4": "Ekodi bɛ jaabi",
+    "step4_desc": "Bamanankan na — sɛbɛnni ni kuma"
+  },
+  "demo": {
+    "title": "A filɛ a baara la",
+    "user_msg": "I ni ce, Ekodi! Bamako sigida jumɛn ka bon?",
+    "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
+    "input_placeholder": "Ɲininkali kɛ Ekodi fɛ..."
+  },
+  "api_showcase": {
+    "title": "Bamanankan IA don i ka porogaramu la",
+    "subtitle": "API REST nɔgɔman min bɛ Bamanankan kuma, bayɛlɛmani, ani hakilitigiya fara porogaramu bɛɛ kan.",
+    "get_key": "I ka API kilɛ sɔrɔ"
+  },
+  "story": {
+    "proverb": "A bɛ sɛnɛ ɲiɔ tɔw ɲɛ, a bɛ bonya ka tɛmɛ u bɛɛ kan.",
+    "desc": "Bamanankan na, Sambala ɲiɔ ye ɲiɔ ye min bɛ sɛnɛ fɔlɔ — a bɛ bonya joona ka tɛmɛ tɔw kan. Ekodi bɛ o niyɔrɔ ta: IA fɔlɔ min bɛ Bamanankan kuma tiɲɛ tiɲɛ. A bɛ yan, a bɛ i ka kan kuma."
+  },
+  "stats": {
+    "languages": "Kanw",
+    "responses": "Jaabi joona",
+    "free": "Prompt gansan",
+    "available": "A bɛ sɔrɔ sisan"
+  },
+  "pricing": {
+    "title": "Daminɛ gansan",
+    "subtitle": "Ekodi dɛmɛ ni prompt 10 gansan ye. Kari tɛ, segin tɛ.",
+    "free_tier": "Gansan",
+    "free_prompts": "Prompt 10",
+    "free_features": "Kuma, bayɛlɛmani ani sɛbɛnni",
+    "free_cta": "Daminɛ",
+    "pro_tier": "Pro",
+    "pro_prompts": "Dɛsɛ tɛ",
+    "pro_features": "Fɔlɔya, API, dɛsɛ tɛ",
+    "pro_cta": "A bɛ na joona",
+    "token_note": "Token sara"
+  },
+  "feedback_cta": {
+    "title": "I ka kuma bɛ Ekodi bonya",
+    "subtitle": "Jaabi kelen-kelen kɔ, an fo Ekodi baara cogo. Kɔfɔli kelen-kelen bɛ IA dɛmɛ ka kalan ka ɲɛnabɔ — mɔgɔ bɛɛ ye.",
+    "cta": "Dɛmɛ ka kɔfɔli di",
+    "badge": "An dɛmɛ ka ɲɛnabɔ"
+  },
+  "ynnov": {
+    "title": "Ynnov ye a jɔ",
+    "desc": "Ynnov bɛ miriya ni laɲini yɛlɛma tiɲɛ ye ni IA fɛɛrɛw ye minw dabɔra Afiriki ni jamana wɛrɛw ye. Sɛgɛsɛgɛli ka taa kunnafoni hakilitigiya ma, Ynnov bɛ jɛkuluw dɛmɛ ka se bonya laban ma.",
+    "mission": "Miriya ka kɛ tiɲɛ ye — IA fɛɛrɛw diɲɛ kɔnɔ nafaw ye.",
+    "visit": "ynnov.io lajɛ"
+  },
+  "footer": {
+    "powered": "Ynnov ka fɛn",
+    "rights": "Hakɛ bɛɛ maralenw"
+  },
+  "auth": {
+    "login_title": "I ni ce, i kɔseginna",
+    "login_subtitle": "Don Ekodi kɔnɔ",
+    "register_title": "Jateminɛ dabɔ",
+    "register_subtitle": "Don Ekodi la — Bamanankan IA dɛmɛbaga",
+    "email": "Email",
+    "name": "Tɔgɔ",
+    "password": "Daɲɛgafe",
+    "confirm_password": "Daɲɛgafe lakodɔn",
+    "login_btn": "Don",
+    "register_btn": "Jateminɛ Dabɔ",
+    "no_account": "Jateminɛ tɛ i bolo?",
+    "has_account": "Jateminɛ bɛ i bolo?",
+    "or": "walima"
+  },
+  "chat": {
+    "new_chat": "Kuma Kura",
+    "conversations": "Kumaw",
+    "type_message": "Sɛbɛn yan...",
+    "send": "Ci",
+    "thinking": "Ekodi bɛ miiri la...",
+    "speak_in": "Kuma:",
+    "french": "Tubabukan",
+    "bambara": "Bamanankan",
+    "welcome": "I ni ce! Bisimila Ekodi la",
+    "welcome_hint": "Ɲininkali kɛ — ne bɛ bamanankan ni tubabukan kuma!",
+    "no_conversations": "Kuma si tɛ yan",
+    "delete_confirm": "Kuma nin bɔ?",
+    "mic_tap": "Digi ka kuma",
+    "mic_recording": "Mɛnni...",
+    "mic_processing": "Baara la..."
+  },
+  "api_page": {
+    "title": "API Kilɛw",
+    "create_key": "Kilɛ Kura Dabɔ",
+    "key_name": "Kilɛ tɔgɔ",
+    "no_keys": "API kilɛ si tɛ yan",
+    "usage": "Baara",
+    "revoke": "Bɔ",
+    "docs_title": "API Sɛbɛnw",
+    "copy": "Kopi"
+  },
+  "admin": {
+    "title": "Ɲɛmɔgɔ Tablo",
+    "users": "Baarakɛlaw",
+    "conversations": "Kumaw",
+    "messages": "Cidenw",
+    "api_keys": "API Kilɛw",
+    "api_usage": "API Weleli",
+    "feedback": "Kɔfɔli",
+    "positive": "Ɲuman",
+    "negative": "Jugu"
+  },
+  "common": {
+    "loading": "Dɔnni...",
+    "error": "Fili dɔ kɛra",
+    "save": "Mara",
+    "cancel": "Dabila",
+    "delete": "Bɔ",
+    "close": "Datugu"
+  }
+}

@@ -2,29 +2,40 @@
 __pycache__/
 *.py[cod]
 *.egg-info/
-*.egg
 dist/
 build/
+*.egg
 
-# Virtual environments
-.venv/
-venv/
-env/
+# Environment
+.env
+tts/.env
 
-# Data & checkpoints (large files, don't commit)
-tts/data/
-tts/checkpoints/
+# Database
+*.db
+*.sqlite3
+
+# Node
+node_modules/
+frontend/dist/
+frontend/.vite/
 
 # IDE
 .vscode/
+.cursor/
 .idea/
-*.swp
-*.swo
 
 # OS
 .DS_Store
 Thumbs.db
 
-# Secrets
-.env
-*.key
+# Docker
+model-cache/
+
+# Logs
+*.log
+
+# Agent transcripts
+agent-transcripts/
+
+# HuggingFace cache
+.cache/

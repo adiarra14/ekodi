@@ -1,0 +1,14 @@
+__pycache__
+*.pyc
+.git
+.env
+*.db
+node_modules
+frontend/node_modules
+frontend/.vite
+.vscode
+.cursor
+*.egg-info
+dist
+*.log
+agent-transcripts

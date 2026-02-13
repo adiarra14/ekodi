@@ -1,0 +1,33 @@
+/* ── Language switcher ────────────────── */
+.lang-switcher {
+  display: flex;
+  gap: 0.2rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 2px;
+}
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.28rem 0.55rem;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: #7c7c8a;
+  font-size: 0.78rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s, background 0.2s;
+  font-family: inherit;
+}
+.lang-btn:hover {
+  color: #e4e4e8;
+  background: rgba(255, 255, 255, 0.05);
+}
+.lang-btn.active {
+  background: rgba(255, 122, 47, 0.12);
+  color: #ff7a2f;
+}
+.lang-flag { font-size: 0.95rem; }
+.lang-code { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.03em; }

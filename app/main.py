@@ -74,10 +74,16 @@ if FRONTEND_BUILD.exists():
 
     @app.get("/{full_path:path}")
     async def serve_spa(full_path: str):
-        """Serve the React SPA for all non-API routes."""
+        """Serve static files from dist/ root, or fall back to index.html for SPA routing."""
         from fastapi.responses import FileResponse
 
-        # Serve index.html for all routes (React Router handles client-side routing)
+        # First check if the path matches a real file in dist/ (logos, audio, etc.)
+        if full_path:
+            static_file = FRONTEND_BUILD / full_path
+            if static_file.is_file():
+                return FileResponse(str(static_file))
+
+        # Otherwise serve index.html (React Router handles client-side routing)
         index = FRONTEND_BUILD / "index.html"
         if index.exists():
             return FileResponse(str(index))

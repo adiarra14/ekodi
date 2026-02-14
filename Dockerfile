@@ -27,6 +27,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend code
 COPY app/ ./app/
 COPY tts/ ./tts/
+COPY scripts/ ./scripts/
 
 # Copy frontend build
 COPY --from=frontend-build /build/dist ./frontend/dist

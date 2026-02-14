@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, User } from 'lucide-react';
+import { Mail, Lock, User, CheckSquare } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher';
@@ -15,15 +15,20 @@ export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [consent, setConsent] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    if (!consent) {
+      setError(t('auth.consent_required'));
+      return;
+    }
     setLoading(true);
     try {
-      await register(email, name, password);
+      await register(email, name, password, consent);
       navigate('/chat');
     } catch (err) {
       setError(err.message);
@@ -88,6 +93,18 @@ export default function Register() {
             minLength={6}
             required
           />
+
+          <label className="auth-consent">
+            <input
+              type="checkbox"
+              checked={consent}
+              onChange={(e) => setConsent(e.target.checked)}
+            />
+            <span>
+              {t('auth.consent_text')}{' '}
+              <Link to="/privacy" target="_blank">{t('auth.privacy_link')}</Link>
+            </span>
+          </label>
 
           <Button type="submit" variant="primary" size="lg" loading={loading} className="auth-submit">
             {t('auth.register_btn')}

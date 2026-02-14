@@ -14,6 +14,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
 from app.middleware.auth import get_current_user
+from app.middleware.rate_limit import check_user_prompt_limit
 from app.models.user import User
 from app.models.conversation import Conversation, Message
 from app.services.asr import transcribe_bambara, transcribe_french
@@ -190,6 +191,9 @@ async def text_chat(
 ):
     """Text chat with conversation persistence."""
     try:
+        # Check daily prompt limit
+        await check_user_prompt_limit(user, db)
+
         # Get or create conversation
         convo = None
         if req.conversation_id:
@@ -275,6 +279,9 @@ async def voice_chat(
     db: AsyncSession = Depends(get_db),
 ):
     """Voice pipeline: audio → ASR → GPT → translate → TTS."""
+    # Check daily prompt limit
+    await check_user_prompt_limit(user, db)
+
     suffix = "." + (audio.filename.split(".")[-1] if audio.filename else "webm")
     with tempfile.NamedTemporaryFile(delete=False, suffix=suffix) as tmp:
         content = await audio.read()

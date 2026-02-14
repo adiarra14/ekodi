@@ -27,7 +27,7 @@ class Settings(BaseModel):
     # JWT
     JWT_SECRET: str = "ekodi-jwt-secret-change-me"
     JWT_ALGORITHM: str = "HS256"
-    JWT_EXPIRE_MINUTES: int = 60 * 24 * 7  # 7 days
+    JWT_EXPIRE_MINUTES: int = 60  # 1 hour for access token
 
     # OpenAI
     OPENAI_API_KEY: str = ""
@@ -42,6 +42,19 @@ class Settings(BaseModel):
 
     # Server
     CORS_ORIGINS: list[str] = ["*"]
+
+    # SMTP (email)
+    SMTP_HOST: str = "smtp.gmail.com"
+    SMTP_PORT: int = 587
+    SMTP_USER: str = ""
+    SMTP_PASSWORD: str = ""
+    SMTP_FROM: str = "ekodi.ai <noreply@ekodi.ai>"
+
+    # Base URL for email links
+    BASE_URL: str = "https://ekodi.ai"
+
+    # Data retention
+    DATA_RETENTION_DAYS: int = 365
 
 
 def _load_dotenv():
@@ -72,4 +85,11 @@ def get_settings() -> Settings:
         JWT_SECRET=os.getenv("JWT_SECRET", Settings().JWT_SECRET),
         OPENAI_API_KEY=os.getenv("OPENAI_API_KEY", ""),
         HF_TOKEN=os.getenv("HF_TOKEN", ""),
+        SMTP_HOST=os.getenv("SMTP_HOST", Settings().SMTP_HOST),
+        SMTP_PORT=int(os.getenv("SMTP_PORT", str(Settings().SMTP_PORT))),
+        SMTP_USER=os.getenv("SMTP_USER", ""),
+        SMTP_PASSWORD=os.getenv("SMTP_PASSWORD", ""),
+        SMTP_FROM=os.getenv("SMTP_FROM", Settings().SMTP_FROM),
+        BASE_URL=os.getenv("BASE_URL", Settings().BASE_URL),
+        DATA_RETENTION_DAYS=int(os.getenv("DATA_RETENTION_DAYS", str(Settings().DATA_RETENTION_DAYS))),
     )

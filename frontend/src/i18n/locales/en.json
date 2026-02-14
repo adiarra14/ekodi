@@ -7,13 +7,14 @@
     "register": "Sign Up",
     "logout": "Logout",
     "admin": "Admin",
+    "settings": "Settings",
     "section_ekodi": "ekodi",
     "section_impact": "Impact",
     "section_pricing": "Pricing",
     "section_partners": "Partners"
   },
   "hero": {
-    "badge": "Sambala ɲiɔ",
+    "badge": "San ba la ɲiɔ",
     "title": "The AI that speaks Bamanankan",
     "subtitle": "Ask any question, on any topic. ekodi answers in Bamanankan: health, education, farming, news, cooking, history, technology. Everything.",
     "leitmotiv": "ekodi is here. And it speaks your language.",
@@ -71,7 +72,7 @@
   },
   "story": {
     "proverb": "The ɲiɔ planted after all the others grows faster and surpasses them all.",
-    "desc": "In Bamanankan culture, Sambala ɲiɔ is the millet planted after all the others. Yet it grows faster and stands taller than them all. ekodi carries that spirit: a modern, proactive, and adapted vision that overcomes barriers faster and more effectively. We have built a concrete, usable model available today. Together we will make it better. Join us and lend a hand to build the best LLM in Bamanankan: ekodi!"
+    "desc": "In Bamanankan culture, San ba la ɲiɔ is the millet planted after all the others. Yet it grows faster and stands taller than them all. ekodi carries that spirit: a modern, proactive, and adapted vision that overcomes barriers faster and more effectively. We have built a concrete, usable model available today. Together we will make it better. Join us and lend a hand to build the best LLM in Bamanankan: ekodi!"
   },
   "stats": {
     "languages": "Languages",
@@ -139,7 +140,8 @@
   },
   "footer": {
     "powered": "A Ynnov Product",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "privacy": "Privacy Policy"
   },
   "auth": {
     "login_title": "Welcome back",
@@ -154,7 +156,28 @@
     "register_btn": "Create Account",
     "no_account": "Don't have an account?",
     "has_account": "Already have an account?",
-    "or": "or"
+    "or": "or",
+    "forgot_password": "Forgot password?",
+    "forgot_title": "Forgot Password",
+    "forgot_subtitle": "Enter your email and we'll send a reset link.",
+    "send_reset_link": "Send Reset Link",
+    "back_to_login": "Back to login",
+    "reset_sent_title": "Check your email",
+    "reset_sent_desc": "If an account exists with that email, a password reset link has been sent.",
+    "reset_title": "Reset Password",
+    "reset_subtitle": "Enter your new password.",
+    "reset_btn": "Reset Password",
+    "reset_success_title": "Password Reset",
+    "reset_success_desc": "Your password has been reset. You can now log in with your new password.",
+    "passwords_mismatch": "Passwords do not match",
+    "consent_required": "You must accept the privacy policy to create an account.",
+    "consent_text": "I accept the privacy policy and terms of service.",
+    "privacy_link": "Privacy Policy",
+    "verifying": "Verifying...",
+    "verify_success_title": "Email Verified",
+    "verify_success": "Your email has been verified. You can now access all features.",
+    "verify_error_title": "Verification Failed",
+    "verify_error": "Invalid or expired verification link."
   },
   "chat": {
     "new_chat": "New Chat",
@@ -194,6 +217,58 @@
     "positive": "Positive",
     "negative": "Negative"
   },
+  "settings": {
+    "title": "Account Settings",
+    "profile": "Profile",
+    "tier": "Plan",
+    "email_status": "Email Status",
+    "verified": "Verified",
+    "not_verified": "Not Verified",
+    "data_privacy": "Data & Privacy",
+    "export_data": "Export My Data",
+    "export_success": "Data export downloaded successfully.",
+    "delete_all_chats": "Delete All Conversations",
+    "delete_chats_confirm": "Are you sure you want to delete all your conversations? This cannot be undone.",
+    "chats_deleted": "All conversations deleted.",
+    "danger_zone": "Danger Zone",
+    "delete_account": "Delete My Account",
+    "delete_account_desc": "Permanently delete your account and all associated data. This action cannot be undone.",
+    "delete_confirm_text": "Enter your password to confirm account deletion:",
+    "confirm_delete": "Permanently Delete"
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "last_updated": "Last updated: February 2026",
+    "intro_title": "Introduction",
+    "intro_text": "ekodi.ai (\"ekodi\", \"we\", \"us\") is operated by Ynnov. We are committed to protecting your privacy and personal data. This policy explains what data we collect, why, and how you can exercise your rights.",
+    "data_collected_title": "Data We Collect",
+    "data_email": "Email address (for account creation and communication)",
+    "data_name": "Full name (for personalization)",
+    "data_chats": "Chat conversations (text messages exchanged with ekodi)",
+    "data_voice": "Voice recordings (when using voice input, temporarily processed)",
+    "data_usage": "Usage data (prompts count, login times, API usage)",
+    "why_title": "Why We Collect This Data",
+    "why_service": "To provide and improve the ekodi AI service",
+    "why_improve": "To train and improve our AI models with your feedback",
+    "why_communicate": "To communicate with you about your account and service updates",
+    "retention_title": "Data Retention",
+    "retention_text": "Your data is retained for up to 365 days after your last activity. You can delete your data at any time from your account settings.",
+    "rights_title": "Your Rights",
+    "rights_access": "Access: View all data we hold about you",
+    "rights_export": "Export: Download a copy of all your data",
+    "rights_delete": "Delete: Permanently delete your account and all data",
+    "rights_withdraw": "Withdraw consent: You can withdraw your consent at any time",
+    "sharing_title": "Data Sharing",
+    "sharing_text": "We do not sell your data. We may share anonymized usage statistics with partners. Your chat content is never shared with third parties.",
+    "contact_title": "Contact Us",
+    "contact_text": "For any questions about your data or privacy, contact us at privacy@ekodi.ai or privacy@ynnov.io."
+  },
+  "consent": {
+    "message": "We use cookies and store chat data to provide our AI service.",
+    "learn_more": "Learn more",
+    "accept": "Accept",
+    "reject": "Reject"
+  },
   "partner_form": {
     "title": "Become a partner",
     "subtitle": "Fill out this form and we will get back to you quickly.",
@@ -221,6 +296,7 @@
     "save": "Save",
     "cancel": "Cancel",
     "delete": "Delete",
-    "close": "Close"
+    "close": "Close",
+    "back": "Back"
   }
 }

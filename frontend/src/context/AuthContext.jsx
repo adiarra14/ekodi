@@ -21,6 +21,7 @@ export function AuthProvider({ children }) {
         })
         .catch(() => {
           localStorage.removeItem('ekodi_token');
+          localStorage.removeItem('ekodi_refresh_token');
           localStorage.removeItem('ekodi_user');
           setUser(null);
         })
@@ -33,27 +34,38 @@ export function AuthProvider({ children }) {
   const login = async (email, password) => {
     const data = await authAPI.login({ email, password });
     localStorage.setItem('ekodi_token', data.token);
+    localStorage.setItem('ekodi_refresh_token', data.refresh_token);
     localStorage.setItem('ekodi_user', JSON.stringify(data.user));
     setUser(data.user);
     return data.user;
   };
 
-  const register = async (email, name, password) => {
-    const data = await authAPI.register({ email, name, password });
+  const register = async (email, name, password, consent = false) => {
+    const data = await authAPI.register({ email, name, password, consent });
     localStorage.setItem('ekodi_token', data.token);
+    localStorage.setItem('ekodi_refresh_token', data.refresh_token);
     localStorage.setItem('ekodi_user', JSON.stringify(data.user));
     setUser(data.user);
     return data.user;
   };
 
-  const logout = () => {
+  const logout = async () => {
+    try { await authAPI.logout(); } catch { /* ignore */ }
     localStorage.removeItem('ekodi_token');
+    localStorage.removeItem('ekodi_refresh_token');
     localStorage.removeItem('ekodi_user');
     setUser(null);
   };
 
+  const updateUser = (newUser) => {
+    setUser(newUser);
+    localStorage.setItem('ekodi_user', JSON.stringify(newUser));
+  };
+
+  const isStaff = user && ['superadmin', 'admin', 'support', 'marketing', 'finance', 'moderator', 'developer'].includes(user.role);
+
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser, isStaff }}>
       {children}
     </AuthContext.Provider>
   );

@@ -77,6 +77,10 @@ export default function Login() {
             required
           />
 
+          <div className="auth-forgot">
+            <Link to="/forgot-password">{t('auth.forgot_password')}</Link>
+          </div>
+
           <Button type="submit" variant="primary" size="lg" loading={loading} className="auth-submit">
             {t('auth.login_btn')}
           </Button>

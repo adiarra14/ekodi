@@ -152,7 +152,7 @@ export default function Landing() {
             <Sprout size={48} className="story-icon" />
           </div>
           <div className="story-text">
-            <h3 className="story-title">Sambala ɲiɔ</h3>
+            <h3 className="story-title">San ba la ɲiɔ</h3>
             <blockquote>{t('story.proverb')}</blockquote>
             <p>{t('story.desc')}</p>
           </div>
@@ -333,6 +333,7 @@ export default function Landing() {
               <a href="#partners">{t('nav.section_partners')}</a>
               <Link to="/login">{t('nav.login')}</Link>
               <Link to="/register">{t('nav.register')}</Link>
+              <Link to="/privacy">{t('footer.privacy')}</Link>
             </nav>
           </div>
           <div className="foot-contacts">

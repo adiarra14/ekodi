@@ -7,13 +7,14 @@
     "register": "Tɔgɔ sɛbɛn",
     "logout": "Bɔ",
     "admin": "Ɲɛmɔgɔ",
+    "settings": "Labɛnw",
     "section_ekodi": "ekodi",
     "section_impact": "Nafaw",
     "section_pricing": "Saratiw",
     "section_partners": "Jɛɲɔgɔnw"
   },
   "hero": {
-    "badge": "Sambala ɲiɔ",
+    "badge": "San ba la ɲiɔ",
     "title": "IA min bɛ Bamanankan kuma",
     "subtitle": "Ɲininkali kɛ fɛn bɛɛ kan, kow bɛɛ kan. ekodi bɛ jaabi Bamanankan na: kɛnɛya, kalanko, sɛnɛ, kibaru, tobili, tariku, fɛɛrɛ. Fɛn bɛɛ.",
     "leitmotiv": "ekodi bɛ yan. A bɛ i ka kan kuma.",
@@ -71,7 +72,7 @@
   },
   "story": {
     "proverb": "Ka dan tɔw kɔfɛ, a ka tɛmɛ u bɛɛ kan.",
-    "desc": "Bamanankan laadala na, Sambala ɲiɔ ye ɲiɔ ye min bɛ dan tɔw bɛɛ kɔfɛ. Nka a bɛ bonya joona ka tɛmɛ u bɛɛ kan. ekodi bɛ o niyɔrɔ ta: miriya kura, ɲɛtaa ani bɛɛnbaliya min bɛ gɛlɛyaw kunbɛn joona ka fisa. An ye modɛli tiɲɛ jɔ min bɛ se ka baara bi. An bɛɛ ɲɔgɔn fɛ de bɛ a ɲɛnabɔ. An bolo di ka Bamanankan LLM ɲumanba jɔ: ekodi!"
+    "desc": "Bamanankan laadala na, San ba la ɲiɔ ye ɲiɔ ye min bɛ dan tɔw bɛɛ kɔfɛ. Nka a bɛ bonya joona ka tɛmɛ u bɛɛ kan. ekodi bɛ o niyɔrɔ ta: miriya kura, ɲɛtaa ani bɛɛnbaliya min bɛ gɛlɛyaw kunbɛn joona ka fisa. An ye modɛli tiɲɛ jɔ min bɛ se ka baara bi. An bɛɛ ɲɔgɔn fɛ de bɛ a ɲɛnabɔ. An bolo di ka Bamanankan LLM ɲumanba jɔ: ekodi!"
   },
   "stats": {
     "languages": "Kanw",
@@ -139,7 +140,8 @@
   },
   "footer": {
     "powered": "Ynnov ka fɛn",
-    "rights": "Hakɛ bɛɛ maralenw"
+    "rights": "Hakɛ bɛɛ maralenw",
+    "privacy": "Gundokoɲɛna sariya"
   },
   "auth": {
     "login_title": "I ni ce, i kɔseginna",
@@ -154,7 +156,28 @@
     "register_btn": "Jateminɛ Dabɔ",
     "no_account": "Jateminɛ tɛ i bolo?",
     "has_account": "Jateminɛ bɛ i bolo?",
-    "or": "walima"
+    "or": "walima",
+    "forgot_password": "Daɲɛgafe ɲinɛnna?",
+    "forgot_title": "Daɲɛgafe ɲinɛnna",
+    "forgot_subtitle": "I ka email sɛbɛn, an bɛ sɛbɛnni ci.",
+    "send_reset_link": "Sɛbɛnni ci",
+    "back_to_login": "Segin donni ma",
+    "reset_sent_title": "I ka email lajɛ",
+    "reset_sent_desc": "Ni jateminɛ bɛ ni o email ye, daɲɛgafe yɛlɛmani sɛbɛnni cira.",
+    "reset_title": "Daɲɛgafe yɛlɛma",
+    "reset_subtitle": "I ka daɲɛgafe kura sɛbɛn.",
+    "reset_btn": "Yɛlɛma",
+    "reset_success_title": "Daɲɛgafe yɛlɛmana",
+    "reset_success_desc": "I ka daɲɛgafe yɛlɛmana. I bɛ se ka don sisan.",
+    "passwords_mismatch": "Daɲɛgafe fila tɛ bɛɛn",
+    "consent_required": "I ka kan ka gundokoɲɛna sariya sɔn.",
+    "consent_text": "Ne bɛ gundokoɲɛna sariya ni baarakɛcogo sɔn.",
+    "privacy_link": "Gundokoɲɛna sariya",
+    "verifying": "Sɛgɛsɛgɛli...",
+    "verify_success_title": "Email sɛgɛsɛgɛra",
+    "verify_success": "I ka email sɛgɛsɛgɛra. I bɛ se ka fɛn bɛɛ kɛ sisan.",
+    "verify_error_title": "Sɛgɛsɛgɛli ma se",
+    "verify_error": "Sɛbɛnni man ɲi walima a waati tɛmɛna."
   },
   "chat": {
     "new_chat": "Kuma Kura",
@@ -194,6 +217,58 @@
     "positive": "Ɲuman",
     "negative": "Jugu"
   },
+  "settings": {
+    "title": "Jateminɛ labɛnw",
+    "profile": "Kunnafoni",
+    "tier": "Saraji",
+    "email_status": "Email cogoya",
+    "verified": "Sɛgɛsɛgɛra",
+    "not_verified": "Ma sɛgɛsɛgɛ",
+    "data_privacy": "Kunnafoni ni gundoko",
+    "export_data": "N ka kunnafoni jigin",
+    "export_success": "Kunnafoni jiginna.",
+    "delete_all_chats": "Kumaw bɛɛ bɔ",
+    "delete_chats_confirm": "I b'a fɛ ka i ka kumaw bɛɛ bɔ? A tɛ se ka segin.",
+    "chats_deleted": "Kumaw bɛɛ bɔra.",
+    "danger_zone": "Farati yɔrɔ",
+    "delete_account": "N ka jateminɛ bɔ",
+    "delete_account_desc": "I ka jateminɛ ni kunnafoni bɛɛ bɔ ka ban. A tɛ se ka segin.",
+    "delete_confirm_text": "I ka daɲɛgafe sɛbɛn ka jateminɛ bɔli lakodɔn:",
+    "confirm_delete": "Bɔ ka ban"
+  },
+  "privacy": {
+    "title": "Gundokoɲɛna sariya",
+    "last_updated": "Yɛlɛmani laban: Fɛburuyɛ 2026",
+    "intro_title": "Daɲɛ fɔlen",
+    "intro_text": "ekodi.ai (\"ekodi\", \"an\") ye Ynnov ka fɛn ye. An bɛ i ka gundoko ni kunnafoni mara. Nin sariya bɛ fɛn minw an bɛ lajɛ, mun na, ani cogo min na i bɛ se ka i ka hakɛw kɛ fɔ.",
+    "data_collected_title": "Kunnafoni minw bɛ lajɛ",
+    "data_email": "Email (jateminɛ dabɔli ni kumakan na)",
+    "data_name": "Tɔgɔ (ladilanni na)",
+    "data_chats": "Kumaɲɔgɔnyaw (cidenw minw bɛ tɛmɛ ekodi fɛ)",
+    "data_voice": "Kan mɛnniw (ni kuma baarakɛcogo bɛ kɛ, a bɛ baara waati dɔɔni)",
+    "data_usage": "Baarakɛcogo kunnafoni (prompt hakɛ, donwaati, API baarakɛcogo)",
+    "why_title": "Mun na an bɛ nin kunnafonw lajɛ",
+    "why_service": "Ka ekodi IA baara di ka ɲɛ",
+    "why_improve": "Ka an ka IA modɛliw kalan ni i ka kɔfɔli ye",
+    "why_communicate": "Ka kuma i fɛ i ka jateminɛ ni yɛlɛmaniw kan",
+    "retention_title": "Kunnafoni maracogo",
+    "retention_text": "I ka kunnafoni bɛ mara tile 365 kɔnɔ i ka baara laban kɔfɛ. I bɛ se k'a bɔ waati o waati i ka labɛnw kɔnɔ.",
+    "rights_title": "I ka hakɛw",
+    "rights_access": "Lajɛli: I ka kunnafoni bɛɛ filɛ an bolo",
+    "rights_export": "Jiginni: I ka kunnafoni bɛɛ jigin",
+    "rights_delete": "Bɔli: I ka jateminɛ ni kunnafoni bɛɛ bɔ ka ban",
+    "rights_withdraw": "Sɔnni bɔli: I bɛ se ka i ka sɔnni bɔ waati o waati",
+    "sharing_title": "Kunnafoni tilan",
+    "sharing_text": "An tɛ i ka kunnafoni feere. An bɛ se ka baarakɛcogo hakɛ tɔgɔdantan tilan jɛɲɔgɔnw fɛ. I ka kumaɲɔgɔnya kɔnɔko tɛ tilan mɔgɔ si ma abada.",
+    "contact_title": "An sɔrɔ",
+    "contact_text": "Ɲininkali bɛɛ kama i ka kunnafoni walima gundoko kan, an sɔrɔ privacy@ekodi.ai walima privacy@ynnov.io."
+  },
+  "consent": {
+    "message": "An bɛ cookies ni kuma kunnafoni mara ka IA baara di.",
+    "learn_more": "Ka dɔ dɔn ka caya",
+    "accept": "Sɔn",
+    "reject": "Ban"
+  },
   "partner_form": {
     "title": "Kɛ jɛɲɔgɔn ye",
     "subtitle": "Nin fɔrɔm dafa, an bɛ i jaabi joona.",
@@ -221,6 +296,7 @@
     "save": "Mara",
     "cancel": "Dabila",
     "delete": "Bɔ",
-    "close": "Datugu"
+    "close": "Datugu",
+    "back": "Segin"
   }
 }

@@ -1,5 +1,6 @@
 """
 Ekodi – JWT authentication middleware and helpers.
+Supports access tokens (1 h), refresh tokens (7 d), and token blacklisting.
 """
 
 import hashlib
@@ -21,6 +22,11 @@ from app.models.api_key import ApiKey
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer(auto_error=False)
 
+# ── In-memory token blacklist (use Redis in production) ───────
+_token_blacklist: set[str] = set()
+
+STAFF_ROLES = {"superadmin", "admin", "support", "marketing", "finance", "moderator", "developer"}
+
 
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
@@ -32,10 +38,22 @@ def verify_password(plain: str, hashed: str) -> bool:
 
 def create_access_token(user_id: str, role: str = "user") -> str:
     settings = get_settings()
-    expire = datetime.now(timezone.utc) + timedelta(minutes=settings.JWT_EXPIRE_MINUTES)
+    expire = datetime.now(timezone.utc) + timedelta(hours=1)
     payload = {
         "sub": user_id,
         "role": role,
+        "type": "access",
+        "exp": expire,
+    }
+    return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+
+
+def create_refresh_token(user_id: str) -> str:
+    settings = get_settings()
+    expire = datetime.now(timezone.utc) + timedelta(days=7)
+    payload = {
+        "sub": user_id,
+        "type": "refresh",
         "exp": expire,
     }
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
@@ -43,10 +61,17 @@ def create_access_token(user_id: str, role: str = "user") -> str:
 
 def decode_token(token: str) -> dict:
     settings = get_settings()
+    if token in _token_blacklist:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token revoked")
     try:
         return jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+
+def blacklist_token(token: str):
+    """Add a token to the blacklist."""
+    _token_blacklist.add(token)
 
 
 async def get_current_user(
@@ -57,6 +82,8 @@ async def get_current_user(
     if not credentials:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
     payload = decode_token(credentials.credentials)
+    if payload.get("type") == "refresh":
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Refresh token cannot be used for API access")
     user_id = payload.get("sub")
     if not user_id:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
@@ -82,9 +109,9 @@ async def get_current_user_optional(
 
 
 async def get_admin_user(user: User = Depends(get_current_user)) -> User:
-    """Require admin role."""
-    if user.role != "admin":
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Admin access required")
+    """Require staff role (any staff role is admin-level for backward compat)."""
+    if user.role not in STAFF_ROLES:
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Staff access required")
     return user
 
 

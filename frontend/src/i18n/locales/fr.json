@@ -7,13 +7,14 @@
     "register": "Inscription",
     "logout": "Deconnexion",
     "admin": "Admin",
+    "settings": "Parametres",
     "section_ekodi": "ekodi",
     "section_impact": "Impact",
     "section_pricing": "Tarifs",
     "section_partners": "Partenaires"
   },
   "hero": {
-    "badge": "Sambala ɲiɔ",
+    "badge": "San ba la ɲiɔ",
     "title": "L'IA qui parle le Bamanankan",
     "subtitle": "Posez n'importe quelle question, sur n'importe quel sujet. ekodi repond en Bamanankan : sante, education, agriculture, actualites, cuisine, histoire, technologie. Tout.",
     "leitmotiv": "ekodi est la. Et il parle votre langue.",
@@ -71,7 +72,7 @@
   },
   "story": {
     "proverb": "C'est le ɲiɔ qui, semé après tous les autres, grandit plus vite et les dépasse tous.",
-    "desc": "En culture Bamanankan, le Sambala ɲiɔ est le mil semé après tous les autres. Pourtant, il pousse plus vite et se dresse plus haut qu'eux. ekodi porte cet esprit : une vision moderne, proactive et adaptée qui permet de surmonter les barrières plus vite et plus efficacement. Nous avons construit un modèle concret et utilisable dès aujourd'hui. C'est ensemble que nous l'améliorerons. Rejoignez-nous et prêtez main-forte pour bâtir le meilleur modèle LLM en Bamanankan : ekodi !"
+    "desc": "En culture Bamanankan, le San ba la ɲiɔ est le mil semé après tous les autres. Pourtant, il pousse plus vite et se dresse plus haut qu'eux. ekodi porte cet esprit : une vision moderne, proactive et adaptée qui permet de surmonter les barrières plus vite et plus efficacement. Nous avons construit un modèle concret et utilisable dès aujourd'hui. C'est ensemble que nous l'améliorerons. Rejoignez-nous et prêtez main-forte pour bâtir le meilleur modèle LLM en Bamanankan : ekodi !"
   },
   "stats": {
     "languages": "Langues",
@@ -139,7 +140,8 @@
   },
   "footer": {
     "powered": "Un produit Ynnov",
-    "rights": "Tous droits reserves"
+    "rights": "Tous droits reserves",
+    "privacy": "Politique de confidentialite"
   },
   "auth": {
     "login_title": "Bon retour",
@@ -154,7 +156,28 @@
     "register_btn": "Creer le Compte",
     "no_account": "Pas encore de compte ?",
     "has_account": "Deja un compte ?",
-    "or": "ou"
+    "or": "ou",
+    "forgot_password": "Mot de passe oublie ?",
+    "forgot_title": "Mot de passe oublie",
+    "forgot_subtitle": "Entrez votre email et nous vous enverrons un lien de reinitialisation.",
+    "send_reset_link": "Envoyer le lien",
+    "back_to_login": "Retour a la connexion",
+    "reset_sent_title": "Consultez votre email",
+    "reset_sent_desc": "Si un compte existe avec cet email, un lien de reinitialisation a ete envoye.",
+    "reset_title": "Reinitialiser le mot de passe",
+    "reset_subtitle": "Entrez votre nouveau mot de passe.",
+    "reset_btn": "Reinitialiser",
+    "reset_success_title": "Mot de passe reinitialise",
+    "reset_success_desc": "Votre mot de passe a ete reinitialise. Vous pouvez maintenant vous connecter.",
+    "passwords_mismatch": "Les mots de passe ne correspondent pas",
+    "consent_required": "Vous devez accepter la politique de confidentialite pour creer un compte.",
+    "consent_text": "J'accepte la politique de confidentialite et les conditions d'utilisation.",
+    "privacy_link": "Politique de confidentialite",
+    "verifying": "Verification...",
+    "verify_success_title": "Email verifie",
+    "verify_success": "Votre email a ete verifie. Vous avez acces a toutes les fonctionnalites.",
+    "verify_error_title": "Echec de la verification",
+    "verify_error": "Lien de verification invalide ou expire."
   },
   "chat": {
     "new_chat": "Nouveau Chat",
@@ -194,6 +217,58 @@
     "positive": "Positifs",
     "negative": "Negatifs"
   },
+  "settings": {
+    "title": "Parametres du compte",
+    "profile": "Profil",
+    "tier": "Offre",
+    "email_status": "Statut email",
+    "verified": "Verifie",
+    "not_verified": "Non verifie",
+    "data_privacy": "Donnees & Confidentialite",
+    "export_data": "Exporter mes donnees",
+    "export_success": "Export des donnees telecharge.",
+    "delete_all_chats": "Supprimer toutes les conversations",
+    "delete_chats_confirm": "Voulez-vous vraiment supprimer toutes vos conversations ? Cette action est irreversible.",
+    "chats_deleted": "Toutes les conversations supprimees.",
+    "danger_zone": "Zone dangereuse",
+    "delete_account": "Supprimer mon compte",
+    "delete_account_desc": "Supprimer definitivement votre compte et toutes les donnees associees. Cette action est irreversible.",
+    "delete_confirm_text": "Entrez votre mot de passe pour confirmer la suppression :",
+    "confirm_delete": "Supprimer definitivement"
+  },
+  "privacy": {
+    "title": "Politique de confidentialite",
+    "last_updated": "Derniere mise a jour : Fevrier 2026",
+    "intro_title": "Introduction",
+    "intro_text": "ekodi.ai (\"ekodi\", \"nous\") est opere par Ynnov. Nous nous engageons a proteger votre vie privee et vos donnees personnelles. Cette politique explique quelles donnees nous collectons, pourquoi et comment vous pouvez exercer vos droits.",
+    "data_collected_title": "Donnees collectees",
+    "data_email": "Adresse email (pour la creation de compte et la communication)",
+    "data_name": "Nom complet (pour la personnalisation)",
+    "data_chats": "Conversations (messages texte echanges avec ekodi)",
+    "data_voice": "Enregistrements vocaux (lors de l'utilisation vocale, traites temporairement)",
+    "data_usage": "Donnees d'utilisation (nombre de prompts, heures de connexion, utilisation API)",
+    "why_title": "Pourquoi nous collectons ces donnees",
+    "why_service": "Pour fournir et ameliorer le service ekodi",
+    "why_improve": "Pour entrainer et ameliorer nos modeles IA avec vos retours",
+    "why_communicate": "Pour communiquer avec vous sur votre compte et les mises a jour",
+    "retention_title": "Conservation des donnees",
+    "retention_text": "Vos donnees sont conservees pendant 365 jours apres votre derniere activite. Vous pouvez supprimer vos donnees a tout moment depuis les parametres de votre compte.",
+    "rights_title": "Vos droits",
+    "rights_access": "Acces : Consulter toutes les donnees que nous detenons sur vous",
+    "rights_export": "Export : Telecharger une copie de toutes vos donnees",
+    "rights_delete": "Suppression : Supprimer definitivement votre compte et toutes vos donnees",
+    "rights_withdraw": "Retrait du consentement : Vous pouvez retirer votre consentement a tout moment",
+    "sharing_title": "Partage des donnees",
+    "sharing_text": "Nous ne vendons pas vos donnees. Nous pouvons partager des statistiques d'utilisation anonymisees avec des partenaires. Le contenu de vos conversations n'est jamais partage avec des tiers.",
+    "contact_title": "Nous contacter",
+    "contact_text": "Pour toute question sur vos donnees ou votre confidentialite, contactez-nous a privacy@ekodi.ai ou privacy@ynnov.io."
+  },
+  "consent": {
+    "message": "Nous utilisons des cookies et stockons les donnees de chat pour fournir notre service IA.",
+    "learn_more": "En savoir plus",
+    "accept": "Accepter",
+    "reject": "Refuser"
+  },
   "partner_form": {
     "title": "Devenir partenaire",
     "subtitle": "Remplissez ce formulaire et nous vous recontacterons rapidement.",
@@ -221,6 +296,7 @@
     "save": "Enregistrer",
     "cancel": "Annuler",
     "delete": "Supprimer",
-    "close": "Fermer"
+    "close": "Fermer",
+    "back": "Retour"
   }
 }

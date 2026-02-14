@@ -77,7 +77,7 @@
   },
   "project": {
     "label": "Work in progress",
-    "title": "ekodi is a project, not a finished product",
+    "title": "ekodi is a project",
     "desc": "The model is actively being trained and improved. Responses may not always be perfect, and that's where you come in. By using ekodi and sharing your feedback, you directly help train the AI to become better at Bamanankan. Be patient, be honest, and help us build something great together."
   },
   "pricing": {
@@ -121,7 +121,7 @@
     "email_label": "Write to us at"
   },
   "feedback_cta": {
-    "title": "You are training ekodi",
+    "title": "ekodi gets better with you",
     "subtitle": "This is not just a chatbot, it's a model that learns. Every time you rate a response, correct a translation, or flag an error, you are directly contributing to training the AI. ekodi gets better because of people like you.",
     "cta": "Try & Give Feedback",
     "badge": "Your feedback trains the model",

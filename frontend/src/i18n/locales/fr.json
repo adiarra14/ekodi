@@ -11,47 +11,47 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "L'IA qui parle le Bamanankan",
-    "subtitle": "Ekodi est un projet vivant. Le modele apprend, grandit, s'ameliore chaque jour — et vous pouvez faire partie de cette aventure.",
-    "leitmotiv": "Ekodi est la. Et il parle votre langue.",
-    "cta_try": "Essayer Ekodi Gratuitement",
+    "subtitle": "ekodi est un projet vivant. Le modele apprend, grandit, s'ameliore chaque jour — et vous pouvez faire partie de cette aventure.",
+    "leitmotiv": "ekodi est la. Et il parle votre langue.",
+    "cta_try": "Essayer ekodi gratuitement",
     "cta_api": "Acces API"
   },
   "features": {
-    "title": "Ce que Ekodi peut faire",
-    "voice_title": "Parlez a Ekodi",
-    "voice_desc": "Parlez en bamanankan ou en francais. Ekodi ecoute, comprend et repond naturellement en Bamanankan — comme une conversation.",
+    "title": "Ce que ekodi peut faire",
+    "voice_title": "Parlez a ekodi",
+    "voice_desc": "Parlez en bamanankan ou en francais. ekodi ecoute, comprend et repond naturellement en Bamanankan — comme une vraie conversation.",
     "translate_title": "Traduisez instantanement",
     "translate_desc": "Passez du francais au bamanankan en un instant. Du texte en entree, du texte en sortie — precis et rapide.",
     "tts_title": "Ecoutez le Bamanankan",
-    "tts_desc": "Ekodi ne se contente pas d'ecrire. Il parle. Une voix bamanankan naturelle, claire et expressive.",
-    "api_title": "Construisez avec Ekodi",
-    "api_desc": "Ajoutez la voix et la traduction bamanankan a vos applications, bots ou services avec une API simple."
+    "tts_desc": "ekodi ne se contente pas d'ecrire. Il parle. Une voix bamanankan naturelle, claire et expressive.",
+    "api_title": "Construisez avec ekodi",
+    "api_desc": "Ajoutez l'intelligence bamanankan a vos applications, bots ou services avec une API simple."
   },
   "how": {
     "title": "Simple comme parler",
     "step1": "Vous parlez ou ecrivez",
     "step1_desc": "En bamanankan ou en francais",
-    "step2": "Ekodi comprend",
+    "step2": "ekodi comprend",
     "step2_desc": "Votre message est analyse instantanement",
-    "step3": "Ekodi reflechit",
+    "step3": "ekodi reflechit",
     "step3_desc": "Une reponse intelligente est generee",
-    "step4": "Ekodi repond",
+    "step4": "ekodi repond",
     "step4_desc": "En bamanankan — texte et voix"
   },
   "demo": {
     "title": "Voyez par vous-meme",
-    "user_msg": "I ni ce, Ekodi! Bamako sigida jumɛn ka bon?",
+    "user_msg": "I ni ce, ekodi! Bamako sigida jumɛn ka bon?",
     "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
-    "input_placeholder": "Demandez a Ekodi..."
+    "input_placeholder": "Posez n'importe quelle question a ekodi..."
   },
   "api_showcase": {
     "title": "Integrez l'IA Bamanankan",
-    "subtitle": "Une API REST simple pour ajouter la voix, la traduction et l'intelligence bamanankan a toute application.",
+    "subtitle": "Une API REST simple pour ajouter l'intelligence bamanankan a toute application.",
     "get_key": "Obtenir votre cle API"
   },
   "story": {
     "proverb": "Seme avant les autres ɲiɔ (mil), il grandit et les depasse tous.",
-    "desc": "En Bamanankan, Sambala ɲiɔ est le mil seme en premier — il pousse plus vite et se dresse plus haut que les autres. Ekodi porte cet esprit : la premiere IA qui parle veritablement le Bamanankan. Comme le sambala, il est encore en train de grandir — et votre patience et vos retours sont la pluie qui l'aide a s'elever."
+    "desc": "En Bamanankan, Sambala ɲiɔ est le mil seme en premier — il pousse plus vite et se dresse plus haut que les autres. ekodi porte cet esprit : la premiere IA qui parle veritablement le Bamanankan. Comme le sambala, il est encore en train de grandir — et votre patience et vos retours sont la pluie qui l'aide a s'elever."
   },
   "stats": {
     "languages": "Langues",
@@ -61,16 +61,16 @@
   },
   "project": {
     "label": "Projet en cours",
-    "title": "Ekodi est un projet, pas un produit fini",
-    "desc": "Le modele est activement entraine et ameliore. Les reponses ne seront pas toujours parfaites — et c'est la que vous intervenez. En utilisant Ekodi et en partageant vos retours, vous contribuez directement a entrainer l'IA pour qu'elle maitrise mieux le Bamanankan. Soyez patient, soyez honnete, et construisons ensemble quelque chose de grand."
+    "title": "ekodi est un projet, pas un produit fini",
+    "desc": "Le modele est activement entraine et ameliore. Les reponses ne seront pas toujours parfaites — et c'est la que vous intervenez. En utilisant ekodi et en partageant vos retours, vous contribuez directement a entrainer l'IA pour qu'elle maitrise mieux le Bamanankan. Soyez patient, soyez honnete, et construisons ensemble quelque chose de grand."
   },
   "pricing": {
     "title": "Gratuit pendant qu'on construit ensemble",
-    "subtitle": "Obtenez 10 prompts gratuits pour tester Ekodi. Vos retours pendant cette phase sont essentiels pour entrainer et ameliorer le modele.",
+    "subtitle": "Obtenez 10 prompts gratuits pour tester ekodi. Vos retours pendant cette phase sont essentiels pour entrainer et ameliorer le modele.",
     "free_tier": "Acces Anticipé",
     "free_prompts": "10 prompts",
-    "free_features": "Voix, traduction et texte",
-    "free_cta": "Tester Ekodi",
+    "free_features": "Assistant IA interactif en Bamanankan",
+    "free_cta": "Tester ekodi",
     "pro_tier": "Pro",
     "pro_prompts": "Illimite",
     "pro_features": "Priorite, acces API, sans limites",
@@ -78,11 +78,11 @@
     "token_note": "Tarification par tokens plus tard"
   },
   "feedback_cta": {
-    "title": "Vous entrainez Ekodi",
-    "subtitle": "Ce n'est pas qu'un chatbot — c'est un modele qui apprend. Chaque fois que vous evaluez une reponse, corrigez une traduction ou signalez une erreur, vous contribuez directement a l'entrainement de l'IA. Ekodi s'ameliore grace a des gens comme vous.",
+    "title": "Vous entrainez ekodi",
+    "subtitle": "Ce n'est pas qu'un chatbot — c'est un modele qui apprend. Chaque fois que vous evaluez une reponse, corrigez une traduction ou signalez une erreur, vous contribuez directement a l'entrainement de l'IA. ekodi s'ameliore grace a des gens comme vous.",
     "cta": "Tester et donner son avis",
     "badge": "Vos retours entrainent le modele",
-    "note": "Nous savons qu'Ekodi n'est pas encore parfait. C'est justement le but. Aidez-nous a en faire la meilleure IA Bamanankan au monde."
+    "note": "Nous savons qu'ekodi n'est pas encore parfait. C'est justement le but. Aidez-nous a en faire la meilleure IA Bamanankan au monde."
   },
   "ynnov": {
     "title": "Concu par Ynnov",
@@ -96,9 +96,9 @@
   },
   "auth": {
     "login_title": "Bon retour",
-    "login_subtitle": "Connectez-vous pour continuer sur Ekodi",
+    "login_subtitle": "Connectez-vous pour continuer sur ekodi",
     "register_title": "Creer un compte",
-    "register_subtitle": "Rejoignez Ekodi — l'assistant IA Bamanankan",
+    "register_subtitle": "Rejoignez ekodi — l'assistant IA Bamanankan",
     "email": "Email",
     "name": "Nom complet",
     "password": "Mot de passe",
@@ -114,12 +114,12 @@
     "conversations": "Conversations",
     "type_message": "Ecrivez un message...",
     "send": "Envoyer",
-    "thinking": "Ekodi reflechit...",
+    "thinking": "ekodi reflechit...",
     "speak_in": "Parler en :",
     "french": "Francais",
     "bambara": "Bamanankan",
-    "welcome": "I ni ce ! Bienvenue sur Ekodi",
-    "welcome_hint": "Posez-moi une question — je parle bamanankan et francais !",
+    "welcome": "I ni ce ! Bienvenue sur ekodi",
+    "welcome_hint": "Posez-moi n'importe quelle question — je parle bamanankan et francais !",
     "no_conversations": "Aucune conversation",
     "delete_confirm": "Supprimer cette conversation ?",
     "mic_tap": "Appuyez pour parler",

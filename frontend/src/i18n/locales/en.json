@@ -11,47 +11,47 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "The AI that speaks Bamanankan",
-    "subtitle": "Ekodi is a living project. The model is learning, growing, getting better every day — and you can be part of that journey.",
-    "leitmotiv": "Ekodi is here. And it speaks your language.",
-    "cta_try": "Try Ekodi Free",
+    "subtitle": "ekodi is a living project. The model is learning, growing, getting better every day — and you can be part of that journey.",
+    "leitmotiv": "ekodi is here. And it speaks your language.",
+    "cta_try": "Try ekodi free",
     "cta_api": "API Access"
   },
   "features": {
-    "title": "What Ekodi can do",
-    "voice_title": "Talk to Ekodi",
-    "voice_desc": "Speak in Bamanankan or French. Ekodi listens, understands, and responds naturally in Bamanankan — like a conversation.",
+    "title": "What ekodi can do",
+    "voice_title": "Talk to ekodi",
+    "voice_desc": "Speak in Bamanankan or French. ekodi listens, understands, and responds naturally — like a real conversation about anything.",
     "translate_title": "Translate instantly",
     "translate_desc": "Switch between French and Bamanankan effortlessly. Text in, text out — accurate and fast.",
     "tts_title": "Hear Bamanankan",
-    "tts_desc": "Ekodi doesn't just write. It speaks. Natural Bamanankan voice, clear and expressive.",
-    "api_title": "Build with Ekodi",
-    "api_desc": "Add Bamanankan voice and translation to your own apps, bots, or services with a simple API."
+    "tts_desc": "ekodi doesn't just write. It speaks. Natural Bamanankan voice, clear and expressive.",
+    "api_title": "Build with ekodi",
+    "api_desc": "Add Bamanankan intelligence to your own apps, bots, or services with a simple API."
   },
   "how": {
     "title": "Simple as speaking",
     "step1": "You speak or type",
     "step1_desc": "In Bamanankan or French",
-    "step2": "Ekodi understands",
+    "step2": "ekodi understands",
     "step2_desc": "Your message is analyzed instantly",
-    "step3": "Ekodi thinks",
+    "step3": "ekodi thinks",
     "step3_desc": "An intelligent response is generated",
-    "step4": "Ekodi answers",
+    "step4": "ekodi answers",
     "step4_desc": "In Bamanankan — text and voice"
   },
   "demo": {
     "title": "See it in action",
-    "user_msg": "I ni ce, Ekodi! Bamako sigida jumɛn ka bon?",
+    "user_msg": "I ni ce, ekodi! Bamako sigida jumɛn ka bon?",
     "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
-    "input_placeholder": "Ask Ekodi anything..."
+    "input_placeholder": "Ask ekodi anything..."
   },
   "api_showcase": {
     "title": "Integrate Bamanankan AI",
-    "subtitle": "A simple REST API to bring Bamanankan voice, translation, and intelligence into any application.",
+    "subtitle": "A simple REST API to bring Bamanankan intelligence into any application.",
     "get_key": "Get Your API Key"
   },
   "story": {
     "proverb": "Planted before the other ɲiɔ (millet), it grows and surpasses them all.",
-    "desc": "In Bamanankan, Sambala ɲiɔ is the millet sown first — it rises faster and stands taller than the rest. Ekodi carries that spirit: the first AI to truly speak Bamanankan. Like sambala, it is still growing — and your patience and feedback are the rain that helps it rise."
+    "desc": "In Bamanankan, Sambala ɲiɔ is the millet sown first — it rises faster and stands taller than the rest. ekodi carries that spirit: the first AI to truly speak Bamanankan. Like sambala, it is still growing — and your patience and feedback are the rain that helps it rise."
   },
   "stats": {
     "languages": "Languages",
@@ -61,16 +61,16 @@
   },
   "project": {
     "label": "Work in progress",
-    "title": "Ekodi is a project, not a finished product",
-    "desc": "The model is actively being trained and improved. Responses may not always be perfect — and that's where you come in. By using Ekodi and sharing your feedback, you directly help train the AI to become better at Bamanankan. Be patient, be honest, and help us build something great together."
+    "title": "ekodi is a project, not a finished product",
+    "desc": "The model is actively being trained and improved. Responses may not always be perfect — and that's where you come in. By using ekodi and sharing your feedback, you directly help train the AI to become better at Bamanankan. Be patient, be honest, and help us build something great together."
   },
   "pricing": {
     "title": "Free while we build together",
-    "subtitle": "Get 10 free prompts to test Ekodi. Your feedback during this phase is what helps us train and improve the model.",
+    "subtitle": "Get 10 free prompts to test ekodi. Your feedback during this phase is what helps us train and improve the model.",
     "free_tier": "Early Access",
     "free_prompts": "10 prompts",
-    "free_features": "Voice, translation, and text",
-    "free_cta": "Test Ekodi",
+    "free_features": "Interactive AI assistant in Bamanankan",
+    "free_cta": "Test ekodi",
     "pro_tier": "Pro",
     "pro_prompts": "Unlimited",
     "pro_features": "Priority access, API, no limits",
@@ -78,11 +78,11 @@
     "token_note": "Token-based pricing later"
   },
   "feedback_cta": {
-    "title": "You are training Ekodi",
-    "subtitle": "This is not just a chatbot — it's a model that learns. Every time you rate a response, correct a translation, or flag an error, you are directly contributing to training the AI. Ekodi gets better because of people like you.",
+    "title": "You are training ekodi",
+    "subtitle": "This is not just a chatbot — it's a model that learns. Every time you rate a response, correct a translation, or flag an error, you are directly contributing to training the AI. ekodi gets better because of people like you.",
     "cta": "Try & Give Feedback",
     "badge": "Your feedback trains the model",
-    "note": "We know Ekodi isn't perfect yet. That's the point. Help us make it the best Bamanankan AI in the world."
+    "note": "We know ekodi isn't perfect yet. That's the point. Help us make it the best Bamanankan AI in the world."
   },
   "ynnov": {
     "title": "Built by Ynnov",
@@ -96,9 +96,9 @@
   },
   "auth": {
     "login_title": "Welcome back",
-    "login_subtitle": "Sign in to continue to Ekodi",
+    "login_subtitle": "Sign in to continue to ekodi",
     "register_title": "Create account",
-    "register_subtitle": "Join Ekodi — the Bamanankan AI assistant",
+    "register_subtitle": "Join ekodi — the Bamanankan AI assistant",
     "email": "Email",
     "name": "Full name",
     "password": "Password",
@@ -114,11 +114,11 @@
     "conversations": "Conversations",
     "type_message": "Type a message...",
     "send": "Send",
-    "thinking": "Ekodi is thinking...",
+    "thinking": "ekodi is thinking...",
     "speak_in": "Speak in:",
     "french": "French",
     "bambara": "Bamanankan",
-    "welcome": "I ni ce! Welcome to Ekodi",
+    "welcome": "I ni ce! Welcome to ekodi",
     "welcome_hint": "Ask me anything — I speak Bamanankan and French!",
     "no_conversations": "No conversations yet",
     "delete_confirm": "Delete this conversation?",

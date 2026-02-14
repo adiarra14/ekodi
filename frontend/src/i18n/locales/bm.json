@@ -11,47 +11,47 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "IA min bɛ Bamanankan kuma",
-    "subtitle": "Ekodi ye porozɛ niimanw ye. Modɛli bɛ kalanni na, bɛ bonya, bɛ ɲɛnabɔ don o don — i bɛ se ka kɛ o sira kan.",
-    "leitmotiv": "Ekodi bɛ yan. A bɛ i ka kan kuma.",
-    "cta_try": "Ekodi dɛmɛ gansan",
+    "subtitle": "ekodi ye porozɛ niimanw ye. Modɛli bɛ kalanni na, bɛ bonya, bɛ ɲɛnabɔ don o don — i bɛ se ka kɛ o sira kan.",
+    "leitmotiv": "ekodi bɛ yan. A bɛ i ka kan kuma.",
+    "cta_try": "ekodi dɛmɛ gansan",
     "cta_api": "API sɔrɔ"
   },
   "features": {
-    "title": "Ekodi bɛ se ka mun kɛ",
-    "voice_title": "Kuma Ekodi fɛ",
-    "voice_desc": "Kuma bamanankan walima tubabukan na. Ekodi bɛ lamɛn, bɛ faamu, ka jaabi Bamanankan na — i ko kumaɲɔgɔnya.",
+    "title": "ekodi bɛ se ka mun kɛ",
+    "voice_title": "Kuma ekodi fɛ",
+    "voice_desc": "Kuma bamanankan walima tubabukan na. ekodi bɛ lamɛn, bɛ faamu, ka jaabi Bamanankan na — i ko kumaɲɔgɔnya tiɲɛ tiɲɛ fɛn bɛɛ kan.",
     "translate_title": "Bayɛlɛmani joona",
     "translate_desc": "Tubabukan ni bamanankan cɛ tɛmɛni ka nɔgɔn. Sɛbɛnni don, sɛbɛnni bɔ — tiɲɛ ni teliya.",
     "tts_title": "Bamanankan lamɛn",
-    "tts_desc": "Ekodi tɛ sɛbɛnni dɔrɔn kɛ. A bɛ kuma. Bamanankan kuma jɛlen, ɲuman.",
-    "api_title": "Jɔ ni Ekodi ye",
-    "api_desc": "Bamanankan kuma ni bayɛlɛmani fara i ka porogaramuw kan ni API nɔgɔman ye."
+    "tts_desc": "ekodi tɛ sɛbɛnni dɔrɔn kɛ. A bɛ kuma. Bamanankan kuma jɛlen, ɲuman.",
+    "api_title": "Jɔ ni ekodi ye",
+    "api_desc": "Bamanankan hakilitigiya fara i ka porogaramuw kan ni API nɔgɔman ye."
   },
   "how": {
     "title": "A man gɛlɛn i ko kumaɲɔgɔnya",
     "step1": "I bɛ kuma walima sɛbɛn",
     "step1_desc": "Bamanankan walima tubabukan na",
-    "step2": "Ekodi bɛ faamu",
+    "step2": "ekodi bɛ faamu",
     "step2_desc": "I ka ciden bɛ sɛgɛsɛgɛ joona",
-    "step3": "Ekodi bɛ miiri",
+    "step3": "ekodi bɛ miiri",
     "step3_desc": "Jaabi hakilitigiya bɛ labɛn",
-    "step4": "Ekodi bɛ jaabi",
+    "step4": "ekodi bɛ jaabi",
     "step4_desc": "Bamanankan na — sɛbɛnni ni kuma"
   },
   "demo": {
     "title": "A filɛ a baara la",
-    "user_msg": "I ni ce, Ekodi! Bamako sigida jumɛn ka bon?",
+    "user_msg": "I ni ce, ekodi! Bamako sigida jumɛn ka bon?",
     "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
-    "input_placeholder": "Ɲininkali kɛ Ekodi fɛ..."
+    "input_placeholder": "Ɲininkali kɛ ekodi fɛ fɛn bɛɛ kan..."
   },
   "api_showcase": {
     "title": "Bamanankan IA don i ka porogaramu la",
-    "subtitle": "API REST nɔgɔman min bɛ Bamanankan kuma, bayɛlɛmani, ani hakilitigiya fara porogaramu bɛɛ kan.",
+    "subtitle": "API REST nɔgɔman min bɛ Bamanankan hakilitigiya fara porogaramu bɛɛ kan.",
     "get_key": "I ka API kilɛ sɔrɔ"
   },
   "story": {
     "proverb": "A bɛ sɛnɛ ɲiɔ tɔw ɲɛ, a bɛ bonya ka tɛmɛ u bɛɛ kan.",
-    "desc": "Bamanankan na, Sambala ɲiɔ ye ɲiɔ ye min bɛ sɛnɛ fɔlɔ — a bɛ bonya joona ka tɛmɛ tɔw kan. Ekodi bɛ o niyɔrɔ ta: IA fɔlɔ min bɛ Bamanankan kuma tiɲɛ tiɲɛ. I ko sambala, a bɛ bonya tuma bɛɛ — i ka muɲuli ni i ka kɔfɔli ye sanji ye min bɛ a dɛmɛ ka wili."
+    "desc": "Bamanankan na, Sambala ɲiɔ ye ɲiɔ ye min bɛ sɛnɛ fɔlɔ — a bɛ bonya joona ka tɛmɛ tɔw kan. ekodi bɛ o niyɔrɔ ta: IA fɔlɔ min bɛ Bamanankan kuma tiɲɛ tiɲɛ. I ko sambala, a bɛ bonya tuma bɛɛ — i ka muɲuli ni i ka kɔfɔli ye sanji ye min bɛ a dɛmɛ ka wili."
   },
   "stats": {
     "languages": "Kanw",
@@ -61,16 +61,16 @@
   },
   "project": {
     "label": "Baara bɛ kɛ a kan",
-    "title": "Ekodi ye porozɛ ye, a ma ban fɔlɔ",
-    "desc": "Modɛli bɛ kalanni na tuma bɛɛ, bɛ ɲɛnabɔ. Jaabi bɛɛ tɛna dafa — o de ye i ka baara ye. Ni i ye Ekodi baara ka kɔfɔli di, i bɛ IA dɛmɛ ka Bamanankan kalan ka fisa. Muɲu, tiɲɛ fɔ, an ka fɛn ɲuman jɔ ɲɔgɔn fɛ."
+    "title": "ekodi ye porozɛ ye, a ma ban fɔlɔ",
+    "desc": "Modɛli bɛ kalanni na tuma bɛɛ, bɛ ɲɛnabɔ. Jaabi bɛɛ tɛna dafa — o de ye i ka baara ye. Ni i ye ekodi baara ka kɔfɔli di, i bɛ IA dɛmɛ ka Bamanankan kalan ka fisa. Muɲu, tiɲɛ fɔ, an ka fɛn ɲuman jɔ ɲɔgɔn fɛ."
   },
   "pricing": {
     "title": "Gansan ka an jɔ ɲɔgɔn fɛ",
-    "subtitle": "Prompt 10 gansan sɔrɔ ka Ekodi dɛmɛ. I ka kɔfɔli bɛ an dɛmɛ ka modɛli kalanni ka ɲɛnabɔ.",
+    "subtitle": "Prompt 10 gansan sɔrɔ ka ekodi dɛmɛ. I ka kɔfɔli bɛ an dɛmɛ ka modɛli kalanni ka ɲɛnabɔ.",
     "free_tier": "Fɔlɔ Don",
     "free_prompts": "Prompt 10",
-    "free_features": "Kuma, bayɛlɛmani ani sɛbɛnni",
-    "free_cta": "Ekodi dɛmɛ",
+    "free_features": "IA dɛmɛbaga Bamanankan na fɛn bɛɛ kan",
+    "free_cta": "ekodi dɛmɛ",
     "pro_tier": "Pro",
     "pro_prompts": "Dɛsɛ tɛ",
     "pro_features": "Fɔlɔya, API, dɛsɛ tɛ",
@@ -78,11 +78,11 @@
     "token_note": "Token sara kɔ"
   },
   "feedback_cta": {
-    "title": "I bɛ Ekodi kalanni na",
-    "subtitle": "Nin tɛ robot dɔrɔn ye — a ye modɛli ye min bɛ kalan. Ni i ye jaabi ɲuman walima jugu jira, walima bayɛlɛmani ladilan, i bɛ IA kalanni na yɛrɛ yɛrɛ. Ekodi bɛ ɲɛnabɔ i ɲɔgɔnw barakɛ de kosɔn.",
+    "title": "I bɛ ekodi kalanni na",
+    "subtitle": "Nin tɛ robot dɔrɔn ye — a ye modɛli ye min bɛ kalan. Ni i ye jaabi ɲuman walima jugu jira, walima bayɛlɛmani ladilan, i bɛ IA kalanni na yɛrɛ yɛrɛ. ekodi bɛ ɲɛnabɔ i ɲɔgɔnw barakɛ de kosɔn.",
     "cta": "Dɛmɛ ka kɔfɔli di",
     "badge": "I ka kɔfɔli bɛ modɛli kalanni na",
-    "note": "An b'a dɔn Ekodi ma dafa fɔlɔ. O de ye kɔrɔ. An dɛmɛ k'a kɛ Bamanankan IA ɲumanba ye diɲɛ kɔnɔ."
+    "note": "An b'a dɔn ekodi ma dafa fɔlɔ. O de ye kɔrɔ. An dɛmɛ k'a kɛ Bamanankan IA ɲumanba ye diɲɛ kɔnɔ."
   },
   "ynnov": {
     "title": "Ynnov ye a jɔ",
@@ -96,9 +96,9 @@
   },
   "auth": {
     "login_title": "I ni ce, i kɔseginna",
-    "login_subtitle": "Don Ekodi kɔnɔ",
+    "login_subtitle": "Don ekodi kɔnɔ",
     "register_title": "Jateminɛ dabɔ",
-    "register_subtitle": "Don Ekodi la — Bamanankan IA dɛmɛbaga",
+    "register_subtitle": "Don ekodi la — Bamanankan IA dɛmɛbaga",
     "email": "Email",
     "name": "Tɔgɔ",
     "password": "Daɲɛgafe",
@@ -114,12 +114,12 @@
     "conversations": "Kumaw",
     "type_message": "Sɛbɛn yan...",
     "send": "Ci",
-    "thinking": "Ekodi bɛ miiri la...",
+    "thinking": "ekodi bɛ miiri la...",
     "speak_in": "Kuma:",
     "french": "Tubabukan",
     "bambara": "Bamanankan",
-    "welcome": "I ni ce! Bisimila Ekodi la",
-    "welcome_hint": "Ɲininkali kɛ — ne bɛ bamanankan ni tubabukan kuma!",
+    "welcome": "I ni ce! Bisimila ekodi la",
+    "welcome_hint": "Ɲininkali kɛ fɛn bɛɛ kan — ne bɛ bamanankan ni tubabukan kuma!",
     "no_conversations": "Kuma si tɛ yan",
     "delete_confirm": "Kuma nin bɔ?",
     "mic_tap": "Digi ka kuma",

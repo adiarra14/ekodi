@@ -5,6 +5,7 @@ import {
   Sprout, ExternalLink, ThumbsUp, ThumbsDown, Check, Lock,
   MessageCircle, Send, ChevronRight, Headphones,
   FlaskConical, Heart, Mail, Users, Landmark, Scale, Globe,
+  HandshakeIcon, Wallet, Cpu, Rocket, Megaphone,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './Landing.css';
@@ -191,6 +192,38 @@ export default function Landing() {
           </div>
         </div>
         <p className="price-inactive-note"><Lock size={12} /> {t('pricing.inactive_note')}</p>
+      </section>
+
+      {/* ━━ PARTNERS ━━ */}
+      <section className="partners" id="partners">
+        <h2>{t('partners.title')}</h2>
+        <p className="partners-sub">{t('partners.subtitle')}</p>
+        <div className="partners-grid">
+          <div className="partner-card">
+            <div className="partner-ico orange"><Wallet size={20} /></div>
+            <h3>{t('partners.financial_title')}</h3>
+            <p>{t('partners.financial_desc')}</p>
+          </div>
+          <div className="partner-card">
+            <div className="partner-ico violet"><Cpu size={20} /></div>
+            <h3>{t('partners.technical_title')}</h3>
+            <p>{t('partners.technical_desc')}</p>
+          </div>
+          <div className="partner-card">
+            <div className="partner-ico teal"><Rocket size={20} /></div>
+            <h3>{t('partners.expansion_title')}</h3>
+            <p>{t('partners.expansion_desc')}</p>
+          </div>
+          <div className="partner-card">
+            <div className="partner-ico blue"><Megaphone size={20} /></div>
+            <h3>{t('partners.promotion_title')}</h3>
+            <p>{t('partners.promotion_desc')}</p>
+          </div>
+        </div>
+        <div className="partners-cta">
+          <a href="mailto:contact@ynnov.io"><Button variant="primary" icon={<Mail size={16} />}>{t('partners.cta')}</Button></a>
+          <span className="partners-email">{t('partners.email_label')} <a href="mailto:contact@ynnov.io">contact@ynnov.io</a></span>
+        </div>
       </section>
 
       {/* ━━ YNNOV ━━ */}

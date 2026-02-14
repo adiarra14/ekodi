@@ -104,6 +104,20 @@
     "business_cta": "Nous contacter",
     "inactive_note": "Ces offres seront activees prochainement"
   },
+  "partners": {
+    "title": "Devenez partenaire",
+    "subtitle": "ekodi est un projet ouvert. Nous cherchons des partenaires pour accelerer son developpement et son impact.",
+    "financial_title": "Partenaire financier",
+    "financial_desc": "Investissez dans l'avenir de l'IA africaine. Soutenez le developpement d'ekodi et contribuez a rendre la technologie accessible a des millions de personnes.",
+    "technical_title": "Partenaire technique",
+    "technical_desc": "Apportez votre expertise en IA, NLP, infrastructure ou donnees. Contribuez au modele, a l'architecture ou aux outils qui font tourner ekodi.",
+    "expansion_title": "Partenaire d'expansion",
+    "expansion_desc": "Aidez ekodi a atteindre de nouveaux pays, de nouvelles langues et de nouveaux marches en Afrique de l'Ouest et au-dela.",
+    "promotion_title": "Partenaire de promotion",
+    "promotion_desc": "Faites connaitre ekodi aupres de vos communautes, reseaux et audiences. Chaque voix compte pour faire grandir le projet.",
+    "cta": "Nous contacter",
+    "email_label": "Ecrivez-nous a"
+  },
   "feedback_cta": {
     "title": "Vous entrainez ekodi",
     "subtitle": "Ce n'est pas qu'un chatbot, c'est un modele qui apprend. Chaque fois que vous evaluez une reponse, corrigez une traduction ou signalez une erreur, vous contribuez directement a l'entrainement de l'IA. ekodi s'ameliore grace a des gens comme vous.",

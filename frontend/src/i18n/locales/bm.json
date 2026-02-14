@@ -104,6 +104,20 @@
     "business_cta": "An sɔrɔ",
     "inactive_note": "Nin saratiw bɛ na joona"
   },
+  "partners": {
+    "title": "Kɛ an ka jɛɲɔgɔn ye",
+    "subtitle": "ekodi ye porozɛ dayɛlɛnnen ye. An bɛ jɛɲɔgɔnw ɲini ka a ɲɛnabɔli ni a nafaw teliya.",
+    "financial_title": "Wari jɛɲɔgɔn",
+    "financial_desc": "Nafoloda Afiriki IA nataw la. ekodi ɲɛnabɔli dɛmɛ ka teknolozi di mɔgɔ miliyɔnw ma.",
+    "technical_title": "Fɛɛrɛ jɛɲɔgɔn",
+    "technical_desc": "I ka IA, NLP, jɔyɔrɔ walima kunnafoni dɔnniya lase. Dɛmɛ modɛli, jɔyɔrɔ walima baarakɛminɛnw na.",
+    "expansion_title": "Jɛnsɛnni jɛɲɔgɔn",
+    "expansion_desc": "ekodi dɛmɛ ka se jamana kuraw, kan kuraw ani sugu kuraw ma Afiriki tile binyɛ kɔnɔ ani a kɔkan.",
+    "promotion_title": "Kunnafoni jɛɲɔgɔn",
+    "promotion_desc": "ekodi kɔnɔfoni kɛ i ka jɛkuluw, jɛɲɔgɔnw ani lamɛnbagaw cɛ. Kan kelen kelen bɛɛ bɛ porozɛ bonya.",
+    "cta": "An sɔrɔ",
+    "email_label": "An sɛbɛn"
+  },
   "feedback_cta": {
     "title": "I bɛ ekodi kalanni na",
     "subtitle": "Nin tɛ robot dɔrɔn ye, a ye modɛli ye min bɛ kalan. Ni i ye jaabi ɲuman walima jugu jira, walima bayɛlɛmani ladilan, i bɛ IA kalanni na yɛrɛ yɛrɛ. ekodi bɛ ɲɛnabɔ i ɲɔgɔnw barakɛ de kosɔn.",

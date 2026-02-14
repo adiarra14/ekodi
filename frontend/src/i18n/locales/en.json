@@ -104,6 +104,20 @@
     "business_cta": "Contact us",
     "inactive_note": "These plans will be available soon"
   },
+  "partners": {
+    "title": "Become a partner",
+    "subtitle": "ekodi is an open project. We are looking for partners to accelerate its development and impact.",
+    "financial_title": "Financial partner",
+    "financial_desc": "Invest in the future of African AI. Support ekodi's development and help make technology accessible to millions of people.",
+    "technical_title": "Technical partner",
+    "technical_desc": "Bring your expertise in AI, NLP, infrastructure, or data. Contribute to the model, architecture, or tools that power ekodi.",
+    "expansion_title": "Expansion partner",
+    "expansion_desc": "Help ekodi reach new countries, new languages, and new markets across West Africa and beyond.",
+    "promotion_title": "Promotion partner",
+    "promotion_desc": "Spread the word about ekodi in your communities, networks, and audiences. Every voice matters to grow the project.",
+    "cta": "Contact us",
+    "email_label": "Write to us at"
+  },
   "feedback_cta": {
     "title": "You are training ekodi",
     "subtitle": "This is not just a chatbot, it's a model that learns. Every time you rate a response, correct a translation, or flag an error, you are directly contributing to training the AI. ekodi gets better because of people like you.",

@@ -203,6 +203,15 @@ h2 {
 .partner-ico.teal{background:rgba(20 184 166/.1);color:var(--teal)} .partner-ico.blue{background:rgba(59 130 246/.1);color:var(--blue)}
 .partner-card h3 { font-size: .92rem; font-weight: 600; color: var(--white); margin: 0; }
 .partner-card p { font-size: .82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+.partner-card.clickable { text-decoration: none; cursor: pointer; position: relative; }
+.partner-arrow {
+  display: flex; align-items: center; justify-content: center;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255 255 255 / .05); color: var(--muted);
+  margin-top: auto; align-self: flex-end;
+  transition: background .2s, color .2s, transform .2s;
+}
+.partner-card.clickable:hover .partner-arrow { background: var(--orange); color: #fff; transform: translateX(2px); }
 .partners-cta { text-align: center; margin-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
 .partners-email { font-size: .82rem; color: var(--muted); }
 .partners-email a { color: var(--orange); text-decoration: none; transition: color .2s; }

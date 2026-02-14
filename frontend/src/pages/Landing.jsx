@@ -199,26 +199,30 @@ export default function Landing() {
         <h2>{t('partners.title')}</h2>
         <p className="partners-sub">{t('partners.subtitle')}</p>
         <div className="partners-grid">
-          <div className="partner-card">
+          <Link to="/partners?type=financial" className="partner-card clickable">
             <div className="partner-ico orange"><Wallet size={20} /></div>
             <h3>{t('partners.financial_title')}</h3>
             <p>{t('partners.financial_desc')}</p>
-          </div>
-          <div className="partner-card">
+            <span className="partner-arrow"><ArrowRight size={14} /></span>
+          </Link>
+          <Link to="/partners?type=technical" className="partner-card clickable">
             <div className="partner-ico violet"><Cpu size={20} /></div>
             <h3>{t('partners.technical_title')}</h3>
             <p>{t('partners.technical_desc')}</p>
-          </div>
-          <div className="partner-card">
+            <span className="partner-arrow"><ArrowRight size={14} /></span>
+          </Link>
+          <Link to="/partners?type=expansion" className="partner-card clickable">
             <div className="partner-ico teal"><Rocket size={20} /></div>
             <h3>{t('partners.expansion_title')}</h3>
             <p>{t('partners.expansion_desc')}</p>
-          </div>
-          <div className="partner-card">
+            <span className="partner-arrow"><ArrowRight size={14} /></span>
+          </Link>
+          <Link to="/partners?type=promotion" className="partner-card clickable">
             <div className="partner-ico blue"><Megaphone size={20} /></div>
             <h3>{t('partners.promotion_title')}</h3>
             <p>{t('partners.promotion_desc')}</p>
-          </div>
+            <span className="partner-arrow"><ArrowRight size={14} /></span>
+          </Link>
         </div>
         <div className="partners-cta">
           <Link to="/partners"><Button variant="primary" icon={<ArrowRight size={16} />}>{t('partners.cta')}</Button></Link>

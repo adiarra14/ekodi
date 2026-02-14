@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { Wallet, Cpu, Rocket, Megaphone, Send, ArrowLeft, CheckCircle } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './PartnerForm.css';
@@ -14,7 +14,9 @@ const PARTNER_TYPES = [
 
 export default function PartnerForm() {
   const { t } = useTranslation();
-  const [form, setForm] = useState({ name: '', email: '', org: '', type: '', message: '' });
+  const [searchParams] = useSearchParams();
+  const initialType = searchParams.get('type') || '';
+  const [form, setForm] = useState({ name: '', email: '', org: '', type: initialType, message: '' });
   const [sent, setSent] = useState(false);
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });

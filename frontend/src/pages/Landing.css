@@ -133,20 +133,33 @@ h2 {
 @media(max-width:700px){.api-inner{grid-template-columns:1fr} .api-text h2{text-align:center}}
 
 /* ═══════ PRICING ═══════ */
-.price { padding: 48px 24px 32px; max-width: 580px; margin: 0 auto; }
+.price { padding: 48px 24px 32px; max-width: 900px; margin: 0 auto; }
 .price-sub { text-align: center; color: var(--muted); margin: 0 0 24px; font-size: .88rem; }
-.price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.price-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px 18px; display: flex; flex-direction: column; gap: 10px; }
+.price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.price-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px 18px; display: flex; flex-direction: column; gap: 8px;
+  position: relative; transition: border-color .25s, opacity .25s;
+}
 .price-card.highlight { border-color: var(--orange); }
-.price-card.muted { opacity: .5; }
+.price-card.inactive { opacity: .45; }
+.price-card.inactive:hover { opacity: .6; }
 .price-label { font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--orange); }
-.price-card.muted .price-label { color: var(--muted); }
-.price-big { font-size: 2rem; font-weight: 800; color: var(--white); display: flex; align-items: baseline; gap: 5px; letter-spacing: -.02em; }
-.price-big small { font-size: .82rem; font-weight: 500; color: var(--muted); }
-.price-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; }
-.price-card li { display: flex; align-items: center; gap: 6px; font-size: .78rem; color: var(--muted); }
+.price-card.inactive .price-label { color: var(--muted); }
+.price-amount { font-size: 1.3rem; font-weight: 800; color: var(--white); letter-spacing: -.02em; }
+.price-card.inactive .price-amount { color: var(--muted); }
+.price-prompts { font-size: .82rem; font-weight: 500; color: var(--orange2); }
+.price-card.inactive .price-prompts { color: var(--muted); }
+.price-card ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 5px; flex: 1; }
+.price-card li { display: flex; align-items: center; gap: 6px; font-size: .76rem; color: var(--muted); }
 .price-card li svg { color: var(--teal); flex-shrink: 0; }
-.price-btn { margin-top: auto; width: 100%; }
+.price-card.inactive li svg { color: var(--muted); }
+.price-btn { margin-top: auto; width: 100%; display: flex; align-items: center; justify-content: center; gap: 5px; }
+.price-inactive-note {
+  text-align: center; font-size: .75rem; color: var(--muted); opacity: .5;
+  margin: 16px 0 0; display: flex; align-items: center; justify-content: center; gap: 5px;
+}
+@media(max-width:800px){.price-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.price-grid{grid-template-columns:1fr}}
 
 /* ═══════ YNNOV ═══════ */

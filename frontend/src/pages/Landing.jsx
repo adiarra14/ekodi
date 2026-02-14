@@ -113,25 +113,49 @@ export default function Landing() {
         <h2>{t('pricing.title')}</h2>
         <p className="price-sub">{t('pricing.subtitle')}</p>
         <div className="price-grid">
+          {/* FREE — active */}
           <div className="price-card highlight">
             <span className="price-label">{t('pricing.free_tier')}</span>
-            <div className="price-big">10 <small>prompts</small></div>
+            <div className="price-amount">{t('pricing.free_price')}</div>
+            <div className="price-prompts">{t('pricing.free_prompts')}</div>
             <ul>
               <li><Check size={14} /> {t('pricing.free_features')}</li>
-              <li><Check size={14} /> {t('feedback_cta.badge')}</li>
+              <li><Check size={14} /> {t('pricing.free_feedback')}</li>
             </ul>
             <Link to="/register"><Button variant="primary" className="price-btn">{t('pricing.free_cta')}</Button></Link>
           </div>
-          <div className="price-card muted">
+          {/* STANDARD — inactive */}
+          <div className="price-card inactive">
+            <span className="price-label">{t('pricing.standard_tier')}</span>
+            <div className="price-amount">{t('pricing.standard_price')}</div>
+            <div className="price-prompts">{t('pricing.standard_prompts')}</div>
+            <ul>
+              <li><Check size={14} /> {t('pricing.standard_features')}</li>
+            </ul>
+            <Button variant="secondary" className="price-btn" disabled><Lock size={13} /> {t('pricing.standard_cta')}</Button>
+          </div>
+          {/* PRO — inactive */}
+          <div className="price-card inactive">
             <span className="price-label">{t('pricing.pro_tier')}</span>
-            <div className="price-big"><Sparkles size={18} /> <small>{t('pricing.pro_prompts')}</small></div>
+            <div className="price-amount">{t('pricing.pro_price')}</div>
+            <div className="price-prompts">{t('pricing.pro_prompts')}</div>
             <ul>
               <li><Check size={14} /> {t('pricing.pro_features')}</li>
-              <li><Lock size={14} /> {t('pricing.token_note')}</li>
             </ul>
-            <Button variant="secondary" className="price-btn" disabled>{t('pricing.pro_cta')}</Button>
+            <Button variant="secondary" className="price-btn" disabled><Lock size={13} /> {t('pricing.pro_cta')}</Button>
+          </div>
+          {/* BUSINESS — inactive */}
+          <div className="price-card inactive">
+            <span className="price-label">{t('pricing.business_tier')}</span>
+            <div className="price-amount">{t('pricing.business_price')}</div>
+            <div className="price-prompts">{t('pricing.business_prompts')}</div>
+            <ul>
+              <li><Check size={14} /> {t('pricing.business_features')}</li>
+            </ul>
+            <Button variant="secondary" className="price-btn" disabled><Lock size={13} /> {t('pricing.business_cta')}</Button>
           </div>
         </div>
+        <p className="price-inactive-note"><Lock size={12} /> {t('pricing.inactive_note')}</p>
       </section>
 
       {/* ━━ YNNOV ━━ */}

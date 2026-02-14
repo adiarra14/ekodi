@@ -87,12 +87,6 @@ export default function Landing() {
           <h3>{t('features.assistant_title')}</h3>
           <p>{t('features.assistant_desc')}</p>
         </div>
-        <div className="feat-grid">
-          <div className="feat-card"><div className="feat-ico orange"><Mic size={20} /></div><h3>{t('features.voice_title')}</h3><p>{t('features.voice_desc')}</p></div>
-          <div className="feat-card"><div className="feat-ico violet"><Languages size={20} /></div><h3>{t('features.translate_title')}</h3><p>{t('features.translate_desc')}</p></div>
-          <div className="feat-card"><div className="feat-ico teal"><Volume2 size={20} /></div><h3>{t('features.tts_title')}</h3><p>{t('features.tts_desc')}</p></div>
-          <div className="feat-card"><div className="feat-ico blue"><Code size={20} /></div><h3>{t('features.api_title')}</h3><p>{t('features.api_desc')}</p></div>
-        </div>
       </section>
 
       {/* ━━ IMPACT ━━ */}

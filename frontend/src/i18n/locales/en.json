@@ -11,7 +11,7 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "The AI that speaks Bamanankan",
-    "subtitle": "ekodi is a living project. The model is learning, growing, getting better every day — and you can be part of that journey.",
+    "subtitle": "ekodi is a living project. The model is learning, growing, getting better every day. And you can be part of that journey.",
     "leitmotiv": "ekodi is here. And it speaks your language.",
     "cta_try": "Try ekodi free",
     "cta_api": "API Access"
@@ -19,9 +19,9 @@
   "features": {
     "title": "What ekodi can do",
     "voice_title": "Talk to ekodi",
-    "voice_desc": "Speak in Bamanankan or French. ekodi listens, understands, and responds naturally — like a real conversation about anything.",
+    "voice_desc": "Speak in Bamanankan or French. ekodi listens, understands, and responds naturally, like a real conversation about anything.",
     "translate_title": "Translate instantly",
-    "translate_desc": "Switch between French and Bamanankan effortlessly. Text in, text out — accurate and fast.",
+    "translate_desc": "Switch between French and Bamanankan effortlessly. Text in, text out. Accurate and fast.",
     "tts_title": "Hear Bamanankan",
     "tts_desc": "ekodi doesn't just write. It speaks. Natural Bamanankan voice, clear and expressive.",
     "api_title": "Build with ekodi",
@@ -36,7 +36,7 @@
     "step3": "ekodi thinks",
     "step3_desc": "An intelligent response is generated",
     "step4": "ekodi answers",
-    "step4_desc": "In Bamanankan — text and voice"
+    "step4_desc": "In Bamanankan, text and voice"
   },
   "demo": {
     "title": "See it in action",
@@ -54,11 +54,11 @@
     "stat_speakers": "40M+",
     "stat_speakers_label": "Mandekan speakers worldwide",
     "farmer_title": "Knowledge for everyone",
-    "farmer_desc": "A farmer who can neither read nor write can now ask about weather, market prices, or farming techniques — simply by speaking their language. ekodi gives access to world knowledge to those who were excluded from it.",
+    "farmer_desc": "A farmer who can neither read nor write can now ask about weather, market prices, or farming techniques, simply by speaking their language. ekodi gives access to world knowledge to those who were excluded from it.",
     "institution_title": "AI agents for institutions",
     "institution_desc": "Governments, NGOs, public services: build AI-powered agents that speak the language of the majority of your population. Inform, assist, and serve in Bamanankan.",
     "equality_title": "Reducing data inequality",
-    "equality_desc": "African languages are underrepresented in AI. ekodi bridges that gap by building a concrete model for Bamanankan — and paves the way for millions of Mandekan speakers.",
+    "equality_desc": "African languages are underrepresented in AI. ekodi bridges that gap by building a concrete model for Bamanankan and paves the way for millions of Mandekan speakers.",
     "company_title": "Reach more people",
     "company_desc": "Companies, startups, brands: reach millions of people without worrying about the language barrier. Integrate ekodi to communicate, sell, and support your customers directly in Bamanankan.",
     "cta": "Join the movement"
@@ -76,7 +76,7 @@
   "project": {
     "label": "Work in progress",
     "title": "ekodi is a project, not a finished product",
-    "desc": "The model is actively being trained and improved. Responses may not always be perfect — and that's where you come in. By using ekodi and sharing your feedback, you directly help train the AI to become better at Bamanankan. Be patient, be honest, and help us build something great together."
+    "desc": "The model is actively being trained and improved. Responses may not always be perfect, and that's where you come in. By using ekodi and sharing your feedback, you directly help train the AI to become better at Bamanankan. Be patient, be honest, and help us build something great together."
   },
   "pricing": {
     "title": "Free while we build together",
@@ -106,7 +106,7 @@
   },
   "feedback_cta": {
     "title": "You are training ekodi",
-    "subtitle": "This is not just a chatbot — it's a model that learns. Every time you rate a response, correct a translation, or flag an error, you are directly contributing to training the AI. ekodi gets better because of people like you.",
+    "subtitle": "This is not just a chatbot, it's a model that learns. Every time you rate a response, correct a translation, or flag an error, you are directly contributing to training the AI. ekodi gets better because of people like you.",
     "cta": "Try & Give Feedback",
     "badge": "Your feedback trains the model",
     "note": "We know ekodi isn't perfect yet. That's the point. Help us make it the best Bamanankan AI in the world."
@@ -114,7 +114,7 @@
   "ynnov": {
     "title": "Built by Ynnov",
     "desc": "Ynnov transforms ideas and visions into reality with AI-driven solutions customized for Africa and developing regions. From R&D to data intelligence, Ynnov empowers organizations to achieve sustainable growth.",
-    "mission": "From vision to reality — AI solutions for real-world impact.",
+    "mission": "From vision to reality. AI solutions for real-world impact.",
     "visit": "Discover ynnov.io"
   },
   "footer": {
@@ -125,7 +125,7 @@
     "login_title": "Welcome back",
     "login_subtitle": "Sign in to continue to ekodi",
     "register_title": "Create account",
-    "register_subtitle": "Join ekodi — the Bamanankan AI assistant",
+    "register_subtitle": "Join ekodi, the Bamanankan AI assistant",
     "email": "Email",
     "name": "Full name",
     "password": "Password",
@@ -146,7 +146,7 @@
     "french": "French",
     "bambara": "Bamanankan",
     "welcome": "I ni ce! Welcome to ekodi",
-    "welcome_hint": "Ask me anything — I speak Bamanankan and French!",
+    "welcome_hint": "Ask me anything, I speak Bamanankan and French!",
     "no_conversations": "No conversations yet",
     "delete_confirm": "Delete this conversation?",
     "mic_tap": "Tap to speak",

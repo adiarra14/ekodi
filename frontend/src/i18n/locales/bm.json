@@ -11,7 +11,7 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "IA min bɛ Bamanankan kuma",
-    "subtitle": "ekodi ye porozɛ niimanw ye. Modɛli bɛ kalanni na, bɛ bonya, bɛ ɲɛnabɔ don o don — i bɛ se ka kɛ o sira kan.",
+    "subtitle": "ekodi ye porozɛ niimanw ye. Modɛli bɛ kalanni na, bɛ bonya, bɛ ɲɛnabɔ don o don. I bɛ se ka kɛ o sira kan.",
     "leitmotiv": "ekodi bɛ yan. A bɛ i ka kan kuma.",
     "cta_try": "ekodi dɛmɛ gansan",
     "cta_api": "API sɔrɔ"
@@ -19,9 +19,9 @@
   "features": {
     "title": "ekodi bɛ se ka mun kɛ",
     "voice_title": "Kuma ekodi fɛ",
-    "voice_desc": "Kuma bamanankan walima tubabukan na. ekodi bɛ lamɛn, bɛ faamu, ka jaabi Bamanankan na — i ko kumaɲɔgɔnya tiɲɛ tiɲɛ fɛn bɛɛ kan.",
+    "voice_desc": "Kuma bamanankan walima tubabukan na. ekodi bɛ lamɛn, bɛ faamu, ka jaabi Bamanankan na, i ko kumaɲɔgɔnya tiɲɛ tiɲɛ fɛn bɛɛ kan.",
     "translate_title": "Bayɛlɛmani joona",
-    "translate_desc": "Tubabukan ni bamanankan cɛ tɛmɛni ka nɔgɔn. Sɛbɛnni don, sɛbɛnni bɔ — tiɲɛ ni teliya.",
+    "translate_desc": "Tubabukan ni bamanankan cɛ tɛmɛni ka nɔgɔn. Sɛbɛnni don, sɛbɛnni bɔ. Tiɲɛ ni teliya.",
     "tts_title": "Bamanankan lamɛn",
     "tts_desc": "ekodi tɛ sɛbɛnni dɔrɔn kɛ. A bɛ kuma. Bamanankan kuma jɛlen, ɲuman.",
     "api_title": "Jɔ ni ekodi ye",
@@ -36,7 +36,7 @@
     "step3": "ekodi bɛ miiri",
     "step3_desc": "Jaabi hakilitigiya bɛ labɛn",
     "step4": "ekodi bɛ jaabi",
-    "step4_desc": "Bamanankan na — sɛbɛnni ni kuma"
+    "step4_desc": "Bamanankan na, sɛbɛnni ni kuma"
   },
   "demo": {
     "title": "A filɛ a baara la",
@@ -54,11 +54,11 @@
     "stat_speakers": "+40 miliyɔn",
     "stat_speakers_label": "Mandekan kumabagaw diɲɛ kɔnɔ",
     "farmer_title": "Dɔnniya bɛɛ ye",
-    "farmer_desc": "Sɛnɛkɛla min tɛ se ka kalan walima ka sɛbɛn, o bɛ se sisan ka ɲininkali kɛ sangaso, sugu sɔngɔ walima sɛnɛ fɛɛrɛ kan — a ka kan kuma dɔrɔn. ekodi bɛ diɲɛ dɔnniya di minw tun bɔra a la.",
+    "farmer_desc": "Sɛnɛkɛla min tɛ se ka kalan walima ka sɛbɛn, o bɛ se sisan ka ɲininkali kɛ sangaso, sugu sɔngɔ walima sɛnɛ fɛɛrɛ kan, a ka kan kuma dɔrɔn. ekodi bɛ diɲɛ dɔnniya di minw tun bɔra a la.",
     "institution_title": "IA dɛmɛbagaw cɛsirilen ye",
     "institution_desc": "Gɔfɛrɛnɛman, ONG, baaraw: IA dɛmɛbagaw jɔ minw bɛ i ka jama ka kan kuma. Kunnafoni di, dɛmɛ kɛ Bamanankan na.",
     "equality_title": "Kunnafoni bɛɛnbaliya dɔgɔya",
-    "equality_desc": "Afiriki kanw tɛ IA kɔnɔ ka ɲɛ. ekodi bɛ o dancɛ datugu ni modɛli tiɲɛ ye Bamanankan kama — ka sira da Mandekan kumabaga miliyɔnw ye.",
+    "equality_desc": "Afiriki kanw tɛ IA kɔnɔ ka ɲɛ. ekodi bɛ o dancɛ datugu ni modɛli tiɲɛ ye Bamanankan kama ka sira da Mandekan kumabaga miliyɔnw ye.",
     "company_title": "Mɔgɔ caman sɔrɔ",
     "company_desc": "Sosiyete, startup, marka: mɔgɔ miliyɔnw sɔrɔ kan gɛlɛya kɔ. ekodi don ka kuma, ka feere, ka i ka kiliyanw dɛmɛ Bamanankan na yɛrɛ yɛrɛ.",
     "cta": "An bolo di"
@@ -76,7 +76,7 @@
   "project": {
     "label": "Baara bɛ kɛ a kan",
     "title": "ekodi ye porozɛ ye, a ma ban fɔlɔ",
-    "desc": "Modɛli bɛ kalanni na tuma bɛɛ, bɛ ɲɛnabɔ. Jaabi bɛɛ tɛna dafa — o de ye i ka baara ye. Ni i ye ekodi baara ka kɔfɔli di, i bɛ IA dɛmɛ ka Bamanankan kalan ka fisa. Muɲu, tiɲɛ fɔ, an ka fɛn ɲuman jɔ ɲɔgɔn fɛ."
+    "desc": "Modɛli bɛ kalanni na tuma bɛɛ, bɛ ɲɛnabɔ. Jaabi bɛɛ tɛna dafa, o de ye i ka baara ye. Ni i ye ekodi baara ka kɔfɔli di, i bɛ IA dɛmɛ ka Bamanankan kalan ka fisa. Muɲu, tiɲɛ fɔ, an ka fɛn ɲuman jɔ ɲɔgɔn fɛ."
   },
   "pricing": {
     "title": "Gansan ka an jɔ ɲɔgɔn fɛ",
@@ -106,7 +106,7 @@
   },
   "feedback_cta": {
     "title": "I bɛ ekodi kalanni na",
-    "subtitle": "Nin tɛ robot dɔrɔn ye — a ye modɛli ye min bɛ kalan. Ni i ye jaabi ɲuman walima jugu jira, walima bayɛlɛmani ladilan, i bɛ IA kalanni na yɛrɛ yɛrɛ. ekodi bɛ ɲɛnabɔ i ɲɔgɔnw barakɛ de kosɔn.",
+    "subtitle": "Nin tɛ robot dɔrɔn ye, a ye modɛli ye min bɛ kalan. Ni i ye jaabi ɲuman walima jugu jira, walima bayɛlɛmani ladilan, i bɛ IA kalanni na yɛrɛ yɛrɛ. ekodi bɛ ɲɛnabɔ i ɲɔgɔnw barakɛ de kosɔn.",
     "cta": "Dɛmɛ ka kɔfɔli di",
     "badge": "I ka kɔfɔli bɛ modɛli kalanni na",
     "note": "An b'a dɔn ekodi ma dafa fɔlɔ. O de ye kɔrɔ. An dɛmɛ k'a kɛ Bamanankan IA ɲumanba ye diɲɛ kɔnɔ."
@@ -114,7 +114,7 @@
   "ynnov": {
     "title": "Ynnov ye a jɔ",
     "desc": "Ynnov bɛ miriya ni laɲini yɛlɛma tiɲɛ ye ni IA fɛɛrɛw ye minw dabɔra Afiriki ni jamana wɛrɛw ye. Sɛgɛsɛgɛli ka taa kunnafoni hakilitigiya ma, Ynnov bɛ jɛkuluw dɛmɛ ka se bonya laban ma.",
-    "mission": "Miriya ka kɛ tiɲɛ ye — IA fɛɛrɛw diɲɛ kɔnɔ nafaw ye.",
+    "mission": "Miriya ka kɛ tiɲɛ ye. IA fɛɛrɛw diɲɛ kɔnɔ nafaw ye.",
     "visit": "ynnov.io lajɛ"
   },
   "footer": {
@@ -125,7 +125,7 @@
     "login_title": "I ni ce, i kɔseginna",
     "login_subtitle": "Don ekodi kɔnɔ",
     "register_title": "Jateminɛ dabɔ",
-    "register_subtitle": "Don ekodi la — Bamanankan IA dɛmɛbaga",
+    "register_subtitle": "Don ekodi la, Bamanankan IA dɛmɛbaga",
     "email": "Email",
     "name": "Tɔgɔ",
     "password": "Daɲɛgafe",
@@ -146,7 +146,7 @@
     "french": "Tubabukan",
     "bambara": "Bamanankan",
     "welcome": "I ni ce! Bisimila ekodi la",
-    "welcome_hint": "Ɲininkali kɛ fɛn bɛɛ kan — ne bɛ bamanankan ni tubabukan kuma!",
+    "welcome_hint": "Ɲininkali kɛ fɛn bɛɛ kan, ne bɛ bamanankan ni tubabukan kuma!",
     "no_conversations": "Kuma si tɛ yan",
     "delete_confirm": "Kuma nin bɔ?",
     "mic_tap": "Digi ka kuma",

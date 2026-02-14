@@ -11,7 +11,7 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "L'IA qui parle le Bamanankan",
-    "subtitle": "ekodi est un projet vivant. Le modele apprend, grandit, s'ameliore chaque jour — et vous pouvez faire partie de cette aventure.",
+    "subtitle": "ekodi est un projet vivant. Le modele apprend, grandit, s'ameliore chaque jour. Et vous pouvez faire partie de cette aventure.",
     "leitmotiv": "ekodi est la. Et il parle votre langue.",
     "cta_try": "Essayer ekodi gratuitement",
     "cta_api": "Acces API"
@@ -19,9 +19,9 @@
   "features": {
     "title": "Ce que ekodi peut faire",
     "voice_title": "Parlez a ekodi",
-    "voice_desc": "Parlez en bamanankan ou en francais. ekodi ecoute, comprend et repond naturellement en Bamanankan — comme une vraie conversation.",
+    "voice_desc": "Parlez en bamanankan ou en francais. ekodi ecoute, comprend et repond naturellement en Bamanankan, comme une vraie conversation.",
     "translate_title": "Traduisez instantanement",
-    "translate_desc": "Passez du francais au bamanankan en un instant. Du texte en entree, du texte en sortie — precis et rapide.",
+    "translate_desc": "Passez du francais au bamanankan en un instant. Du texte en entree, du texte en sortie. Precis et rapide.",
     "tts_title": "Ecoutez le Bamanankan",
     "tts_desc": "ekodi ne se contente pas d'ecrire. Il parle. Une voix bamanankan naturelle, claire et expressive.",
     "api_title": "Construisez avec ekodi",
@@ -36,7 +36,7 @@
     "step3": "ekodi reflechit",
     "step3_desc": "Une reponse intelligente est generee",
     "step4": "ekodi repond",
-    "step4_desc": "En bamanankan — texte et voix"
+    "step4_desc": "En bamanankan, texte et voix"
   },
   "demo": {
     "title": "Voyez par vous-meme",
@@ -54,11 +54,11 @@
     "stat_speakers": "+40 millions",
     "stat_speakers_label": "de locuteurs Mandekan dans le monde",
     "farmer_title": "Le savoir pour tous",
-    "farmer_desc": "Un agriculteur qui ne sait ni lire ni ecrire peut desormais poser des questions sur la meteo, les prix du marche ou les techniques agricoles — simplement en parlant sa langue. ekodi donne acces au savoir mondial a ceux qui en etaient exclus.",
+    "farmer_desc": "Un agriculteur qui ne sait ni lire ni ecrire peut desormais poser des questions sur la meteo, les prix du marche ou les techniques agricoles, simplement en parlant sa langue. ekodi donne acces au savoir mondial a ceux qui en etaient exclus.",
     "institution_title": "Des agents IA pour les institutions",
     "institution_desc": "Gouvernements, ONG, services publics : construisez des agents IA qui parlent la langue de la majorite de votre population. Informez, assistez et servez en Bamanankan.",
     "equality_title": "Reduire l'inegalite des donnees",
-    "equality_desc": "Les langues africaines sont sous-representees dans l'IA. ekodi comble ce fosse en construisant un modele concret pour le Bamanankan — et ouvre la voie a des millions de locuteurs Mandekan.",
+    "equality_desc": "Les langues africaines sont sous-representees dans l'IA. ekodi comble ce fosse en construisant un modele concret pour le Bamanankan et ouvre la voie a des millions de locuteurs Mandekan.",
     "company_title": "Toucher plus de clients",
     "company_desc": "Entreprises, startups, marques : atteignez des millions de personnes sans vous soucier de la barriere linguistique. Integrez ekodi pour communiquer, vendre et accompagner vos clients directement en Bamanankan.",
     "cta": "Rejoindre le mouvement"
@@ -76,7 +76,7 @@
   "project": {
     "label": "Projet en cours",
     "title": "ekodi est un projet, pas un produit fini",
-    "desc": "Le modele est activement entraine et ameliore. Les reponses ne seront pas toujours parfaites — et c'est la que vous intervenez. En utilisant ekodi et en partageant vos retours, vous contribuez directement a entrainer l'IA pour qu'elle maitrise mieux le Bamanankan. Soyez patient, soyez honnete, et construisons ensemble quelque chose de grand."
+    "desc": "Le modele est activement entraine et ameliore. Les reponses ne seront pas toujours parfaites, et c'est la que vous intervenez. En utilisant ekodi et en partageant vos retours, vous contribuez directement a entrainer l'IA pour qu'elle maitrise mieux le Bamanankan. Soyez patient, soyez honnete, et construisons ensemble quelque chose de grand."
   },
   "pricing": {
     "title": "Gratuit pendant qu'on construit ensemble",
@@ -106,7 +106,7 @@
   },
   "feedback_cta": {
     "title": "Vous entrainez ekodi",
-    "subtitle": "Ce n'est pas qu'un chatbot — c'est un modele qui apprend. Chaque fois que vous evaluez une reponse, corrigez une traduction ou signalez une erreur, vous contribuez directement a l'entrainement de l'IA. ekodi s'ameliore grace a des gens comme vous.",
+    "subtitle": "Ce n'est pas qu'un chatbot, c'est un modele qui apprend. Chaque fois que vous evaluez une reponse, corrigez une traduction ou signalez une erreur, vous contribuez directement a l'entrainement de l'IA. ekodi s'ameliore grace a des gens comme vous.",
     "cta": "Tester et donner son avis",
     "badge": "Vos retours entrainent le modele",
     "note": "Nous savons qu'ekodi n'est pas encore parfait. C'est justement le but. Aidez-nous a en faire la meilleure IA Bamanankan au monde."
@@ -114,7 +114,7 @@
   "ynnov": {
     "title": "Concu par Ynnov",
     "desc": "Ynnov transforme les idees et les visions en realite grace a des solutions IA adaptees a l'Afrique et aux regions en developpement. De la R&D a l'intelligence des donnees, Ynnov accompagne les organisations vers une croissance durable.",
-    "mission": "De la vision a la realite — des solutions IA pour un impact concret.",
+    "mission": "De la vision a la realite. Des solutions IA pour un impact concret.",
     "visit": "Decouvrir ynnov.io"
   },
   "footer": {
@@ -125,7 +125,7 @@
     "login_title": "Bon retour",
     "login_subtitle": "Connectez-vous pour continuer sur ekodi",
     "register_title": "Creer un compte",
-    "register_subtitle": "Rejoignez ekodi — l'assistant IA Bamanankan",
+    "register_subtitle": "Rejoignez ekodi, l'assistant IA Bamanankan",
     "email": "Email",
     "name": "Nom complet",
     "password": "Mot de passe",
@@ -146,7 +146,7 @@
     "french": "Francais",
     "bambara": "Bamanankan",
     "welcome": "I ni ce ! Bienvenue sur ekodi",
-    "welcome_hint": "Posez-moi n'importe quelle question — je parle bamanankan et francais !",
+    "welcome_hint": "Posez-moi n'importe quelle question, je parle bamanankan et francais !",
     "no_conversations": "Aucune conversation",
     "delete_confirm": "Supprimer cette conversation ?",
     "mic_tap": "Appuyez pour parler",

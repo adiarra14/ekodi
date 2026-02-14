@@ -12,7 +12,7 @@ For full VITS training (with discriminator + KL loss), use the Colab notebook:
 
 Usage:
     python scripts/train.py
-    python scripts/train.py --config config/ekodi-port.yml --epochs 5
+    python scripts/train.py --config config/tts-port.yml --epochs 5
 """
 
 import argparse
@@ -55,7 +55,7 @@ def mel_loss(pred_wav, target_wav, sr=16000, device="cuda"):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config", default="config/ekodi-port.yml")
+    parser.add_argument("--config", default="config/tts-port.yml")
     parser.add_argument("--epochs", type=int, default=None)
     parser.add_argument("--batch-size", type=int, default=1)
     parser.add_argument("--lr", type=float, default=1e-4)

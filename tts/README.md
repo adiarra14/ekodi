@@ -39,7 +39,7 @@ curl -X POST http://localhost:8000/tts \
 ```
 tts/
 ├── config/
-│   └── ekodi-port.yml           # all settings (model, data, training, server)
+│   └── tts-port.yml           # all settings (model, data, training, server)
 ├── scripts/
 │   ├── download_data.py        # download open Bambara datasets
 │   ├── prepare_data.py         # normalise audio + text, split
@@ -96,7 +96,7 @@ python scripts/train.py
 Fine-tunes `facebook/mms-tts-bam` (VITS) on your Bambara data.
 Designed for 8-12 GB VRAM (fp16, gradient accumulation).
 
-Settings in `config/ekodi-port.yml` → `training:` section.
+Settings in `config/tts-port.yml` → `training:` section.
 
 To resume from a checkpoint:
 ```bash
@@ -162,7 +162,7 @@ with open("output.wav", "wb") as f:
 
 ## Configuration
 
-All settings are in `config/ekodi-port.yml`. Key sections:
+All settings are in `config/tts-port.yml`. Key sections:
 
 | Section | What it controls |
 |---------|-----------------|

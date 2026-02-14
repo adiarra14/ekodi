@@ -7,7 +7,7 @@ Uses Meta MMS-TTS (VITS architecture) as foundation.
   - Output: 16 kHz mono WAV
 
 Usage:
-    model = EkodiTTS.from_config("config/ekodi-port.yml")
+    model = EkodiTTS.from_config("config/tts-port.yml")
     wav   = model.synthesize("I ni ce!")
 """
 

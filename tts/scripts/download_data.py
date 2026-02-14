@@ -167,7 +167,7 @@ def main():
     parser = argparse.ArgumentParser(description="Download Bambara TTS data")
     parser.add_argument("--source", choices=list(SOURCES.keys()), default=None,
                         help="Force a specific data source")
-    parser.add_argument("--config", default="config/ekodi-port.yml")
+    parser.add_argument("--config", default="config/tts-port.yml")
     parser.add_argument("--raw-dir", default=None)
     parser.add_argument("--max-samples", type=int, default=10000,
                         help="Max samples to download (default 10000)")

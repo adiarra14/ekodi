@@ -10,7 +10,7 @@ Reads the raw metadata CSV from download_data.py and produces:
 
 Usage:
     python scripts/prepare_data.py
-    python scripts/prepare_data.py --config config/ekodi-port.yml
+    python scripts/prepare_data.py --config config/tts-port.yml
 """
 
 import argparse
@@ -32,7 +32,7 @@ from src.text_normalize import normalize_bambara
 
 def main():
     parser = argparse.ArgumentParser(description="Prepare Bambara TTS data")
-    parser.add_argument("--config", default="config/ekodi-port.yml")
+    parser.add_argument("--config", default="config/tts-port.yml")
     args = parser.parse_args()
 
     import yaml

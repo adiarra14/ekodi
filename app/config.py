@@ -37,7 +37,7 @@ class Settings(BaseModel):
 
     # TTS config path
     TTS_CONFIG_PATH: str = str(
-        Path(__file__).resolve().parent.parent / "tts" / "config" / "ekodi-port.yml"
+        Path(__file__).resolve().parent.parent / "tts" / "config" / "tts-port.yml"
     )
 
     # Server

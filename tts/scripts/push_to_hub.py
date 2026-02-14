@@ -78,7 +78,7 @@ def main():
     parser = argparse.ArgumentParser(description="Push model to Hugging Face Hub")
     parser.add_argument("--repo-id", required=True, help="HF Hub repo id, e.g. your-username/ekodi-bambara-tts")
     parser.add_argument("--checkpoint", default=None, help="Path to checkpoint dir (default: from config)")
-    parser.add_argument("--config", default="config/ekodi-port.yml")
+    parser.add_argument("--config", default="config/tts-port.yml")
     parser.add_argument("--private", action="store_true", help="Make the repo private")
     args = parser.parse_args()
 

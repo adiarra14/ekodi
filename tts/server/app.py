@@ -37,7 +37,7 @@ logging.basicConfig(level=logging.INFO, format="%(levelname)s | %(message)s")
 logger = logging.getLogger(__name__)
 
 # ── Config ────────────────────────────────────────────────────
-CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "ekodi-port.yml"
+CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "tts-port.yml"
 SERVER_DIR = Path(__file__).resolve().parent
 ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 

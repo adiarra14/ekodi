@@ -50,7 +50,7 @@
     "get_key": "Get Your API Key"
   },
   "story": {
-    "proverb": "Planted before the other ɲiɔ (millet), it grows and surpasses them all.",
+    "proverb": "The ɲiɔ planted after all the others grows faster and surpasses them all.",
     "desc": "In Bamanankan, Sambala ɲiɔ is the millet sown first — it rises faster and stands taller than the rest. ekodi carries that spirit: the first AI to truly speak Bamanankan. Like sambala, it is still growing — and your patience and feedback are the rain that helps it rise."
   },
   "stats": {
@@ -74,17 +74,17 @@
     "free_feedback": "Your feedback trains the model",
     "free_cta": "Test ekodi",
     "standard_tier": "Standard",
-    "standard_price": "2,500 FCFA / month",
-    "standard_prompts": "100 prompts / month",
+    "standard_price": "—",
+    "standard_prompts": "More prompts",
     "standard_features": "Voice and text conversations",
     "standard_cta": "Coming soon",
     "pro_tier": "Pro",
-    "pro_price": "7,500 FCFA / month",
+    "pro_price": "—",
     "pro_prompts": "Unlimited",
     "pro_features": "API access, priority, no limits",
     "pro_cta": "Coming soon",
     "business_tier": "Business",
-    "business_price": "Custom",
+    "business_price": "—",
     "business_prompts": "Custom volume",
     "business_features": "Custom integration, dedicated support",
     "business_cta": "Contact us",

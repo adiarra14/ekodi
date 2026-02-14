@@ -50,7 +50,7 @@
     "get_key": "I ka API kilɛ sɔrɔ"
   },
   "story": {
-    "proverb": "A bɛ sɛnɛ ɲiɔ tɔw ɲɛ, a bɛ bonya ka tɛmɛ u bɛɛ kan.",
+    "proverb": "Ɲiɔ min sɛnɛna tɔw bɛɛ kɔ, o de bonyara ka tɛmɛ u bɛɛ kan.",
     "desc": "Bamanankan na, Sambala ɲiɔ ye ɲiɔ ye min bɛ sɛnɛ fɔlɔ — a bɛ bonya joona ka tɛmɛ tɔw kan. ekodi bɛ o niyɔrɔ ta: IA fɔlɔ min bɛ Bamanankan kuma tiɲɛ tiɲɛ. I ko sambala, a bɛ bonya tuma bɛɛ — i ka muɲuli ni i ka kɔfɔli ye sanji ye min bɛ a dɛmɛ ka wili."
   },
   "stats": {
@@ -74,17 +74,17 @@
     "free_feedback": "I ka kɔfɔli bɛ modɛli kalanni na",
     "free_cta": "ekodi dɛmɛ",
     "standard_tier": "Standard",
-    "standard_price": "2 500 FCFA / kalo",
-    "standard_prompts": "Prompt 100 / kalo",
+    "standard_price": "—",
+    "standard_prompts": "Prompt caman",
     "standard_features": "Kuma ni sɛbɛnni kumaɲɔgɔnya",
     "standard_cta": "A bɛ na joona",
     "pro_tier": "Pro",
-    "pro_price": "7 500 FCFA / kalo",
+    "pro_price": "—",
     "pro_prompts": "Dɛsɛ tɛ",
     "pro_features": "API, fɔlɔya, dɛsɛ tɛ",
     "pro_cta": "A bɛ na joona",
     "business_tier": "Business",
-    "business_price": "Ladilanni",
+    "business_price": "—",
     "business_prompts": "Hakɛ ladilanni",
     "business_features": "Ladilanni kɛrɛfɛ, dɛmɛ gansan",
     "business_cta": "An sɔrɔ",

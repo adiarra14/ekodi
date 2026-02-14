@@ -19,8 +19,8 @@
   "features": {
     "title": "What ekodi can do",
     "assistant_title": "A real AI assistant in Bamanankan",
-    "assistant_desc": "Ask any question, on any topic. ekodi answers in Bamanankan like ChatGPT would: health, education, farming, news, cooking, history, technology. Everything.",
-    "voice_title": "Talk to ekodi",
+    "assistant_desc": "Ask any question, on any topic. ekodi answers in Bamanankan: health, education, farming, news, cooking, history, technology. Everything.",
+    "voice_title": "Speak, ekodi listens",
     "voice_desc": "Speak in Bamanankan or French. ekodi listens, understands, and responds naturally by voice, like a real conversation.",
     "translate_title": "Translate instantly",
     "translate_desc": "Switch between French and Bamanankan effortlessly. Text in, text out. Accurate and fast.",

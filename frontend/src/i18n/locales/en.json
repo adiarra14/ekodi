@@ -46,8 +46,8 @@
   },
   "demo": {
     "title": "See it in action",
-    "user_msg": "ekodi, tell me about Mali",
-    "ai_msg": "Mali ye jamana belebeleba ye, Afriki Tlebi fɛ. Mɔgɔ miliyɔn mugan ni saba, bɛ a kɔnɔ. Bamako de ye a faaba ye... dugu min sigilen bɛ, Ba Joliba da la. Tumbutu, ani Jɛnɛ, olu fana ye dugu kɔrɔba ye. Bamanankan ye kanba ye. Mali ye tariku jamana ye, min ɲɛsinna a ka sini ma.",
+    "user_msg": "ekodi, Mali ko fɔ n ye",
+    "ai_msg": "Mali ye jamana belebeleba ye, Afriki Tlebi fɛ. Mɔgɔ miliyɔn mugan ni saba, bɛ a kɔnɔ. Bamako de ye a faaba ye, dugu min sigilen bɛ, Ba Joliba da la. Tumbutu, ani Jɛnɛ, olu fana ye dugu kɔrɔba u ye. Jamana bɔnya ye, kilometɛrɛ miliyɔn kelen, ni fila ye. Bamanankan ye kanba ye. Mɔgɔ kɛmɛ o kɛmɛ sarada bi-segin b'a fɔ. Mali ye a ka yɛrɛmahɔrɔnya sɔrɔ, san ba kelen, kɛmɛ kɔnɔntɔn, ni bi-wɔɔrɔ, Sɛtanburu kalo la. Mali ye Jatigiya jamana ye. Sinankunya, bɛ hɛrɛ sabati mɔgɔw cɛ. Mali ye tariku jamana ye, min ɲɛsinna a ka sini ma.",
     "input_placeholder": "Ask ekodi anything..."
   },
   "api_showcase": {

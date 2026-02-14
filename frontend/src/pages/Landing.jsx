@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect, useCallback } from 'react';
 import {
   ArrowRight, Sparkles, Sprout, ExternalLink,
   Check, Lock, MessageCircle, Send, ChevronRight, Headphones,
@@ -14,13 +14,70 @@ import './Landing.css';
 export default function Landing() {
   const { t } = useTranslation();
   const audioRef = useRef(null);
+  const analyserRef = useRef(null);
+  const ctxRef = useRef(null);
+  const barsRef = useRef(null);
+  const rafRef = useRef(null);
   const [playing, setPlaying] = useState(false);
+
+  const BAR_COUNT = 48;
+
+  // Setup Web Audio analyser (once)
+  const ensureAnalyser = useCallback(() => {
+    if (analyserRef.current) return;
+    const a = audioRef.current;
+    if (!a) return;
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = ctx.createMediaElementSource(a);
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 128;
+    analyser.smoothingTimeConstant = 0.75;
+    src.connect(analyser);
+    analyser.connect(ctx.destination);
+    ctxRef.current = ctx;
+    analyserRef.current = analyser;
+  }, []);
+
+  // Animation loop: read frequency data and update bar heights
+  const animate = useCallback(() => {
+    const analyser = analyserRef.current;
+    const bars = barsRef.current;
+    if (!analyser || !bars) return;
+    const data = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(data);
+    const step = Math.max(1, Math.floor(data.length / BAR_COUNT));
+    for (let i = 0; i < BAR_COUNT; i++) {
+      const val = data[Math.min(i * step, data.length - 1)] / 255;
+      const h = 3 + val * 28;
+      if (bars.children[i]) bars.children[i].style.height = `${h}px`;
+    }
+    rafRef.current = requestAnimationFrame(animate);
+  }, []);
+
+  // Start/stop animation with play state
+  useEffect(() => {
+    if (playing) {
+      rafRef.current = requestAnimationFrame(animate);
+    } else {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+      // Reset bars to idle
+      const bars = barsRef.current;
+      if (bars) {
+        for (let i = 0; i < bars.children.length; i++) {
+          bars.children[i].style.height = `${5 + Math.sin(i * 0.4) * 6}px`;
+        }
+      }
+    }
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [playing, animate]);
 
   const toggleAudio = (e) => {
     e.preventDefault();
     e.stopPropagation();
+    ensureAnalyser();
     const a = audioRef.current;
     if (!a) return;
+    if (ctxRef.current?.state === 'suspended') ctxRef.current.resume();
     if (a.paused) { a.play(); setPlaying(true); }
     else { a.pause(); setPlaying(false); }
   };
@@ -60,19 +117,18 @@ export default function Landing() {
               <div className="demo-bubble"><p>{t('demo.user_msg')}</p></div>
             </div>
             <div className="demo-msg demo-ai">
-              <div className="demo-avatar ai-av"><img src="/logo-ekodi-actif.png" alt="" /></div>
+              <div className={`demo-avatar ai-av ${playing ? 'ai-speaking' : ''}`}><img src="/logo-ekodi-actif.png" alt="" /></div>
               <div className="demo-bubble ai-bubble">
-                <p>{t('demo.ai_msg')}</p>
-                <button className={`demo-audio-bar ${playing ? 'is-playing' : ''}`} onClick={toggleAudio} type="button">
-                  <span className="demo-play-btn">
-                    {playing ? <Pause size={12} /> : <Play size={12} />}
+                <button className={`demo-audio-main ${playing ? 'is-playing' : ''}`} onClick={toggleAudio} type="button">
+                  <span className="demo-play-btn-lg">
+                    {playing ? <Pause size={18} /> : <Play size={18} />}
                   </span>
-                  <div className="demo-wave">
-                    {Array.from({ length: 32 }).map((_, i) => (
-                      <span key={i} style={{ height: `${4 + Math.sin(i * 0.5) * 12}px`, animationDelay: `${i * 35}ms` }} />
+                  <div className="demo-wave-lg" ref={barsRef}>
+                    {Array.from({ length: BAR_COUNT }).map((_, i) => (
+                      <span key={i} style={{ height: `${5 + Math.sin(i * 0.4) * 6}px` }} />
                     ))}
                   </div>
-                  <Headphones size={13} className="demo-headphones" />
+                  <Headphones size={15} className="demo-headphones" />
                 </button>
                 <audio ref={audioRef} src="/demo-voice.wav" onEnded={() => setPlaying(false)} preload="auto" />
               </div>

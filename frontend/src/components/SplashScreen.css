@@ -1,0 +1,122 @@
+/* ── Splash / Loading Screen ── */
+.splash {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: #09090b;
+  transition: opacity 0.7s ease, visibility 0.7s;
+}
+.splash.exit {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* Background orbs */
+.splash-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.splash-orb {
+  position: absolute; border-radius: 50%; filter: blur(120px);
+  animation: sOrbDrift 8s ease-in-out infinite alternate;
+}
+.s-orb-1 { width: 400px; height: 400px; top: -10%; left: 15%; background: rgba(255, 122, 47, 0.12); }
+.s-orb-2 { width: 350px; height: 350px; bottom: -5%; right: 10%; background: rgba(139, 92, 246, 0.1); animation-delay: 2s; }
+.s-orb-3 { width: 250px; height: 250px; top: 40%; left: 55%; background: rgba(20, 184, 166, 0.06); animation-delay: 4s; }
+@keyframes sOrbDrift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(20px, -15px) scale(1.08); }
+}
+
+/* Center content */
+.splash-center {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+
+/* Logo with animated rings */
+.splash-rings {
+  position: relative;
+  width: 260px; height: 260px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Stack all logos on top of each other */
+.splash-logo-stack {
+  position: relative; z-index: 2;
+  width: 150px; height: 150px;
+  animation: sLogoIn 0.8s ease-out 0.15s forwards, sLogoFloat 3s ease-in-out 1s infinite;
+  opacity: 0;
+}
+.splash-logo {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.35s ease-in-out;
+}
+.splash-logo.active {
+  opacity: 1;
+}
+
+.s-ring {
+  position: absolute; border-radius: 50%;
+  border: 1.5px solid rgba(255, 122, 47, 0.35);
+  opacity: 0;
+  animation: sRingGrow 2.5s ease-out infinite;
+}
+.s-r1 { width: 170px; height: 170px; animation-delay: 0.3s; }
+.s-r2 { width: 210px; height: 210px; animation-delay: 0.9s; }
+.s-r3 { width: 260px; height: 260px; animation-delay: 1.5s; }
+
+@keyframes sLogoIn {
+  0% { opacity: 0; transform: scale(0.5); }
+  60% { opacity: 1; transform: scale(1.08); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes sLogoFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+@keyframes sRingGrow {
+  0% { transform: scale(0.5); opacity: 0.6; }
+  70% { opacity: 0.1; }
+  100% { transform: scale(1.1); opacity: 0; }
+}
+
+/* Animated text */
+.splash-text {
+  display: flex; align-items: baseline;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em;
+}
+.s-l {
+  display: inline-block; color: #fafafa;
+  opacity: 0;
+  animation: sLetterIn 0.5s ease-out forwards;
+}
+.s-dot {
+  display: inline-block; color: #ff7a2f;
+  font-size: 1.5rem; margin-left: 2px;
+  opacity: 0;
+  animation: sLetterIn 0.5s ease-out forwards;
+}
+@keyframes sLetterIn {
+  0% { opacity: 0; transform: translateY(20px) rotateX(40deg); }
+  60% { opacity: 1; transform: translateY(-3px) rotateX(-5deg); }
+  100% { opacity: 1; transform: translateY(0) rotateX(0); }
+}
+
+/* After letters land, gentle color shimmer */
+.splash.hold .s-l:nth-child(1) { color: #ff7a2f; }
+.splash.hold .s-l:nth-child(2) { color: #ff8f4f; }
+.splash.hold .s-l:nth-child(3) { color: #ffa56f; }
+.splash.hold .s-l:nth-child(4) { color: #ffbb8f; }
+.splash.hold .s-l:nth-child(5) { color: #fafafa; }
+
+/* Tagline */
+.splash-tag {
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #71717a;
+  opacity: 0; margin: 0;
+  animation: sTagIn 0.6s ease-out 1s forwards;
+}
+@keyframes sTagIn {
+  0% { opacity: 0; transform: translateY(8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}

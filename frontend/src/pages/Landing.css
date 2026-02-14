@@ -89,38 +89,55 @@ section[id] { scroll-margin-top: 64px; }
 .demo-msg { display: flex; gap: 7px; align-items: flex-start; }
 .demo-avatar { width: 24px; height: 24px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: .72rem; font-weight: 700; }
 .user-av { background: var(--orange); color: #fff; }
-.ai-av { background: transparent; }
-.ai-av img { height: 24px; width: auto; object-fit: contain; }
+.ai-av {
+  background: rgba(255 122 47 / .08); position: relative;
+  transition: background .3s, box-shadow .3s;
+}
+.ai-av img { height: 24px; width: auto; object-fit: contain; transition: transform .3s; }
+.ai-av.ai-speaking {
+  background: rgba(255 122 47 / .15);
+  box-shadow: 0 0 12px rgba(255 122 47 / .25);
+  animation: aiPulse 1.5s ease-in-out infinite;
+}
+.ai-av.ai-speaking img { animation: aiBreath 2s ease-in-out infinite; }
+@keyframes aiPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(255 122 47 / .2); }
+  50% { box-shadow: 0 0 20px rgba(255 122 47 / .4); }
+}
+@keyframes aiBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
 .demo-bubble { background: rgba(255 255 255 / .04); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; flex: 1; }
 .demo-bubble p { font-size: .82rem; line-height: 1.5; color: var(--text); margin: 0; }
 .demo-user .demo-bubble { background: rgba(255 122 47 / .06); border-color: rgba(255 122 47 / .1); }
-.demo-audio-bar {
-  display: flex; align-items: center; gap: 8px; margin-top: 8px;
-  color: var(--muted); cursor: pointer;
-  background: rgba(255 122 47 / .06); border: 1px solid rgba(255 122 47 / .12);
-  border-radius: 8px; padding: 7px 10px;
-  transition: background .2s, border-color .2s;
-  font-family: inherit; font-size: inherit;
+/* ── Demo audio: main player (replaces text) ── */
+.demo-audio-main {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; cursor: pointer;
+  background: linear-gradient(135deg, rgba(255 122 47 / .08), rgba(139 92 246 / .05));
+  border: 1px solid rgba(255 122 47 / .18);
+  border-radius: 10px; padding: 12px 14px;
+  transition: background .2s, border-color .2s, box-shadow .2s;
+  font-family: inherit; font-size: inherit; color: inherit;
 }
-.demo-audio-bar:hover { background: rgba(255 122 47 / .1); border-color: rgba(255 122 47 / .25); }
-.demo-play-btn {
+.demo-audio-main:hover { background: rgba(255 122 47 / .12); border-color: rgba(255 122 47 / .3); box-shadow: 0 4px 16px rgba(255 122 47 / .08); }
+.demo-play-btn-lg {
   display: flex; align-items: center; justify-content: center;
-  width: 24px; height: 24px; border-radius: 50%;
+  width: 36px; height: 36px; border-radius: 50%;
   background: var(--orange); color: #fff; flex-shrink: 0;
-  transition: transform .15s;
+  transition: transform .15s, box-shadow .2s;
 }
-.demo-audio-bar:hover .demo-play-btn { transform: scale(1.1); }
-.demo-headphones { color: var(--muted); opacity: .5; flex-shrink: 0; }
-.demo-wave { display: flex; align-items: center; gap: 2px; height: 16px; flex: 1; }
-.demo-wave span {
-  width: 2px; border-radius: 2px; background: var(--orange); opacity: .3;
-  transition: opacity .3s;
+.demo-audio-main:hover .demo-play-btn-lg { transform: scale(1.08); box-shadow: 0 0 12px rgba(255 122 47 / .3); }
+.demo-headphones { color: var(--muted); opacity: .4; flex-shrink: 0; }
+.demo-wave-lg { display: flex; align-items: center; gap: 2px; height: 32px; flex: 1; }
+.demo-wave-lg span {
+  width: 2.5px; border-radius: 2px; background: var(--orange);
+  opacity: .35; transition: height 80ms ease, opacity 120ms ease;
 }
-/* paused: static bars */
-.demo-audio-bar:not(.is-playing) .demo-wave span { animation: none; transform: scaleY(.45); }
-/* playing: animated bars */
-.demo-audio-bar.is-playing .demo-wave span { animation: dW 1.1s ease-in-out infinite alternate; opacity: .6; }
-@keyframes dW { 0%{transform:scaleY(.35);opacity:.3} 100%{transform:scaleY(1);opacity:.8} }
+/* playing: brighter bars, JS controls height */
+.demo-audio-main.is-playing .demo-wave-lg span { opacity: .75; }
+.demo-audio-main.is-playing .demo-play-btn-lg { box-shadow: 0 0 16px rgba(255 122 47 / .4); }
 .demo-input { display: flex; align-items: center; gap: 7px; padding: 8px 11px; background: rgba(255 255 255 / .03); border: 1px solid var(--border); border-radius: 10px; color: var(--muted); font-size: .78rem; }
 .demo-input span { flex: 1; }
 .demo-input-ico { opacity: .4; }

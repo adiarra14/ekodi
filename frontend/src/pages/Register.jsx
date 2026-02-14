@@ -36,8 +36,20 @@ export default function Register() {
     <div className="auth-page">
       <div className="auth-card">
         <div className="auth-header">
-          <Link to="/" className="auth-logo">
-            <img src="/logo-ekodi-std.png" alt="Ekodi" />
+          <Link to="/" className="auth-logo-anim">
+            <div className="auth-logo-ring">
+              <span className="auth-ring r1" />
+              <span className="auth-ring r2" />
+              <img src="/logo-ekodi-std.png" alt="Ekodi" className="auth-logo-img" />
+            </div>
+            <div className="auth-logo-text">
+              <span className="auth-txt-e">e</span>
+              <span className="auth-txt-k">k</span>
+              <span className="auth-txt-o">o</span>
+              <span className="auth-txt-d">d</span>
+              <span className="auth-txt-i">i</span>
+              <span className="auth-txt-dot">.ai</span>
+            </div>
           </Link>
           <h1>{t('auth.register_title')}</h1>
           <p>{t('auth.register_subtitle')}</p>

@@ -82,6 +82,11 @@ export default function Landing() {
       {/* ━━ FEATURES ━━ */}
       <section className="feat" id="features">
         <h2>{t('features.title')}</h2>
+        <div className="feat-hero-card">
+          <div className="feat-ico-lg orange"><MessageCircle size={24} /></div>
+          <h3>{t('features.assistant_title')}</h3>
+          <p>{t('features.assistant_desc')}</p>
+        </div>
         <div className="feat-grid">
           <div className="feat-card"><div className="feat-ico orange"><Mic size={20} /></div><h3>{t('features.voice_title')}</h3><p>{t('features.voice_desc')}</p></div>
           <div className="feat-card"><div className="feat-ico violet"><Languages size={20} /></div><h3>{t('features.translate_title')}</h3><p>{t('features.translate_desc')}</p></div>

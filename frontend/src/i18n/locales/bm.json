@@ -18,8 +18,10 @@
   },
   "features": {
     "title": "ekodi bɛ se ka mun kɛ",
+    "assistant_title": "IA dɛmɛbaga tiɲɛ Bamanankan na",
+    "assistant_desc": "Ɲininkali kɛ fɛn bɛɛ kan, kow bɛɛ kan. ekodi bɛ jaabi Bamanankan na i ko ChatGPT: kɛnɛya, kalanko, sɛnɛ, kibaru, tobili, tariku, fɛɛrɛ. Fɛn bɛɛ.",
     "voice_title": "Kuma ekodi fɛ",
-    "voice_desc": "Kuma bamanankan walima tubabukan na. ekodi bɛ lamɛn, bɛ faamu, ka jaabi Bamanankan na, i ko kumaɲɔgɔnya tiɲɛ tiɲɛ fɛn bɛɛ kan.",
+    "voice_desc": "Kuma bamanankan walima tubabukan na. ekodi bɛ lamɛn, bɛ faamu, ka jaabi da fɛ, i ko kumaɲɔgɔnya tiɲɛ tiɲɛ.",
     "translate_title": "Bayɛlɛmani joona",
     "translate_desc": "Tubabukan ni bamanankan cɛ tɛmɛni ka nɔgɔn. Sɛbɛnni don, sɛbɛnni bɔ. Tiɲɛ ni teliya.",
     "tts_title": "Bamanankan lamɛn",

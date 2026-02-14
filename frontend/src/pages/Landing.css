@@ -152,10 +152,12 @@ h2 {
 /* ═══════ YNNOV ═══════ */
 .ynv { padding: 48px 24px; }
 .ynv-copy { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; text-align: center; align-items: center; }
-.ynv-badge { display: inline-flex; padding: 4px 12px; border-radius: 50px; font-size: .7rem; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; background: rgba(255 122 47/.1); color: var(--orange); }
-.ynv-copy h2 { margin: 0; }
+.ynv-logo { height: 40px; width: auto; object-fit: contain; margin-bottom: 4px; }
 .ynv-copy p { color: var(--muted); line-height: 1.65; margin: 0; max-width: 480px; font-size: .88rem; }
 .ynv-mission { font-style: italic; color: var(--orange2) !important; }
+.ynv-links { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.ynv-email { display: inline-flex; align-items: center; gap: 5px; font-size: .82rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+.ynv-email:hover { color: var(--white); }
 
 /* ═══════ CLOSING (Project + Feedback) ═══════ */
 .closing { padding: 48px 24px; }
@@ -189,7 +191,8 @@ h2 {
 
 /* ═══════ FOOTER ═══════ */
 .foot { border-top: 1px solid var(--border); padding: 28px 24px; }
-.foot-inner { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.foot-inner { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.foot-top { display: flex; align-items: center; justify-content: space-between; width: 100%; flex-wrap: wrap; gap: 16px; }
 .foot-brand { display: flex; align-items: center; gap: 8px; }
 .foot-brand img { height: 24px; width: auto; object-fit: contain; }
 .foot-brand strong { font-size: .9rem; color: var(--white); }
@@ -198,6 +201,9 @@ h2 {
 .foot-links { display: flex; gap: 18px; }
 .foot-links a { font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .2s; }
 .foot-links a:hover { color: var(--white); }
+.foot-contacts { display: flex; gap: 24px; flex-wrap: wrap; }
+.foot-contacts a { display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+.foot-contacts a:hover { color: var(--orange); }
 .foot-copy { font-size: .68rem; color: var(--muted); opacity: .5; margin: 0; }
 
 @media(max-width:600px){.hero{min-height:auto;padding-top:100px;padding-bottom:32px}}

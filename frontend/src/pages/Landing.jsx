@@ -4,7 +4,7 @@ import {
   Mic, Languages, Volume2, Code, ArrowRight, Sparkles,
   Sprout, ExternalLink, ThumbsUp, ThumbsDown, Check, Lock,
   MessageCircle, Send, ChevronRight, Headphones,
-  FlaskConical, Heart,
+  FlaskConical, Heart, Mail,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './Landing.css';
@@ -137,13 +137,15 @@ export default function Landing() {
       {/* ━━ YNNOV ━━ */}
       <section className="ynv">
         <div className="ynv-copy">
-          <span className="ynv-badge">ynnov.io</span>
-          <h2>{t('ynnov.title')}</h2>
+          <img src="/ynnov-logo.png" alt="Ynnov" className="ynv-logo" />
           <p>{t('ynnov.desc')}</p>
           <p className="ynv-mission">{t('ynnov.mission')}</p>
-          <a href="https://ynnov.io" target="_blank" rel="noopener noreferrer">
-            <Button variant="outline" size="sm" icon={<ExternalLink size={14} />}>{t('ynnov.visit')}</Button>
-          </a>
+          <div className="ynv-links">
+            <a href="https://ynnov.io" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="sm" icon={<ExternalLink size={14} />}>{t('ynnov.visit')}</Button>
+            </a>
+            <a href="mailto:contact@ynnov.io" className="ynv-email"><Mail size={14} /> contact@ynnov.io</a>
+          </div>
         </div>
       </section>
 
@@ -168,17 +170,23 @@ export default function Landing() {
       {/* ━━ FOOTER ━━ */}
       <footer className="foot">
         <div className="foot-inner">
-          <div className="foot-brand">
-            <img src="/logo-ekodi-std.png" alt="Ekodi" />
-            <div><strong>ekodi<span>.ai</span></strong><small>{t('footer.powered')}</small></div>
+          <div className="foot-top">
+            <div className="foot-brand">
+              <img src="/logo-ekodi-std.png" alt="Ekodi" />
+              <div><strong>ekodi<span>.ai</span></strong><small>{t('footer.powered')}</small></div>
+            </div>
+            <nav className="foot-links">
+              <Link to="/login">{t('nav.login')}</Link>
+              <Link to="/register">{t('nav.register')}</Link>
+              <a href="#features">{t('features.title')}</a>
+              <a href="#pricing">Pricing</a>
+            </nav>
           </div>
-          <nav className="foot-links">
-            <Link to="/login">{t('nav.login')}</Link>
-            <Link to="/register">{t('nav.register')}</Link>
-            <a href="#features">{t('features.title')}</a>
-            <a href="#pricing">Pricing</a>
-          </nav>
-          <p className="foot-copy">&copy; 2024–{new Date().getFullYear()} Ekodi · {t('footer.rights')}</p>
+          <div className="foot-contacts">
+            <a href="mailto:support@ekodi.ai"><Mail size={13} /> support@ekodi.ai</a>
+            <a href="mailto:contact@ynnov.io"><Mail size={13} /> contact@ynnov.io</a>
+          </div>
+          <p className="foot-copy">&copy; {new Date().getFullYear()} Ynnov · {t('footer.rights')}</p>
         </div>
       </footer>
     </div>

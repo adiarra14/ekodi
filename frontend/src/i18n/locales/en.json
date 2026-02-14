@@ -11,7 +11,7 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "The AI that speaks Bamanankan",
-    "subtitle": "Ask anything by voice or text. Ekodi understands, thinks, and answers — in Bamanankan.",
+    "subtitle": "Ekodi is a living project. The model is learning, growing, getting better every day — and you can be part of that journey.",
     "leitmotiv": "Ekodi is here. And it speaks your language.",
     "cta_try": "Try Ekodi Free",
     "cta_api": "API Access"
@@ -51,7 +51,7 @@
   },
   "story": {
     "proverb": "Planted before the other ɲiɔ (millet), it grows and surpasses them all.",
-    "desc": "In Bamanankan, Sambala ɲiɔ is the millet sown first — it rises faster and stands taller than the rest. Ekodi carries that spirit: the first AI to truly speak Bamanankan. It is here, and it speaks your language."
+    "desc": "In Bamanankan, Sambala ɲiɔ is the millet sown first — it rises faster and stands taller than the rest. Ekodi carries that spirit: the first AI to truly speak Bamanankan. Like sambala, it is still growing — and your patience and feedback are the rain that helps it rise."
   },
   "stats": {
     "languages": "Languages",
@@ -59,24 +59,30 @@
     "free": "Free Prompts",
     "available": "Available Now"
   },
+  "project": {
+    "label": "Work in progress",
+    "title": "Ekodi is a project, not a finished product",
+    "desc": "The model is actively being trained and improved. Responses may not always be perfect — and that's where you come in. By using Ekodi and sharing your feedback, you directly help train the AI to become better at Bamanankan. Be patient, be honest, and help us build something great together."
+  },
   "pricing": {
-    "title": "Start for free",
-    "subtitle": "Discover Ekodi with 10 free prompts. No credit card, no commitment.",
-    "free_tier": "Free",
+    "title": "Free while we build together",
+    "subtitle": "Get 10 free prompts to test Ekodi. Your feedback during this phase is what helps us train and improve the model.",
+    "free_tier": "Early Access",
     "free_prompts": "10 prompts",
     "free_features": "Voice, translation, and text",
-    "free_cta": "Get Started",
+    "free_cta": "Join & Help",
     "pro_tier": "Pro",
     "pro_prompts": "Unlimited",
     "pro_features": "Priority access, API, no limits",
     "pro_cta": "Coming Soon",
-    "token_note": "Token-based pricing"
+    "token_note": "Token-based pricing later"
   },
   "feedback_cta": {
-    "title": "Your voice shapes Ekodi",
-    "subtitle": "After each response, tell us how Ekodi did. Every rating helps the AI learn and improve — for everyone.",
+    "title": "You are training Ekodi",
+    "subtitle": "This is not just a chatbot — it's a model that learns. Every time you rate a response, correct a translation, or flag an error, you are directly contributing to training the AI. Ekodi gets better because of people like you.",
     "cta": "Try & Give Feedback",
-    "badge": "Help us improve"
+    "badge": "Your feedback trains the model",
+    "note": "We know Ekodi isn't perfect yet. That's the point. Help us make it the best Bamanankan AI in the world."
   },
   "ynnov": {
     "title": "Built by Ynnov",

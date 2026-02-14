@@ -31,6 +31,15 @@ Thumbs.db
 # Docker
 model-cache/
 
+# Model checkpoints & training data (too large for git)
+tts/checkpoints/
+tts/data/
+tts/assets/voice/trained/
+*.safetensors
+*.pt
+*.bin
+*.ckpt
+
 # Logs
 *.log
 

@@ -4,6 +4,7 @@ import {
   Mic, Languages, Volume2, Code, ArrowRight, Sparkles,
   Sprout, ExternalLink, ThumbsUp, ThumbsDown, Check, Lock,
   MessageCircle, Send, ChevronRight, Headphones, Globe,
+  FlaskConical, Heart,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './Landing.css';
@@ -83,6 +84,18 @@ export default function Landing() {
               <Send size={16} className="demo-send-ico" />
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ━━━━━━━━━━ PROJECT STATUS ━━━━━━━━━━ */}
+      <section className="proj">
+        <div className="proj-card">
+          <div className="proj-badge">
+            <FlaskConical size={14} />
+            <span>{t('project.label')}</span>
+          </div>
+          <h3>{t('project.title')}</h3>
+          <p>{t('project.desc')}</p>
         </div>
       </section>
 
@@ -218,6 +231,7 @@ export default function Landing() {
           </div>
           <h3>{t('feedback_cta.title')}</h3>
           <p>{t('feedback_cta.subtitle')}</p>
+          <p className="fb-note"><Heart size={14} /> {t('feedback_cta.note')}</p>
           <Link to="/register"><Button variant="primary">{t('feedback_cta.cta')}</Button></Link>
         </div>
       </section>

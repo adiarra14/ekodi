@@ -254,6 +254,52 @@ h2 {
 .demo-input-ico { opacity: .4; }
 .demo-send-ico { color: var(--orange); opacity: .6; }
 
+/* ═══════════════ PROJECT STATUS ═══════════════ */
+.proj {
+  padding: 40px 24px 20px;
+  display: flex;
+  justify-content: center;
+}
+.proj-card {
+  max-width: 640px;
+  width: 100%;
+  text-align: center;
+  background: rgba(139 92 246 / .04);
+  border: 1px solid rgba(139 92 246 / .12);
+  border-radius: 14px;
+  padding: 32px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.proj-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(139 92 246 / .12);
+  color: var(--violet);
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.proj-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+  margin: 0;
+}
+.proj-card p {
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+  max-width: 540px;
+  font-size: .9rem;
+}
+
 /* ═══════════════ STORY ═══════════════ */
 .story {
   padding: 60px 24px;
@@ -602,6 +648,16 @@ h2 {
   margin: 0;
   max-width: 420px;
 }
+.fb-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .85rem;
+  font-style: italic;
+  color: var(--orange2) !important;
+  margin-top: 4px;
+}
+.fb-note svg { flex-shrink: 0; color: var(--orange); }
 
 /* ═══════════════ YNNOV ═══════════════ */
 .ynv {

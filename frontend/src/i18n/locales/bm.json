@@ -11,7 +11,7 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "IA min bɛ Bamanankan kuma",
-    "subtitle": "Ɲininkali kɛ ni kuma ye walima ni sɛbɛnni ye. Ekodi bɛ faamu, bɛ miiri, ka jaabi — Bamanankan na.",
+    "subtitle": "Ekodi ye porozɛ niimanw ye. Modɛli bɛ kalanni na, bɛ bonya, bɛ ɲɛnabɔ don o don — i bɛ se ka kɛ o sira kan.",
     "leitmotiv": "Ekodi bɛ yan. A bɛ i ka kan kuma.",
     "cta_try": "Ekodi dɛmɛ gansan",
     "cta_api": "API sɔrɔ"
@@ -51,7 +51,7 @@
   },
   "story": {
     "proverb": "A bɛ sɛnɛ ɲiɔ tɔw ɲɛ, a bɛ bonya ka tɛmɛ u bɛɛ kan.",
-    "desc": "Bamanankan na, Sambala ɲiɔ ye ɲiɔ ye min bɛ sɛnɛ fɔlɔ — a bɛ bonya joona ka tɛmɛ tɔw kan. Ekodi bɛ o niyɔrɔ ta: IA fɔlɔ min bɛ Bamanankan kuma tiɲɛ tiɲɛ. A bɛ yan, a bɛ i ka kan kuma."
+    "desc": "Bamanankan na, Sambala ɲiɔ ye ɲiɔ ye min bɛ sɛnɛ fɔlɔ — a bɛ bonya joona ka tɛmɛ tɔw kan. Ekodi bɛ o niyɔrɔ ta: IA fɔlɔ min bɛ Bamanankan kuma tiɲɛ tiɲɛ. I ko sambala, a bɛ bonya tuma bɛɛ — i ka muɲuli ni i ka kɔfɔli ye sanji ye min bɛ a dɛmɛ ka wili."
   },
   "stats": {
     "languages": "Kanw",
@@ -59,24 +59,30 @@
     "free": "Prompt gansan",
     "available": "A bɛ sɔrɔ sisan"
   },
+  "project": {
+    "label": "Baara bɛ kɛ a kan",
+    "title": "Ekodi ye porozɛ ye, a ma ban fɔlɔ",
+    "desc": "Modɛli bɛ kalanni na tuma bɛɛ, bɛ ɲɛnabɔ. Jaabi bɛɛ tɛna dafa — o de ye i ka baara ye. Ni i ye Ekodi baara ka kɔfɔli di, i bɛ IA dɛmɛ ka Bamanankan kalan ka fisa. Muɲu, tiɲɛ fɔ, an ka fɛn ɲuman jɔ ɲɔgɔn fɛ."
+  },
   "pricing": {
-    "title": "Daminɛ gansan",
-    "subtitle": "Ekodi dɛmɛ ni prompt 10 gansan ye. Kari tɛ, segin tɛ.",
-    "free_tier": "Gansan",
+    "title": "Gansan ka an jɔ ɲɔgɔn fɛ",
+    "subtitle": "Prompt 10 gansan sɔrɔ ka Ekodi dɛmɛ. I ka kɔfɔli bɛ an dɛmɛ ka modɛli kalanni ka ɲɛnabɔ.",
+    "free_tier": "Fɔlɔ Don",
     "free_prompts": "Prompt 10",
     "free_features": "Kuma, bayɛlɛmani ani sɛbɛnni",
-    "free_cta": "Daminɛ",
+    "free_cta": "Don ka dɛmɛ",
     "pro_tier": "Pro",
     "pro_prompts": "Dɛsɛ tɛ",
     "pro_features": "Fɔlɔya, API, dɛsɛ tɛ",
     "pro_cta": "A bɛ na joona",
-    "token_note": "Token sara"
+    "token_note": "Token sara kɔ"
   },
   "feedback_cta": {
-    "title": "I ka kuma bɛ Ekodi bonya",
-    "subtitle": "Jaabi kelen-kelen kɔ, an fo Ekodi baara cogo. Kɔfɔli kelen-kelen bɛ IA dɛmɛ ka kalan ka ɲɛnabɔ — mɔgɔ bɛɛ ye.",
+    "title": "I bɛ Ekodi kalanni na",
+    "subtitle": "Nin tɛ robot dɔrɔn ye — a ye modɛli ye min bɛ kalan. Ni i ye jaabi ɲuman walima jugu jira, walima bayɛlɛmani ladilan, i bɛ IA kalanni na yɛrɛ yɛrɛ. Ekodi bɛ ɲɛnabɔ i ɲɔgɔnw barakɛ de kosɔn.",
     "cta": "Dɛmɛ ka kɔfɔli di",
-    "badge": "An dɛmɛ ka ɲɛnabɔ"
+    "badge": "I ka kɔfɔli bɛ modɛli kalanni na",
+    "note": "An b'a dɔn Ekodi ma dafa fɔlɔ. O de ye kɔrɔ. An dɛmɛ k'a kɛ Bamanankan IA ɲumanba ye diɲɛ kɔnɔ."
   },
   "ynnov": {
     "title": "Ynnov ye a jɔ",

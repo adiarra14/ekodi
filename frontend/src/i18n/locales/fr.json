@@ -11,7 +11,7 @@
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "L'IA qui parle le Bamanankan",
-    "subtitle": "Posez vos questions par voix ou texte. Ekodi comprend, reflechit et repond — en Bamanankan.",
+    "subtitle": "Ekodi est un projet vivant. Le modele apprend, grandit, s'ameliore chaque jour — et vous pouvez faire partie de cette aventure.",
     "leitmotiv": "Ekodi est la. Et il parle votre langue.",
     "cta_try": "Essayer Ekodi Gratuitement",
     "cta_api": "Acces API"
@@ -51,7 +51,7 @@
   },
   "story": {
     "proverb": "Seme avant les autres ɲiɔ (mil), il grandit et les depasse tous.",
-    "desc": "En Bamanankan, Sambala ɲiɔ est le mil seme en premier — il pousse plus vite et se dresse plus haut que les autres. Ekodi porte cet esprit : la premiere IA qui parle veritablement le Bamanankan. Il est la, et il parle votre langue."
+    "desc": "En Bamanankan, Sambala ɲiɔ est le mil seme en premier — il pousse plus vite et se dresse plus haut que les autres. Ekodi porte cet esprit : la premiere IA qui parle veritablement le Bamanankan. Comme le sambala, il est encore en train de grandir — et votre patience et vos retours sont la pluie qui l'aide a s'elever."
   },
   "stats": {
     "languages": "Langues",
@@ -59,24 +59,30 @@
     "free": "Prompts Gratuits",
     "available": "Disponible"
   },
+  "project": {
+    "label": "Projet en cours",
+    "title": "Ekodi est un projet, pas un produit fini",
+    "desc": "Le modele est activement entraine et ameliore. Les reponses ne seront pas toujours parfaites — et c'est la que vous intervenez. En utilisant Ekodi et en partageant vos retours, vous contribuez directement a entrainer l'IA pour qu'elle maitrise mieux le Bamanankan. Soyez patient, soyez honnete, et construisons ensemble quelque chose de grand."
+  },
   "pricing": {
-    "title": "Commencez gratuitement",
-    "subtitle": "Decouvrez Ekodi avec 10 prompts gratuits. Sans carte, sans engagement.",
-    "free_tier": "Gratuit",
+    "title": "Gratuit pendant qu'on construit ensemble",
+    "subtitle": "Obtenez 10 prompts gratuits pour tester Ekodi. Vos retours pendant cette phase sont essentiels pour entrainer et ameliorer le modele.",
+    "free_tier": "Acces Anticipé",
     "free_prompts": "10 prompts",
     "free_features": "Voix, traduction et texte",
-    "free_cta": "Commencer",
+    "free_cta": "Rejoindre et Aider",
     "pro_tier": "Pro",
     "pro_prompts": "Illimite",
     "pro_features": "Priorite, acces API, sans limites",
     "pro_cta": "Bientot disponible",
-    "token_note": "Tarification par tokens"
+    "token_note": "Tarification par tokens plus tard"
   },
   "feedback_cta": {
-    "title": "Votre voix fait grandir Ekodi",
-    "subtitle": "Apres chaque reponse, dites-nous comment Ekodi s'en est sorti. Chaque evaluation aide l'IA a apprendre et s'ameliorer — pour tout le monde.",
+    "title": "Vous entrainez Ekodi",
+    "subtitle": "Ce n'est pas qu'un chatbot — c'est un modele qui apprend. Chaque fois que vous evaluez une reponse, corrigez une traduction ou signalez une erreur, vous contribuez directement a l'entrainement de l'IA. Ekodi s'ameliore grace a des gens comme vous.",
     "cta": "Tester et donner son avis",
-    "badge": "Aidez-nous a progresser"
+    "badge": "Vos retours entrainent le modele",
+    "note": "Nous savons qu'Ekodi n'est pas encore parfait. C'est justement le but. Aidez-nous a en faire la meilleure IA Bamanankan au monde."
   },
   "ynnov": {
     "title": "Concu par Ynnov",

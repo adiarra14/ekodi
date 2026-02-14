@@ -98,26 +98,30 @@ export default function Landing() {
           <span>{t('impact.stat_speakers_label')}</span>
         </div>
         <div className="impact-grid">
-          <div className="impact-card">
+          <Link to="/register" className="impact-card clickable orange-hover">
             <div className="impact-ico orange"><Users size={20} /></div>
             <h3>{t('impact.farmer_title')}</h3>
             <p>{t('impact.farmer_desc')}</p>
-          </div>
-          <div className="impact-card">
+            <span className="card-arrow"><ArrowRight size={14} /></span>
+          </Link>
+          <Link to="/register" className="impact-card clickable violet-hover">
             <div className="impact-ico violet"><Landmark size={20} /></div>
             <h3>{t('impact.institution_title')}</h3>
             <p>{t('impact.institution_desc')}</p>
-          </div>
-          <div className="impact-card">
+            <span className="card-arrow"><ArrowRight size={14} /></span>
+          </Link>
+          <Link to="/register" className="impact-card clickable teal-hover">
             <div className="impact-ico teal"><Scale size={20} /></div>
             <h3>{t('impact.equality_title')}</h3>
             <p>{t('impact.equality_desc')}</p>
-          </div>
-          <div className="impact-card">
+            <span className="card-arrow"><ArrowRight size={14} /></span>
+          </Link>
+          <Link to="/register" className="impact-card clickable blue-hover">
             <div className="impact-ico blue"><Sparkles size={20} /></div>
             <h3>{t('impact.company_title')}</h3>
             <p>{t('impact.company_desc')}</p>
-          </div>
+            <span className="card-arrow"><ArrowRight size={14} /></span>
+          </Link>
         </div>
         <div className="impact-cta">
           <Link to="/register"><Button variant="primary" icon={<ArrowRight size={16} />}>{t('impact.cta')}</Button></Link>
@@ -198,25 +202,25 @@ export default function Landing() {
         <h2>{t('partners.title')}</h2>
         <p className="partners-sub">{t('partners.subtitle')}</p>
         <div className="partners-grid">
-          <Link to="/partners?type=financial" className="partner-card clickable">
+          <Link to="/partners?type=financial" className="partner-card clickable orange-hover">
             <div className="partner-ico orange"><Wallet size={20} /></div>
             <h3>{t('partners.financial_title')}</h3>
             <p>{t('partners.financial_desc')}</p>
             <span className="partner-arrow"><ArrowRight size={14} /></span>
           </Link>
-          <Link to="/partners?type=technical" className="partner-card clickable">
+          <Link to="/partners?type=technical" className="partner-card clickable violet-hover">
             <div className="partner-ico violet"><Cpu size={20} /></div>
             <h3>{t('partners.technical_title')}</h3>
             <p>{t('partners.technical_desc')}</p>
             <span className="partner-arrow"><ArrowRight size={14} /></span>
           </Link>
-          <Link to="/partners?type=expansion" className="partner-card clickable">
+          <Link to="/partners?type=expansion" className="partner-card clickable teal-hover">
             <div className="partner-ico teal"><Rocket size={20} /></div>
             <h3>{t('partners.expansion_title')}</h3>
             <p>{t('partners.expansion_desc')}</p>
             <span className="partner-arrow"><ArrowRight size={14} /></span>
           </Link>
-          <Link to="/partners?type=promotion" className="partner-card clickable">
+          <Link to="/partners?type=promotion" className="partner-card clickable blue-hover">
             <div className="partner-ico blue"><Megaphone size={20} /></div>
             <h3>{t('partners.promotion_title')}</h3>
             <p>{t('partners.promotion_desc')}</p>

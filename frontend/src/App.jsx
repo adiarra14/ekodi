@@ -7,6 +7,7 @@ import Register from './pages/Register';
 import Chat from './pages/Chat';
 import ApiKeys from './pages/ApiKeys';
 import Admin from './pages/Admin';
+import PartnerForm from './pages/PartnerForm';
 import './i18n';
 
 export default function App() {
@@ -21,6 +22,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/api-keys" element={<ApiKeys />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/partners" element={<PartnerForm />} />
           </Route>
           {/* Chat has its own full-screen layout */}
           <Route path="/chat" element={<Chat />} />

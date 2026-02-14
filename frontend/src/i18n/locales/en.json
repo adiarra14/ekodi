@@ -188,6 +188,27 @@
     "positive": "Positive",
     "negative": "Negative"
   },
+  "partner_form": {
+    "title": "Become a partner",
+    "subtitle": "Fill out this form and we will get back to you quickly.",
+    "name": "Your name",
+    "name_ph": "First and last name",
+    "email": "Your email",
+    "email_ph": "email@example.com",
+    "org": "Organization",
+    "org_ph": "Company, NGO, institution...",
+    "type": "Partnership type",
+    "type_financial": "Financial",
+    "type_technical": "Technical",
+    "type_expansion": "Expansion",
+    "type_promotion": "Promotion",
+    "message": "Your message",
+    "message_ph": "Describe how you would like to collaborate with ekodi...",
+    "submit": "Send message",
+    "success_title": "Message ready to send!",
+    "success_desc": "Your email client will open with the pre-filled message. Send it and we will reply quickly.",
+    "back_home": "Back to home"
+  },
   "common": {
     "loading": "Loading...",
     "error": "Something went wrong",

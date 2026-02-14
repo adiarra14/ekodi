@@ -221,8 +221,8 @@ export default function Landing() {
           </div>
         </div>
         <div className="partners-cta">
-          <a href="mailto:contact@ynnov.io"><Button variant="primary" icon={<Mail size={16} />}>{t('partners.cta')}</Button></a>
-          <span className="partners-email">{t('partners.email_label')} <a href="mailto:contact@ynnov.io">contact@ynnov.io</a></span>
+          <Link to="/partners"><Button variant="primary" icon={<ArrowRight size={16} />}>{t('partners.cta')}</Button></Link>
+          <span className="partners-email">{t('partners.email_label')} <a href="mailto:support@ekodi.ai">support@ekodi.ai</a></span>
         </div>
       </section>
 

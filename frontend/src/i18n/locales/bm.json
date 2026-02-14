@@ -188,6 +188,27 @@
     "positive": "Ɲuman",
     "negative": "Jugu"
   },
+  "partner_form": {
+    "title": "Kɛ jɛɲɔgɔn ye",
+    "subtitle": "Nin fɔrɔm dafa, an bɛ i jaabi joona.",
+    "name": "I tɔgɔ",
+    "name_ph": "Tɔgɔ ni jamu",
+    "email": "I ka email",
+    "email_ph": "email@misali.com",
+    "org": "Jɛkulu",
+    "org_ph": "Sosiyete, ONG, cɛsiri...",
+    "type": "Jɛɲɔgɔnya sugu",
+    "type_financial": "Wari",
+    "type_technical": "Fɛɛrɛ",
+    "type_expansion": "Jɛnsɛnni",
+    "type_promotion": "Kunnafoni",
+    "message": "I ka ciden",
+    "message_ph": "I ka jɛɲɔgɔnya cogoya fɔ ekodi fɛ...",
+    "submit": "Ciden ci",
+    "success_title": "Ciden labɛnna !",
+    "success_desc": "I ka email porogaramu bɛ yɛlɛ ni ciden labɛnnen ye. A ci, an bɛ i jaabi joona.",
+    "back_home": "Segin so"
+  },
   "common": {
     "loading": "Dɔnni...",
     "error": "Fili dɔ kɛra",

@@ -12,8 +12,19 @@ export default function Navbar() {
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Hide navbar on chat page (it has its own layout)
   if (location.pathname === '/chat') return null;
+
+  const isHome = location.pathname === '/';
+
+  const scrollTo = (id) => {
+    setMenuOpen(false);
+    if (!isHome) {
+      window.location.href = `/#${id}`;
+      return;
+    }
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   return (
     <nav className="navbar">
@@ -29,9 +40,21 @@ export default function Navbar() {
         </button>
 
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          <Link to="/" className="nav-link" onClick={() => setMenuOpen(false)}>
-            {t('nav.home')}
-          </Link>
+          {/* Section anchors (visible on landing or navigate to landing) */}
+          <button className="nav-link nav-section" onClick={() => scrollTo('features')}>
+            {t('nav.section_ekodi')}
+          </button>
+          <button className="nav-link nav-section" onClick={() => scrollTo('impact')}>
+            {t('nav.section_impact')}
+          </button>
+          <button className="nav-link nav-section" onClick={() => scrollTo('pricing')}>
+            {t('nav.section_pricing')}
+          </button>
+          <button className="nav-link nav-section" onClick={() => scrollTo('partners')}>
+            {t('nav.section_partners')}
+          </button>
+
+          <span className="nav-divider" />
 
           {user ? (
             <>

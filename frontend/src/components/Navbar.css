@@ -74,6 +74,10 @@
   box-shadow: none;
 }
 
+.nav-section { font-size: 0.8rem; color: #555; }
+.nav-section:hover { color: #e4e4e8; }
+.nav-divider { width: 1px; height: 16px; background: rgba(255, 255, 255, 0.06); margin: 0 4px; }
+
 .nav-logout { color: #ef4444; }
 .nav-logout:hover { background: rgba(239, 68, 68, 0.08); }
 
@@ -102,4 +106,6 @@
   }
   .nav-links.open { display: flex; }
   .nav-link { width: 100%; justify-content: center; }
+  .nav-divider { width: 80%; height: 1px; margin: 4px auto; }
+  .nav-section { font-size: 0.82rem; }
 }

@@ -1,23 +1,35 @@
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { useRef, useState } from 'react';
 import {
-  Mic, Languages, Volume2, Code, ArrowRight, Sparkles,
-  Sprout, ExternalLink, ThumbsUp, ThumbsDown, Check, Lock,
-  MessageCircle, Send, ChevronRight, Headphones,
-  FlaskConical, Heart, Mail, Users, Landmark, Scale, Globe,
-  HandshakeIcon, Wallet, Cpu, Rocket, Megaphone,
+  ArrowRight, Sparkles, Sprout, ExternalLink,
+  Check, Lock, MessageCircle, Send, ChevronRight, Headphones,
+  Play, Pause,
+  Mail, Users, Landmark, Scale, Globe,
+  Wallet, Cpu, Rocket, Megaphone,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './Landing.css';
 
 export default function Landing() {
   const { t } = useTranslation();
+  const audioRef = useRef(null);
+  const [playing, setPlaying] = useState(false);
+
+  const toggleAudio = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const a = audioRef.current;
+    if (!a) return;
+    if (a.paused) { a.play(); setPlaying(true); }
+    else { a.pause(); setPlaying(false); }
+  };
 
   return (
     <div className="land">
 
       {/* ━━ HERO ━━ */}
-      <section className="hero">
+      <section className="hero" id="hero">
         <div className="hero-bg" aria-hidden="true">
           <div className="hero-orb orb-1" />
           <div className="hero-orb orb-2" />
@@ -29,14 +41,14 @@ export default function Landing() {
           <p className="hero-motiv">{t('hero.leitmotiv')}</p>
           <div className="hero-actions">
             <Link to="/register"><Button variant="primary" size="lg" icon={<ArrowRight size={18} />}>{t('hero.cta_try')}</Button></Link>
-            <Link to="/api-keys"><Button variant="ghost-border" size="lg" icon={<Code size={16} />}>{t('hero.cta_api')}</Button></Link>
+            <a href="#impact"><Button variant="ghost-border" size="lg" icon={<Globe size={16} />}>{t('nav.section_impact')}</Button></a>
           </div>
         </div>
       </section>
 
       {/* ━━ DEMO ━━ */}
       <section className="demo">
-        <div className="demo-window">
+        <Link to="/register" className="demo-window clickable">
           <div className="demo-bar">
             <div className="demo-dots"><span /><span /><span /></div>
             <span className="demo-title">ekodi.ai</span>
@@ -51,14 +63,18 @@ export default function Landing() {
               <div className="demo-avatar ai-av"><img src="/logo-ekodi-actif.png" alt="" /></div>
               <div className="demo-bubble ai-bubble">
                 <p>{t('demo.ai_msg')}</p>
-                <div className="demo-audio-bar">
-                  <Headphones size={14} />
+                <button className={`demo-audio-bar ${playing ? 'is-playing' : ''}`} onClick={toggleAudio} type="button">
+                  <span className="demo-play-btn">
+                    {playing ? <Pause size={12} /> : <Play size={12} />}
+                  </span>
                   <div className="demo-wave">
                     {Array.from({ length: 32 }).map((_, i) => (
                       <span key={i} style={{ height: `${4 + Math.sin(i * 0.5) * 12}px`, animationDelay: `${i * 35}ms` }} />
                     ))}
                   </div>
-                </div>
+                  <Headphones size={13} className="demo-headphones" />
+                </button>
+                <audio ref={audioRef} src="/demo-voice.wav" onEnded={() => setPlaying(false)} preload="auto" />
               </div>
             </div>
             <div className="demo-input">
@@ -67,25 +83,23 @@ export default function Landing() {
               <Send size={16} className="demo-send-ico" />
             </div>
           </div>
-        </div>
+        </Link>
       </section>
 
       {/* ━━ STORY ━━ */}
-      <section className="story">
+      <section className="story" id="features">
         <div className="story-card">
-          <Sprout size={28} className="story-icon" />
-          <blockquote>{t('story.proverb')}</blockquote>
-          <p>{t('story.desc')}</p>
-        </div>
-      </section>
-
-      {/* ━━ FEATURES ━━ */}
-      <section className="feat" id="features">
-        <h2>{t('features.title')}</h2>
-        <div className="feat-hero-card">
-          <div className="feat-ico-lg orange"><MessageCircle size={24} /></div>
-          <h3>{t('features.assistant_title')}</h3>
-          <p>{t('features.assistant_desc')}</p>
+          <div className="story-icon-wrap">
+            <span className="story-ring ring-1" />
+            <span className="story-ring ring-2" />
+            <span className="story-ring ring-3" />
+            <Sprout size={48} className="story-icon" />
+          </div>
+          <div className="story-text">
+            <h3 className="story-title">Sambala ɲiɔ</h3>
+            <blockquote>{t('story.proverb')}</blockquote>
+            <p>{t('story.desc')}</p>
+          </div>
         </div>
       </section>
 
@@ -93,43 +107,40 @@ export default function Landing() {
       <section className="impact" id="impact">
         <h2>{t('impact.title')}</h2>
         <div className="impact-stat">
-          <Globe size={22} />
+          <Globe size={20} />
           <strong>{t('impact.stat_speakers')}</strong>
           <span>{t('impact.stat_speakers_label')}</span>
         </div>
         <div className="impact-grid">
           <Link to="/register" className="impact-card clickable orange-hover">
-            <div className="impact-ico orange"><Users size={20} /></div>
+            <div className="impact-ico orange"><Users size={18} /></div>
             <h3>{t('impact.farmer_title')}</h3>
             <p>{t('impact.farmer_desc')}</p>
             <span className="card-arrow"><ArrowRight size={14} /></span>
           </Link>
           <Link to="/register" className="impact-card clickable violet-hover">
-            <div className="impact-ico violet"><Landmark size={20} /></div>
+            <div className="impact-ico violet"><Landmark size={18} /></div>
             <h3>{t('impact.institution_title')}</h3>
             <p>{t('impact.institution_desc')}</p>
             <span className="card-arrow"><ArrowRight size={14} /></span>
           </Link>
           <Link to="/register" className="impact-card clickable teal-hover">
-            <div className="impact-ico teal"><Scale size={20} /></div>
+            <div className="impact-ico teal"><Scale size={18} /></div>
             <h3>{t('impact.equality_title')}</h3>
             <p>{t('impact.equality_desc')}</p>
             <span className="card-arrow"><ArrowRight size={14} /></span>
           </Link>
           <Link to="/register" className="impact-card clickable blue-hover">
-            <div className="impact-ico blue"><Sparkles size={20} /></div>
+            <div className="impact-ico blue"><Sparkles size={18} /></div>
             <h3>{t('impact.company_title')}</h3>
             <p>{t('impact.company_desc')}</p>
             <span className="card-arrow"><ArrowRight size={14} /></span>
           </Link>
         </div>
-        <div className="impact-cta">
-          <Link to="/register"><Button variant="primary" icon={<ArrowRight size={16} />}>{t('impact.cta')}</Button></Link>
-        </div>
       </section>
 
       {/* ━━ API ━━ */}
-      <section className="api-sec">
+      <section className="api-sec" id="api">
         <div className="api-inner">
           <div className="api-text">
             <h2>{t('api_showcase.title')}</h2>
@@ -152,8 +163,7 @@ export default function Landing() {
         <h2>{t('pricing.title')}</h2>
         <p className="price-sub">{t('pricing.subtitle')}</p>
         <div className="price-grid">
-          {/* FREE — active */}
-          <div className="price-card highlight">
+          <Link to="/register" className="price-card highlight clickable">
             <span className="price-label">{t('pricing.free_tier')}</span>
             <div className="price-amount">{t('pricing.free_price')}</div>
             <div className="price-prompts">{t('pricing.free_prompts')}</div>
@@ -161,9 +171,8 @@ export default function Landing() {
               <li><Check size={14} /> {t('pricing.free_features')}</li>
               <li><Check size={14} /> {t('pricing.free_feedback')}</li>
             </ul>
-            <Link to="/register"><Button variant="primary" className="price-btn">{t('pricing.free_cta')}</Button></Link>
-          </div>
-          {/* STANDARD — inactive */}
+            <span className="price-btn-link">{t('pricing.free_cta')} <ArrowRight size={14} /></span>
+          </Link>
           <div className="price-card inactive">
             <span className="price-label">{t('pricing.standard_tier')}</span>
             <div className="price-amount">{t('pricing.standard_price')}</div>
@@ -171,9 +180,8 @@ export default function Landing() {
             <ul>
               <li><Check size={14} /> {t('pricing.standard_features')}</li>
             </ul>
-            <Button variant="secondary" className="price-btn" disabled><Lock size={13} /> {t('pricing.standard_cta')}</Button>
+            <span className="price-btn-lock"><Lock size={13} /> {t('pricing.standard_cta')}</span>
           </div>
-          {/* PRO — inactive */}
           <div className="price-card inactive">
             <span className="price-label">{t('pricing.pro_tier')}</span>
             <div className="price-amount">{t('pricing.pro_price')}</div>
@@ -181,9 +189,8 @@ export default function Landing() {
             <ul>
               <li><Check size={14} /> {t('pricing.pro_features')}</li>
             </ul>
-            <Button variant="secondary" className="price-btn" disabled><Lock size={13} /> {t('pricing.pro_cta')}</Button>
+            <span className="price-btn-lock"><Lock size={13} /> {t('pricing.pro_cta')}</span>
           </div>
-          {/* BUSINESS — inactive */}
           <div className="price-card inactive">
             <span className="price-label">{t('pricing.business_tier')}</span>
             <div className="price-amount">{t('pricing.business_price')}</div>
@@ -191,7 +198,7 @@ export default function Landing() {
             <ul>
               <li><Check size={14} /> {t('pricing.business_features')}</li>
             </ul>
-            <Button variant="secondary" className="price-btn" disabled><Lock size={13} /> {t('pricing.business_cta')}</Button>
+            <span className="price-btn-lock"><Lock size={13} /> {t('pricing.business_cta')}</span>
           </div>
         </div>
         <p className="price-inactive-note"><Lock size={12} /> {t('pricing.inactive_note')}</p>
@@ -203,25 +210,25 @@ export default function Landing() {
         <p className="partners-sub">{t('partners.subtitle')}</p>
         <div className="partners-grid">
           <Link to="/partners?type=financial" className="partner-card clickable orange-hover">
-            <div className="partner-ico orange"><Wallet size={20} /></div>
+            <div className="partner-ico orange"><Wallet size={18} /></div>
             <h3>{t('partners.financial_title')}</h3>
             <p>{t('partners.financial_desc')}</p>
             <span className="partner-arrow"><ArrowRight size={14} /></span>
           </Link>
           <Link to="/partners?type=technical" className="partner-card clickable violet-hover">
-            <div className="partner-ico violet"><Cpu size={20} /></div>
+            <div className="partner-ico violet"><Cpu size={18} /></div>
             <h3>{t('partners.technical_title')}</h3>
             <p>{t('partners.technical_desc')}</p>
             <span className="partner-arrow"><ArrowRight size={14} /></span>
           </Link>
           <Link to="/partners?type=expansion" className="partner-card clickable teal-hover">
-            <div className="partner-ico teal"><Rocket size={20} /></div>
+            <div className="partner-ico teal"><Rocket size={18} /></div>
             <h3>{t('partners.expansion_title')}</h3>
             <p>{t('partners.expansion_desc')}</p>
             <span className="partner-arrow"><ArrowRight size={14} /></span>
           </Link>
           <Link to="/partners?type=promotion" className="partner-card clickable blue-hover">
-            <div className="partner-ico blue"><Megaphone size={20} /></div>
+            <div className="partner-ico blue"><Megaphone size={18} /></div>
             <h3>{t('partners.promotion_title')}</h3>
             <p>{t('partners.promotion_desc')}</p>
             <span className="partner-arrow"><ArrowRight size={14} /></span>
@@ -234,7 +241,7 @@ export default function Landing() {
       </section>
 
       {/* ━━ YNNOV ━━ */}
-      <section className="ynv">
+      <section className="ynv" id="ynnov">
         <div className="ynv-copy">
           <img src="/ynnov-logo.png" alt="Ynnov" className="ynv-logo" />
           <p>{t('ynnov.desc')}</p>
@@ -248,22 +255,11 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* ━━ PROJECT + FEEDBACK (combined, last) ━━ */}
-      <section className="closing">
-        <div className="closing-inner">
-          <div className="closing-left">
-            <div className="proj-badge"><FlaskConical size={14} /><span>{t('project.label')}</span></div>
-            <h3>{t('project.title')}</h3>
-            <p>{t('project.desc')}</p>
-          </div>
-          <div className="closing-right">
-            <div className="fb-icons"><ThumbsUp size={22} className="fb-up" /><ThumbsDown size={22} className="fb-dn" /></div>
-            <h3>{t('feedback_cta.title')}</h3>
-            <p>{t('feedback_cta.subtitle')}</p>
-            <p className="fb-note"><Heart size={14} /> {t('feedback_cta.note')}</p>
-            <Link to="/register"><Button variant="primary">{t('feedback_cta.cta')}</Button></Link>
-          </div>
-        </div>
+      {/* ━━ PROJECT BANNER ━━ */}
+      <section className="proj-banner" id="project">
+        <Sprout size={16} />
+        <p>{t('project.desc')}</p>
+        <Link to="/register" className="proj-banner-cta">{t('feedback_cta.cta')} <ArrowRight size={14} /></Link>
       </section>
 
       {/* ━━ FOOTER ━━ */}
@@ -275,10 +271,12 @@ export default function Landing() {
               <div><strong>ekodi<span>.ai</span></strong><small>{t('footer.powered')}</small></div>
             </div>
             <nav className="foot-links">
+              <a href="#features">{t('nav.section_ekodi')}</a>
+              <a href="#impact">{t('nav.section_impact')}</a>
+              <a href="#pricing">{t('nav.section_pricing')}</a>
+              <a href="#partners">{t('nav.section_partners')}</a>
               <Link to="/login">{t('nav.login')}</Link>
               <Link to="/register">{t('nav.register')}</Link>
-              <a href="#features">{t('features.title')}</a>
-              <a href="#pricing">Pricing</a>
             </nav>
           </div>
           <div className="foot-contacts">

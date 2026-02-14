@@ -6,12 +6,16 @@
     "login": "Login",
     "register": "Sign Up",
     "logout": "Logout",
-    "admin": "Admin"
+    "admin": "Admin",
+    "section_ekodi": "ekodi",
+    "section_impact": "Impact",
+    "section_pricing": "Pricing",
+    "section_partners": "Partners"
   },
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "The AI that speaks Bamanankan",
-    "subtitle": "ekodi is a living project. The model is learning, growing, getting better every day. And you can be part of that journey.",
+    "subtitle": "Ask any question, on any topic. ekodi answers in Bamanankan: health, education, farming, news, cooking, history, technology. Everything.",
     "leitmotiv": "ekodi is here. And it speaks your language.",
     "cta_try": "Try ekodi free",
     "cta_api": "API Access"
@@ -42,8 +46,8 @@
   },
   "demo": {
     "title": "See it in action",
-    "user_msg": "I ni ce, ekodi! Bamako sigida jumɛn ka bon?",
-    "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
+    "user_msg": "ekodi, tell me about Mali",
+    "ai_msg": "Mali ye jamana belebeleba ye, Afriki Tlebi fɛ. Mɔgɔ miliyɔn mugan ni saba, bɛ a kɔnɔ. Bamako de ye a faaba ye... dugu min sigilen bɛ, Ba Joliba da la. Tumbutu, ani Jɛnɛ, olu fana ye dugu kɔrɔba ye. Bamanankan ye kanba ye. Mali ye tariku jamana ye, min ɲɛsinna a ka sini ma.",
     "input_placeholder": "Ask ekodi anything..."
   },
   "api_showcase": {
@@ -78,7 +82,7 @@
   "project": {
     "label": "Work in progress",
     "title": "The ekodi project",
-    "desc": "The model is actively being trained and improved. Responses may not always be perfect, and that's where you come in. By using ekodi and sharing your feedback, you directly help train the AI to become better at Bamanankan. Be patient, be honest, and help us build something great together."
+    "desc": "Ask any question, on any topic. ekodi answers in Bamanankan: health, education, farming, news, cooking, history, technology. Everything."
   },
   "pricing": {
     "title": "Free while we build together",

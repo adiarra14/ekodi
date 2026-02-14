@@ -6,12 +6,16 @@
     "login": "Connexion",
     "register": "Inscription",
     "logout": "Deconnexion",
-    "admin": "Admin"
+    "admin": "Admin",
+    "section_ekodi": "ekodi",
+    "section_impact": "Impact",
+    "section_pricing": "Tarifs",
+    "section_partners": "Partenaires"
   },
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "L'IA qui parle le Bamanankan",
-    "subtitle": "ekodi est un projet vivant. Le modele apprend, grandit, s'ameliore chaque jour. Et vous pouvez faire partie de cette aventure.",
+    "subtitle": "Posez n'importe quelle question, sur n'importe quel sujet. ekodi repond en Bamanankan : sante, education, agriculture, actualites, cuisine, histoire, technologie. Tout.",
     "leitmotiv": "ekodi est la. Et il parle votre langue.",
     "cta_try": "Essayer ekodi gratuitement",
     "cta_api": "Acces API"
@@ -42,8 +46,8 @@
   },
   "demo": {
     "title": "Voyez par vous-meme",
-    "user_msg": "I ni ce, ekodi! Bamako sigida jumɛn ka bon?",
-    "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
+    "user_msg": "ekodi, parle moi du Mali",
+    "ai_msg": "Mali ye jamana belebeleba ye, Afriki Tlebi fɛ. Mɔgɔ miliyɔn mugan ni saba, bɛ a kɔnɔ. Bamako de ye a faaba ye... dugu min sigilen bɛ, Ba Joliba da la. Tumbutu, ani Jɛnɛ, olu fana ye dugu kɔrɔba ye. Bamanankan ye kanba ye. Mali ye tariku jamana ye, min ɲɛsinna a ka sini ma.",
     "input_placeholder": "Posez n'importe quelle question a ekodi..."
   },
   "api_showcase": {
@@ -78,7 +82,7 @@
   "project": {
     "label": "Projet en cours",
     "title": "Le projet ekodi",
-    "desc": "Le modele est activement entraine et ameliore. Les reponses ne seront pas toujours parfaites, et c'est la que vous intervenez. En utilisant ekodi et en partageant vos retours, vous contribuez directement a entrainer l'IA pour qu'elle maitrise mieux le Bamanankan. Soyez patient, soyez honnete, et construisons ensemble quelque chose de grand."
+    "desc": "Posez n'importe quelle question, sur n'importe quel sujet. ekodi repond en Bamanankan : sante, education, agriculture, actualites, cuisine, histoire, technologie. Tout."
   },
   "pricing": {
     "title": "Gratuit pendant qu'on construit ensemble",

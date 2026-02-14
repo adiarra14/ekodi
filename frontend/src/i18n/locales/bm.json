@@ -6,12 +6,16 @@
     "login": "Don",
     "register": "Tɔgɔ sɛbɛn",
     "logout": "Bɔ",
-    "admin": "Ɲɛmɔgɔ"
+    "admin": "Ɲɛmɔgɔ",
+    "section_ekodi": "ekodi",
+    "section_impact": "Nafaw",
+    "section_pricing": "Saratiw",
+    "section_partners": "Jɛɲɔgɔnw"
   },
   "hero": {
     "badge": "Sambala ɲiɔ",
     "title": "IA min bɛ Bamanankan kuma",
-    "subtitle": "ekodi ye porozɛ niimanw ye. Modɛli bɛ kalanni na, bɛ bonya, bɛ ɲɛnabɔ don o don. I bɛ se ka kɛ o sira kan.",
+    "subtitle": "Ɲininkali kɛ fɛn bɛɛ kan, kow bɛɛ kan. ekodi bɛ jaabi Bamanankan na: kɛnɛya, kalanko, sɛnɛ, kibaru, tobili, tariku, fɛɛrɛ. Fɛn bɛɛ.",
     "leitmotiv": "ekodi bɛ yan. A bɛ i ka kan kuma.",
     "cta_try": "ekodi dɛmɛ gansan",
     "cta_api": "API sɔrɔ"
@@ -42,8 +46,8 @@
   },
   "demo": {
     "title": "A filɛ a baara la",
-    "user_msg": "I ni ce, ekodi! Bamako sigida jumɛn ka bon?",
-    "ai_msg": "I ni ce! Bamako sigida camanw ka ɲi kosɛbɛ. Hamdallaye, ACI 2000, ani Badalabougou ye sigida ɲumanw ye...",
+    "user_msg": "ekodi, Mali ko fɔ n ye",
+    "ai_msg": "Mali ye jamana belebeleba ye, Afriki Tlebi fɛ. Mɔgɔ miliyɔn mugan ni saba, bɛ a kɔnɔ. Bamako de ye a faaba ye... dugu min sigilen bɛ, Ba Joliba da la. Tumbutu, ani Jɛnɛ, olu fana ye dugu kɔrɔba ye. Bamanankan ye kanba ye. Mali ye tariku jamana ye, min ɲɛsinna a ka sini ma.",
     "input_placeholder": "Ɲininkali kɛ ekodi fɛ fɛn bɛɛ kan..."
   },
   "api_showcase": {
@@ -78,7 +82,7 @@
   "project": {
     "label": "Baara bɛ kɛ a kan",
     "title": "ekodi porozɛ",
-    "desc": "Modɛli bɛ kalanni na tuma bɛɛ, bɛ ɲɛnabɔ. Jaabi bɛɛ tɛna dafa, o de ye i ka baara ye. Ni i ye ekodi baara ka kɔfɔli di, i bɛ IA dɛmɛ ka Bamanankan kalan ka fisa. Muɲu, tiɲɛ fɔ, an ka fɛn ɲuman jɔ ɲɔgɔn fɛ."
+    "desc": "Ɲininkali kɛ fɛn bɛɛ kan, kow bɛɛ kan. ekodi bɛ jaabi Bamanankan na: kɛnɛya, kalanko, sɛnɛ, kibaru, tobili, tariku, fɛɛrɛ. Fɛn bɛɛ."
   },
   "pricing": {
     "title": "Gansan ka an jɔ ɲɔgɔn fɛ",

@@ -49,6 +49,20 @@
     "subtitle": "A simple REST API to bring Bamanankan intelligence into any application.",
     "get_key": "Get Your API Key"
   },
+  "impact": {
+    "title": "Why ekodi changes everything",
+    "stat_speakers": "40M+",
+    "stat_speakers_label": "Mandekan speakers worldwide",
+    "farmer_title": "Knowledge for everyone",
+    "farmer_desc": "A farmer who can neither read nor write can now ask about weather, market prices, or farming techniques — simply by speaking their language. ekodi gives access to world knowledge to those who were excluded from it.",
+    "institution_title": "AI agents for institutions",
+    "institution_desc": "Governments, NGOs, public services: build AI-powered agents that speak the language of the majority of your population. Inform, assist, and serve in Bamanankan.",
+    "equality_title": "Reducing data inequality",
+    "equality_desc": "African languages are underrepresented in AI. ekodi bridges that gap by building a concrete model for Bamanankan — and paves the way for millions of Mandekan speakers.",
+    "company_title": "Reach more people",
+    "company_desc": "Companies, startups, brands: reach millions of people without worrying about the language barrier. Integrate ekodi to communicate, sell, and support your customers directly in Bamanankan.",
+    "cta": "Join the movement"
+  },
   "story": {
     "proverb": "The ɲiɔ planted after all the others grows faster and surpasses them all.",
     "desc": "In Bamanankan culture, Sambala ɲiɔ is the millet planted after all the others. Yet it grows faster and stands taller than them all. ekodi carries that spirit: a modern, proactive, and adapted vision that overcomes barriers faster and more effectively. We have built a concrete, usable model available today. Together we will make it better. Join us and lend a hand to build the best LLM in Bamanankan: ekodi!"

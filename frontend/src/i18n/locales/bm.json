@@ -49,6 +49,20 @@
     "subtitle": "API REST nɔgɔman min bɛ Bamanankan hakilitigiya fara porogaramu bɛɛ kan.",
     "get_key": "I ka API kilɛ sɔrɔ"
   },
+  "impact": {
+    "title": "Mun na ekodi bɛ fɛn bɛɛ yɛlɛma",
+    "stat_speakers": "+40 miliyɔn",
+    "stat_speakers_label": "Mandekan kumabagaw diɲɛ kɔnɔ",
+    "farmer_title": "Dɔnniya bɛɛ ye",
+    "farmer_desc": "Sɛnɛkɛla min tɛ se ka kalan walima ka sɛbɛn, o bɛ se sisan ka ɲininkali kɛ sangaso, sugu sɔngɔ walima sɛnɛ fɛɛrɛ kan — a ka kan kuma dɔrɔn. ekodi bɛ diɲɛ dɔnniya di minw tun bɔra a la.",
+    "institution_title": "IA dɛmɛbagaw cɛsirilen ye",
+    "institution_desc": "Gɔfɛrɛnɛman, ONG, baaraw: IA dɛmɛbagaw jɔ minw bɛ i ka jama ka kan kuma. Kunnafoni di, dɛmɛ kɛ Bamanankan na.",
+    "equality_title": "Kunnafoni bɛɛnbaliya dɔgɔya",
+    "equality_desc": "Afiriki kanw tɛ IA kɔnɔ ka ɲɛ. ekodi bɛ o dancɛ datugu ni modɛli tiɲɛ ye Bamanankan kama — ka sira da Mandekan kumabaga miliyɔnw ye.",
+    "company_title": "Mɔgɔ caman sɔrɔ",
+    "company_desc": "Sosiyete, startup, marka: mɔgɔ miliyɔnw sɔrɔ kan gɛlɛya kɔ. ekodi don ka kuma, ka feere, ka i ka kiliyanw dɛmɛ Bamanankan na yɛrɛ yɛrɛ.",
+    "cta": "An bolo di"
+  },
   "story": {
     "proverb": "Ka dan tɔw kɔfɛ, a ka tɛmɛ u bɛɛ kan.",
     "desc": "Bamanankan laadala na, Sambala ɲiɔ ye ɲiɔ ye min bɛ dan tɔw bɛɛ kɔfɛ. Nka a bɛ bonya joona ka tɛmɛ u bɛɛ kan. ekodi bɛ o niyɔrɔ ta: miriya kura, ɲɛtaa ani bɛɛnbaliya min bɛ gɛlɛyaw kunbɛn joona ka fisa. An ye modɛli tiɲɛ jɔ min bɛ se ka baara bi. An bɛɛ ɲɔgɔn fɛ de bɛ a ɲɛnabɔ. An bolo di ka Bamanankan LLM ɲumanba jɔ: ekodi!"

@@ -119,6 +119,32 @@ h2 {
 .feat-card p { font-size: .82rem; color: var(--muted); line-height: 1.55; margin: 0; }
 @media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
 
+/* ═══════ IMPACT ═══════ */
+.impact { padding: 48px 24px; max-width: 900px; margin: 0 auto; }
+.impact-stat {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 0 0 24px; padding: 12px 20px;
+  background: rgba(255 122 47 / .06); border: 1px solid rgba(255 122 47 / .12);
+  border-radius: 50px; width: fit-content; margin-left: auto; margin-right: auto;
+}
+.impact-stat svg { color: var(--orange); }
+.impact-stat strong { font-size: 1.2rem; font-weight: 800; color: var(--white); }
+.impact-stat span { font-size: .82rem; color: var(--muted); }
+.impact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.impact-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 22px 20px; display: flex; flex-direction: column; gap: 8px;
+  transition: border-color .25s, transform .2s;
+}
+.impact-card:hover { border-color: rgba(255 255 255 / .12); transform: translateY(-1px); }
+.impact-ico { width: 36px; height: 36px; border-radius: 9px; display: flex; align-items: center; justify-content: center; }
+.impact-ico.orange{background:rgba(255 122 47/.1);color:var(--orange)} .impact-ico.violet{background:rgba(139 92 246/.1);color:var(--violet)}
+.impact-ico.teal{background:rgba(20 184 166/.1);color:var(--teal)} .impact-ico.blue{background:rgba(59 130 246/.1);color:var(--blue)}
+.impact-card h3 { font-size: .92rem; font-weight: 600; color: var(--white); margin: 0; }
+.impact-card p { font-size: .82rem; color: var(--muted); line-height: 1.55; margin: 0; }
+.impact-cta { text-align: center; margin-top: 20px; }
+@media(max-width:600px){.impact-grid{grid-template-columns:1fr} .impact-stat{flex-wrap:wrap;justify-content:center}}
+
 /* ═══════ API ═══════ */
 .api-sec { padding: 48px 24px; }
 .api-inner { max-width: 900px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1.1fr; gap: 28px; align-items: center; }

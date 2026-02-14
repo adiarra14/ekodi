@@ -4,7 +4,7 @@ import {
   Mic, Languages, Volume2, Code, ArrowRight, Sparkles,
   Sprout, ExternalLink, ThumbsUp, ThumbsDown, Check, Lock,
   MessageCircle, Send, ChevronRight, Headphones,
-  FlaskConical, Heart, Mail,
+  FlaskConical, Heart, Mail, Users, Landmark, Scale, Globe,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './Landing.css';
@@ -86,6 +86,41 @@ export default function Landing() {
           <div className="feat-card"><div className="feat-ico violet"><Languages size={20} /></div><h3>{t('features.translate_title')}</h3><p>{t('features.translate_desc')}</p></div>
           <div className="feat-card"><div className="feat-ico teal"><Volume2 size={20} /></div><h3>{t('features.tts_title')}</h3><p>{t('features.tts_desc')}</p></div>
           <div className="feat-card"><div className="feat-ico blue"><Code size={20} /></div><h3>{t('features.api_title')}</h3><p>{t('features.api_desc')}</p></div>
+        </div>
+      </section>
+
+      {/* ━━ IMPACT ━━ */}
+      <section className="impact" id="impact">
+        <h2>{t('impact.title')}</h2>
+        <div className="impact-stat">
+          <Globe size={22} />
+          <strong>{t('impact.stat_speakers')}</strong>
+          <span>{t('impact.stat_speakers_label')}</span>
+        </div>
+        <div className="impact-grid">
+          <div className="impact-card">
+            <div className="impact-ico orange"><Users size={20} /></div>
+            <h3>{t('impact.farmer_title')}</h3>
+            <p>{t('impact.farmer_desc')}</p>
+          </div>
+          <div className="impact-card">
+            <div className="impact-ico violet"><Landmark size={20} /></div>
+            <h3>{t('impact.institution_title')}</h3>
+            <p>{t('impact.institution_desc')}</p>
+          </div>
+          <div className="impact-card">
+            <div className="impact-ico teal"><Scale size={20} /></div>
+            <h3>{t('impact.equality_title')}</h3>
+            <p>{t('impact.equality_desc')}</p>
+          </div>
+          <div className="impact-card">
+            <div className="impact-ico blue"><Sparkles size={20} /></div>
+            <h3>{t('impact.company_title')}</h3>
+            <p>{t('impact.company_desc')}</p>
+          </div>
+        </div>
+        <div className="impact-cta">
+          <Link to="/register"><Button variant="primary" icon={<ArrowRight size={16} />}>{t('impact.cta')}</Button></Link>
         </div>
       </section>
 

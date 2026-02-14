@@ -15,21 +15,30 @@ const PARTNER_TYPES = [
 export default function PartnerForm() {
   const { t } = useTranslation();
   const [searchParams] = useSearchParams();
-  const initialType = searchParams.get('type') || '';
-  const [form, setForm] = useState({ name: '', email: '', org: '', type: initialType, message: '' });
+  const initialType = searchParams.get('type');
+  const [form, setForm] = useState({ name: '', email: '', org: '', types: initialType ? [initialType] : [], message: '' });
   const [sent, setSent] = useState(false);
 
   const update = (field) => (e) => setForm({ ...form, [field]: e.target.value });
 
+  const toggleType = (key) => {
+    setForm((prev) => ({
+      ...prev,
+      types: prev.types.includes(key)
+        ? prev.types.filter((k) => k !== key)
+        : [...prev.types, key],
+    }));
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const typeLabel = form.type ? t(`partner_form.type_${form.type}`) : '';
-    const subject = `[ekodi partenariat] ${typeLabel} - ${form.org || form.name}`;
+    const typeLabels = form.types.map((k) => t(`partner_form.type_${k}`)).join(', ');
+    const subject = `[ekodi partenariat] ${typeLabels} - ${form.org || form.name}`;
     const body = [
       `Nom: ${form.name}`,
       `Email: ${form.email}`,
       form.org ? `Organisation: ${form.org}` : '',
-      `Type de partenariat: ${typeLabel}`,
+      `Type de partenariat: ${typeLabels}`,
       '',
       form.message,
     ].filter(Boolean).join('\n');
@@ -81,8 +90,8 @@ export default function PartnerForm() {
                 <button
                   key={key}
                   type="button"
-                  className={`pf-type-btn ${color} ${form.type === key ? 'active' : ''}`}
-                  onClick={() => setForm({ ...form, type: key })}
+                  className={`pf-type-btn ${color} ${form.types.includes(key) ? 'active' : ''}`}
+                  onClick={() => toggleType(key)}
                 >
                   <Icon size={16} />
                   <span>{t(`partner_form.type_${key}`)}</span>
@@ -96,7 +105,7 @@ export default function PartnerForm() {
             <textarea value={form.message} onChange={update('message')} required rows={4} placeholder={t('partner_form.message_ph')} />
           </div>
 
-          <Button type="submit" variant="primary" icon={<Send size={16} />} disabled={!form.name || !form.email || !form.type || !form.message}>
+          <Button type="submit" variant="primary" icon={<Send size={16} />} disabled={!form.name || !form.email || form.types.length === 0 || !form.message}>
             {t('partner_form.submit')}
           </Button>
         </form>

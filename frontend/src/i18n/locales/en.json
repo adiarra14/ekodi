@@ -234,7 +234,14 @@
     "delete_account": "Delete My Account",
     "delete_account_desc": "Permanently delete your account and all associated data. This action cannot be undone.",
     "delete_confirm_text": "Enter your password to confirm account deletion:",
-    "confirm_delete": "Permanently Delete"
+    "confirm_delete": "Permanently Delete",
+    "usage": "Usage",
+    "month_tokens": "This Month Tokens",
+    "month_cost": "This Month Cost",
+    "total_tokens": "Total Tokens",
+    "total_cost": "Total Cost",
+    "credits": "Credits Balance",
+    "total_requests": "Total Requests"
   },
   "privacy": {
     "title": "Privacy Policy",
@@ -298,5 +305,10 @@
     "delete": "Delete",
     "close": "Close",
     "back": "Back"
+  },
+  "server": {
+    "busy_title": "Server is busy",
+    "busy_message": "Too many requests right now. Please wait a moment and try again.",
+    "retry_in": "Retry in"
   }
 }

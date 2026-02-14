@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { authAPI } from '../services/api';
 import {
-  User, Shield, Download, Trash2, MessageSquare, AlertTriangle,
+  User, Shield, Download, Trash2, MessageSquare, AlertTriangle, Activity,
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import './UserSettings.css';
@@ -18,6 +18,13 @@ export default function UserSettings() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState('');
   const [success, setSuccess] = useState('');
+  const [usage, setUsage] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      authAPI.myUsage().then(setUsage).catch(() => {});
+    }
+  }, [user]);
 
   if (!user) { navigate('/login'); return null; }
 
@@ -100,6 +107,41 @@ export default function UserSettings() {
             </div>
           </div>
         </div>
+
+        {/* Usage Stats */}
+        {usage && (
+          <div className="settings-section">
+            <h2><Activity size={18} /> {t('settings.usage') || 'Usage'}</h2>
+            <div className="settings-usage-grid">
+              <div className="settings-usage-card">
+                <span className="settings-usage-label">{t('settings.month_tokens') || 'This Month Tokens'}</span>
+                <span className="settings-usage-value">{(usage.this_month?.tokens || 0).toLocaleString()}</span>
+              </div>
+              <div className="settings-usage-card">
+                <span className="settings-usage-label">{t('settings.month_cost') || 'This Month Cost'}</span>
+                <span className="settings-usage-value cost">${(usage.this_month?.cost || 0).toFixed(4)}</span>
+              </div>
+              <div className="settings-usage-card">
+                <span className="settings-usage-label">{t('settings.total_tokens') || 'Total Tokens'}</span>
+                <span className="settings-usage-value">{(usage.total_tokens_used || 0).toLocaleString()}</span>
+              </div>
+              <div className="settings-usage-card">
+                <span className="settings-usage-label">{t('settings.total_cost') || 'Total Cost'}</span>
+                <span className="settings-usage-value cost">${(usage.total_cost || 0).toFixed(4)}</span>
+              </div>
+              {usage.credits_balance > 0 && (
+                <div className="settings-usage-card">
+                  <span className="settings-usage-label">{t('settings.credits') || 'Credits Balance'}</span>
+                  <span className="settings-usage-value credits">${usage.credits_balance.toFixed(4)}</span>
+                </div>
+              )}
+              <div className="settings-usage-card">
+                <span className="settings-usage-label">{t('settings.total_requests') || 'Total Requests'}</span>
+                <span className="settings-usage-value">{usage.total_requests}</span>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Data Actions */}
         <div className="settings-section">

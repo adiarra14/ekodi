@@ -3,7 +3,7 @@
 import uuid
 from datetime import datetime, date, timezone
 
-from sqlalchemy import String, Boolean, Integer, Date, DateTime, Text
+from sqlalchemy import String, Boolean, Integer, Float, Date, DateTime, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.database import Base
@@ -51,6 +51,14 @@ class User(Base):
     prompt_reset_date: Mapped[date | None] = mapped_column(Date, nullable=True)
     last_login: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
+    # ── Billing / Credits ─────────────────────────────────
+    credits_balance: Mapped[float] = mapped_column(Float, default=0.0)
+    # Credits in USD; negative = overage, 0 = no credits, >0 = available
+    total_tokens_used: Mapped[int] = mapped_column(Integer, default=0)
+    total_cost: Mapped[float] = mapped_column(Float, default=0.0)
+    monthly_budget: Mapped[float] = mapped_column(Float, default=0.0)
+    # 0 = no budget limit
+
     # ── Timestamps ────────────────────────────────────────
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=lambda: datetime.now(timezone.utc)
@@ -60,3 +68,4 @@ class User(Base):
     conversations = relationship("Conversation", back_populates="user", cascade="all, delete-orphan")
     api_keys = relationship("ApiKey", back_populates="user", cascade="all, delete-orphan")
     feedbacks = relationship("Feedback", back_populates="user", cascade="all, delete-orphan")
+    token_usages = relationship("TokenUsage", back_populates="user", cascade="all, delete-orphan")

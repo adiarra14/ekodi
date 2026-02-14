@@ -56,6 +56,19 @@ async function request(path, options = {}) {
     throw new Error('Unauthorized');
   }
 
+  // Handle 503 — server busy
+  if (res.status === 503) {
+    const data = await res.json().catch(() => ({}));
+    const err = new Error(data.detail || 'Server is currently busy. Please try again in a moment.');
+    err.code = 'SERVER_BUSY';
+    err.retryAfter = parseInt(res.headers.get('Retry-After') || '10', 10);
+    // Dispatch global event for the busy banner
+    window.dispatchEvent(new CustomEvent('ekodi-server-busy', {
+      detail: { message: err.message, retryAfter: err.retryAfter },
+    }));
+    throw err;
+  }
+
   if (!res.ok) {
     const data = await res.json().catch(() => ({}));
     throw new Error(data.detail || `Error ${res.status}`);
@@ -83,6 +96,7 @@ export const authAPI = {
   deleteAccount: (password) => request('/auth/account', { method: 'DELETE', body: JSON.stringify({ password }) }),
   exportData: () => request('/auth/export'),
   deleteAllConversations: () => request('/auth/conversations/all', { method: 'DELETE' }),
+  myUsage: () => request('/auth/me/usage'),
 };
 
 // Conversations
@@ -96,6 +110,11 @@ export const chatAPI = {
   deleteConversation: (id) => request(`/conversations/${id}`, { method: 'DELETE' }),
   sendText: (data) => request('/chat', { method: 'POST', body: JSON.stringify(data) }),
   sendVoice: (formData) => request('/voice-chat', { method: 'POST', body: formData }),
+};
+
+// Server Status (public, no auth)
+export const statusAPI = {
+  check: () => fetch(`${API_BASE}/status`).then(r => r.json()).catch(() => ({ status: 'unknown' })),
 };
 
 // TTS
@@ -155,4 +174,34 @@ export const adminAPI = {
 
   // Exports
   exportUsersCSV: () => request('/admin/export/users'),
+
+  // Session management
+  sessions: () => request('/admin/sessions'),
+  userSessions: (userId) => request(`/admin/users/${userId}/sessions`),
+  forceLogout: (userId) => request(`/admin/users/${userId}/force-logout`, { method: 'POST' }),
+  tokenConfig: () => request('/admin/token-config'),
+
+  // Billing & Token Usage
+  billingOverview: () => request('/admin/billing/overview'),
+  billingUsers: (params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return request(`/admin/billing/users${qs ? '?' + qs : ''}`);
+  },
+  billingDaily: (days = 30) => request(`/admin/billing/daily?days=${days}`),
+  billingUserDetail: (userId, params = {}) => {
+    const qs = new URLSearchParams(params).toString();
+    return request(`/admin/billing/users/${userId}${qs ? '?' + qs : ''}`);
+  },
+  updateCredits: (userId, amount, reason) => request(`/admin/billing/users/${userId}/credits`, {
+    method: 'POST',
+    body: JSON.stringify({ amount, reason }),
+  }),
+  updateBudget: (userId, monthly_budget) => request(`/admin/billing/users/${userId}/budget`, {
+    method: 'PATCH',
+    body: JSON.stringify({ monthly_budget }),
+  }),
+  billingPricing: () => request('/admin/billing/pricing'),
+
+  // Server Health
+  serverHealth: () => request('/admin/health'),
 };

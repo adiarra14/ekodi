@@ -32,6 +32,9 @@ services:
       - SMTP_FROM=${SMTP_FROM:-ekodi.ai <noreply@ekodi.ai>}
       - BASE_URL=${BASE_URL:-https://ekodi.ai}
       - DATA_RETENTION_DAYS=${DATA_RETENTION_DAYS:-365}
+      - EKODI_MAX_CONCURRENT=${EKODI_MAX_CONCURRENT:-20}
+      - EKODI_CPU_THRESHOLD=${EKODI_CPU_THRESHOLD:-90}
+      - EKODI_MEMORY_THRESHOLD=${EKODI_MEMORY_THRESHOLD:-90}
     volumes:
       - model-cache:/root/.cache
     networks:

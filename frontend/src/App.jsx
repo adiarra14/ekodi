@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import Layout from './components/Layout';
 import SplashScreen from './components/SplashScreen';
 import ConsentBanner from './components/ConsentBanner';
+import ServerBusyBanner from './components/ServerBusyBanner';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -45,6 +46,7 @@ export default function App() {
           <Route path="/chat" element={<Chat />} />
         </Routes>
         <ConsentBanner />
+        <ServerBusyBanner />
       </AuthProvider>
     </BrowserRouter>
   );

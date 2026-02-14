@@ -52,3 +52,6 @@ gunicorn>=21.2.0
 
 # Pydantic email validation
 pydantic[email]>=2.5.0
+
+# System monitoring
+psutil>=5.9.0

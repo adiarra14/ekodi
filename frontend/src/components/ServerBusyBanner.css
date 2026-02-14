@@ -1,0 +1,97 @@
+.server-busy-banner {
+  position: fixed;
+  top: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  width: 90%;
+  max-width: 520px;
+  animation: busySlideIn 0.35s ease-out;
+}
+
+@keyframes busySlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.server-busy-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 18px;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 12px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.server-busy-icon {
+  color: #f59e0b;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.server-busy-text {
+  flex: 1;
+}
+
+.server-busy-text strong {
+  display: block;
+  color: #f59e0b;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+
+.server-busy-text p {
+  margin: 0;
+  color: #d4d4d8;
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.server-busy-countdown {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  font-variant-numeric: tabular-nums;
+}
+
+.server-busy-countdown .spin {
+  animation: busySpin 1s linear infinite;
+}
+
+@keyframes busySpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.server-busy-close {
+  background: none;
+  border: none;
+  color: #71717a;
+  cursor: pointer;
+  padding: 2px;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+.server-busy-close:hover {
+  color: #f59e0b;
+}
+
+@media (max-width: 600px) {
+  .server-busy-banner {
+    top: 70px;
+    width: 95%;
+  }
+}

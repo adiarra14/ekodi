@@ -22,6 +22,7 @@ from app.models.user import User
 from app.models.conversation import Conversation, Message
 from app.models.api_key import ApiKey
 from app.models.feedback import Feedback
+from app.models.token_usage import TokenUsage
 from app.middleware.auth import (
     hash_password,
     verify_password,
@@ -138,7 +139,7 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     send_verification_email(user.email, user.name, verification_token)
 
     token = create_access_token(user.id, user.role)
-    refresh = create_refresh_token(user.id)
+    refresh = create_refresh_token(user.id, is_staff=user.is_staff)
     return AuthResponse(
         token=token,
         refresh_token=refresh,
@@ -205,7 +206,7 @@ async def login(req: LoginRequest, request: Request, db: AsyncSession = Depends(
     await db.flush()
 
     token = create_access_token(user.id, user.role)
-    refresh = create_refresh_token(user.id)
+    refresh = create_refresh_token(user.id, is_staff=user.is_staff)
     return AuthResponse(
         token=token,
         refresh_token=refresh,
@@ -229,7 +230,7 @@ async def refresh_token(req: RefreshRequest, db: AsyncSession = Depends(get_db))
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "User not found")
 
     new_access = create_access_token(user.id, user.role)
-    new_refresh = create_refresh_token(user.id)
+    new_refresh = create_refresh_token(user.id, is_staff=user.is_staff)
 
     # Blacklist old refresh token
     blacklist_token(req.refresh_token)
@@ -265,6 +266,45 @@ async def me(user: User = Depends(get_current_user)):
         "consent_given": user.consent_given,
         "created_at": user.created_at.isoformat(),
     })
+
+
+@router.get("/me/usage")
+async def my_usage(
+    user: User = Depends(get_current_user),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get current user's token usage summary."""
+    from sqlalchemy import func
+
+    total_requests = (await db.execute(
+        select(func.count(TokenUsage.id)).where(TokenUsage.user_id == user.id)
+    )).scalar() or 0
+
+    month_start = datetime.now(timezone.utc).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    month_tokens = (await db.execute(
+        select(func.sum(TokenUsage.total_tokens)).where(
+            TokenUsage.user_id == user.id,
+            TokenUsage.created_at >= month_start,
+        )
+    )).scalar() or 0
+    month_cost = (await db.execute(
+        select(func.sum(TokenUsage.total_cost)).where(
+            TokenUsage.user_id == user.id,
+            TokenUsage.created_at >= month_start,
+        )
+    )).scalar() or 0
+
+    return {
+        "total_tokens_used": user.total_tokens_used or 0,
+        "total_cost": round(user.total_cost or 0, 6),
+        "credits_balance": round(user.credits_balance or 0, 4),
+        "monthly_budget": round(user.monthly_budget or 0, 2),
+        "total_requests": total_requests,
+        "this_month": {
+            "tokens": month_tokens,
+            "cost": round(month_cost, 6),
+        },
+    }
 
 
 # ── Forgot Password ──────────────────────────────────────────

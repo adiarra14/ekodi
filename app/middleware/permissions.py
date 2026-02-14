@@ -149,11 +149,11 @@ def require_staff():
 # ── Visible tabs per role (for frontend) ─────────────────────
 
 ROLE_TABS: dict[str, list[str]] = {
-    "superadmin": ["stats", "users", "team", "apikeys", "feedback", "chats"],
-    "admin": ["stats", "users", "team", "apikeys", "feedback", "chats"],
+    "superadmin": ["stats", "users", "team", "apikeys", "feedback", "chats", "sessions", "billing", "health"],
+    "admin": ["stats", "users", "team", "apikeys", "feedback", "chats", "sessions", "billing", "health"],
     "support": ["stats", "users", "feedback"],
     "marketing": ["stats"],
-    "finance": ["stats", "apikeys"],
+    "finance": ["stats", "apikeys", "billing"],
     "moderator": ["feedback", "chats"],
-    "developer": ["apikeys", "stats"],
+    "developer": ["apikeys", "stats", "health"],
 }

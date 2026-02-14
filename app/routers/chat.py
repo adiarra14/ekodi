@@ -1,5 +1,5 @@
 """
-Ekodi – Chat routes (text chat, voice chat) with DB persistence.
+Ekodi – Chat routes (text chat, voice chat) with DB persistence and token usage tracking.
 """
 
 import logging
@@ -17,9 +17,10 @@ from app.middleware.auth import get_current_user
 from app.middleware.rate_limit import check_user_prompt_limit
 from app.models.user import User
 from app.models.conversation import Conversation, Message
+from app.models.token_usage import TokenUsage
 from app.services.asr import transcribe_bambara, transcribe_french
 from app.services.translation import translate_to_bambara, translate_bambara_to_french
-from app.services.chat_ai import gpt_chat_with_history
+from app.services.chat_ai import gpt_chat_with_history, ChatResult
 from app.services.tts_service import synthesize_to_b64
 
 logger = logging.getLogger(__name__)
@@ -39,6 +40,41 @@ class ConversationCreate(BaseModel):
 
 class ConversationRename(BaseModel):
     title: str = Field(..., min_length=1, max_length=255)
+
+
+# ── Helper: save token usage to DB ───────────────────────────
+
+async def _save_token_usage(
+    db: AsyncSession,
+    user: User,
+    result: ChatResult,
+    conversation_id: str | None,
+    endpoint: str,
+):
+    """Save token usage record and update user running totals."""
+    usage = TokenUsage(
+        user_id=user.id,
+        conversation_id=conversation_id,
+        model=result.model,
+        endpoint=endpoint,
+        prompt_tokens=result.prompt_tokens,
+        completion_tokens=result.completion_tokens,
+        total_tokens=result.total_tokens,
+        prompt_cost=result.prompt_cost,
+        completion_cost=result.completion_cost,
+        total_cost=result.total_cost,
+    )
+    db.add(usage)
+
+    # Update user running totals
+    user.total_tokens_used = (user.total_tokens_used or 0) + result.total_tokens
+    user.total_cost = (user.total_cost or 0) + result.total_cost
+
+    # Deduct from credits if user has a credit balance
+    if user.credits_balance and user.credits_balance > 0:
+        user.credits_balance = max(0, user.credits_balance - result.total_cost)
+
+    await db.flush()
 
 
 # ── Conversation CRUD ────────────────────────────────────────
@@ -189,7 +225,7 @@ async def text_chat(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Text chat with conversation persistence."""
+    """Text chat with conversation persistence and token usage tracking."""
     try:
         # Check daily prompt limit
         await check_user_prompt_limit(user, db)
@@ -238,8 +274,9 @@ async def text_chat(
         all_msgs = result.scalars().all()
         gpt_history = _build_gpt_history(all_msgs[:-1])  # exclude current msg
 
-        # GPT response (in French)
-        ai_text_fr = gpt_chat_with_history(gpt_history, user_text_fr)
+        # GPT response (returns ChatResult with usage data)
+        chat_result: ChatResult = gpt_chat_with_history(gpt_history, user_text_fr)
+        ai_text_fr = chat_result.text
         ai_text_bm = translate_to_bambara(ai_text_fr)
         audio_b64 = synthesize_to_b64(ai_text_bm)
 
@@ -254,6 +291,9 @@ async def text_chat(
         await db.flush()
         await db.refresh(ai_msg)
 
+        # Save token usage
+        await _save_token_usage(db, user, chat_result, convo.id, "chat")
+
         return JSONResponse({
             "conversation_id": convo.id,
             "message_id": ai_msg.id,
@@ -262,7 +302,15 @@ async def text_chat(
             "ai_text_bm": ai_text_bm,
             "audio_base64": audio_b64,
             "input_lang": req.input_lang,
+            "usage": {
+                "prompt_tokens": chat_result.prompt_tokens,
+                "completion_tokens": chat_result.completion_tokens,
+                "total_tokens": chat_result.total_tokens,
+                "cost": round(chat_result.total_cost, 6),
+            },
         })
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error("Chat failed: %s", e, exc_info=True)
         raise HTTPException(500, f"Chat failed: {e}")
@@ -278,7 +326,7 @@ async def voice_chat(
     user: User = Depends(get_current_user),
     db: AsyncSession = Depends(get_db),
 ):
-    """Voice pipeline: audio → ASR → GPT → translate → TTS."""
+    """Voice pipeline: audio → ASR → GPT → translate → TTS, with token tracking."""
     # Check daily prompt limit
     await check_user_prompt_limit(user, db)
 
@@ -344,7 +392,8 @@ async def voice_chat(
     )
     all_msgs = result.scalars().all()
     gpt_history = _build_gpt_history(all_msgs[:-1])
-    ai_text_fr = gpt_chat_with_history(gpt_history, user_text_fr)
+    chat_result: ChatResult = gpt_chat_with_history(gpt_history, user_text_fr)
+    ai_text_fr = chat_result.text
 
     # Translate + TTS
     ai_text_bm = translate_to_bambara(ai_text_fr)
@@ -361,6 +410,9 @@ async def voice_chat(
     await db.flush()
     await db.refresh(ai_msg)
 
+    # Save token usage
+    await _save_token_usage(db, user, chat_result, convo.id, "voice-chat")
+
     return JSONResponse({
         "conversation_id": convo.id,
         "message_id": ai_msg.id,
@@ -370,4 +422,10 @@ async def voice_chat(
         "ai_text_bm": ai_text_bm,
         "audio_base64": audio_b64,
         "input_lang": input_lang,
+        "usage": {
+            "prompt_tokens": chat_result.prompt_tokens,
+            "completion_tokens": chat_result.completion_tokens,
+            "total_tokens": chat_result.total_tokens,
+            "cost": round(chat_result.total_cost, 6),
+        },
     })

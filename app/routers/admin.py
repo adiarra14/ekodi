@@ -1,20 +1,23 @@
 """
 Ekodi – Admin routes (dashboard, RBAC user/team management,
-API key oversight, feedback, chat history, data retention).
+API key oversight, feedback, chat history, data retention, billing).
 """
 
 import csv
 import io
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, EmailStr, Field
-from sqlalchemy import select, func, or_
+from sqlalchemy import select, func, or_, extract, cast, Date
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database import get_db
-from app.middleware.auth import get_admin_user, hash_password, STAFF_ROLES
+from app.middleware.auth import (
+    get_admin_user, hash_password, STAFF_ROLES,
+    force_logout_user, get_active_session_count, get_all_session_counts,
+)
 from app.middleware.permissions import (
     require_permission, require_staff, has_permission,
     ROLE_PERMISSIONS, ROLE_TABS, TIER_LIMITS,
@@ -23,6 +26,7 @@ from app.models.user import User
 from app.models.conversation import Conversation, Message
 from app.models.api_key import ApiKey
 from app.models.feedback import Feedback
+from app.models.token_usage import TokenUsage
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -66,6 +70,23 @@ async def admin_stats(
         count = (await db.execute(select(func.count(User.id)).where(User.tier == tier))).scalar() or 0
         tier_counts[tier] = count
 
+    # Token usage / billing summary
+    total_tokens = (await db.execute(select(func.sum(TokenUsage.total_tokens)))).scalar() or 0
+    total_cost = (await db.execute(select(func.sum(TokenUsage.total_cost)))).scalar() or 0
+    total_requests = (await db.execute(select(func.count(TokenUsage.id)))).scalar() or 0
+
+    # This month
+    month_start = datetime.now(timezone.utc).replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    month_tokens = (await db.execute(
+        select(func.sum(TokenUsage.total_tokens)).where(TokenUsage.created_at >= month_start)
+    )).scalar() or 0
+    month_cost = (await db.execute(
+        select(func.sum(TokenUsage.total_cost)).where(TokenUsage.created_at >= month_start)
+    )).scalar() or 0
+    month_requests = (await db.execute(
+        select(func.count(TokenUsage.id)).where(TokenUsage.created_at >= month_start)
+    )).scalar() or 0
+
     return {
         "users": users_count,
         "staff": staff_count,
@@ -79,6 +100,14 @@ async def admin_stats(
             "negative": negative,
         },
         "tiers": tier_counts,
+        "billing": {
+            "total_tokens": total_tokens,
+            "total_cost": round(total_cost, 4),
+            "total_requests": total_requests,
+            "month_tokens": month_tokens,
+            "month_cost": round(month_cost, 4),
+            "month_requests": month_requests,
+        },
     }
 
 
@@ -607,4 +636,414 @@ async def get_roles_config(user: User = Depends(require_staff())):
         "tiers": list(VALID_TIERS),
         "departments": list(DEPARTMENTS),
         "tier_limits": TIER_LIMITS,
+    }
+
+
+# ── Billing & Token Usage ────────────────────────────────────
+
+@router.get("/billing/overview")
+async def billing_overview(
+    admin: User = Depends(require_permission("stats.read")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get billing overview: total cost, tokens, per-model breakdown."""
+    now = datetime.now(timezone.utc)
+    month_start = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+
+    # Total all-time
+    total_cost = (await db.execute(select(func.sum(TokenUsage.total_cost)))).scalar() or 0
+    total_tokens = (await db.execute(select(func.sum(TokenUsage.total_tokens)))).scalar() or 0
+    total_requests = (await db.execute(select(func.count(TokenUsage.id)))).scalar() or 0
+
+    # This month
+    month_cost = (await db.execute(
+        select(func.sum(TokenUsage.total_cost)).where(TokenUsage.created_at >= month_start)
+    )).scalar() or 0
+    month_tokens = (await db.execute(
+        select(func.sum(TokenUsage.total_tokens)).where(TokenUsage.created_at >= month_start)
+    )).scalar() or 0
+    month_requests = (await db.execute(
+        select(func.count(TokenUsage.id)).where(TokenUsage.created_at >= month_start)
+    )).scalar() or 0
+
+    # Per-model breakdown
+    model_rows = (await db.execute(
+        select(
+            TokenUsage.model,
+            func.count(TokenUsage.id).label("requests"),
+            func.sum(TokenUsage.prompt_tokens).label("prompt_tokens"),
+            func.sum(TokenUsage.completion_tokens).label("completion_tokens"),
+            func.sum(TokenUsage.total_tokens).label("total_tokens"),
+            func.sum(TokenUsage.total_cost).label("total_cost"),
+        ).group_by(TokenUsage.model)
+    )).all()
+    by_model = [
+        {
+            "model": r.model,
+            "requests": r.requests,
+            "prompt_tokens": r.prompt_tokens or 0,
+            "completion_tokens": r.completion_tokens or 0,
+            "total_tokens": r.total_tokens or 0,
+            "total_cost": round(r.total_cost or 0, 4),
+        }
+        for r in model_rows
+    ]
+
+    # Per-endpoint breakdown
+    endpoint_rows = (await db.execute(
+        select(
+            TokenUsage.endpoint,
+            func.count(TokenUsage.id).label("requests"),
+            func.sum(TokenUsage.total_cost).label("total_cost"),
+        ).group_by(TokenUsage.endpoint)
+    )).all()
+    by_endpoint = [
+        {
+            "endpoint": r.endpoint,
+            "requests": r.requests,
+            "total_cost": round(r.total_cost or 0, 4),
+        }
+        for r in endpoint_rows
+    ]
+
+    return {
+        "all_time": {
+            "total_cost": round(total_cost, 4),
+            "total_tokens": total_tokens,
+            "total_requests": total_requests,
+        },
+        "this_month": {
+            "total_cost": round(month_cost, 4),
+            "total_tokens": month_tokens,
+            "total_requests": month_requests,
+        },
+        "by_model": by_model,
+        "by_endpoint": by_endpoint,
+    }
+
+
+@router.get("/billing/users")
+async def billing_per_user(
+    admin: User = Depends(require_permission("stats.read")),
+    db: AsyncSession = Depends(get_db),
+    page: int = Query(1, ge=1),
+    per_page: int = Query(50, ge=1, le=200),
+):
+    """Get token usage and cost per user, sorted by highest cost."""
+    offset = (page - 1) * per_page
+
+    rows = (await db.execute(
+        select(
+            TokenUsage.user_id,
+            func.count(TokenUsage.id).label("requests"),
+            func.sum(TokenUsage.total_tokens).label("total_tokens"),
+            func.sum(TokenUsage.total_cost).label("total_cost"),
+        )
+        .group_by(TokenUsage.user_id)
+        .order_by(func.sum(TokenUsage.total_cost).desc())
+        .offset(offset)
+        .limit(per_page)
+    )).all()
+
+    total_users = (await db.execute(
+        select(func.count(func.distinct(TokenUsage.user_id)))
+    )).scalar() or 0
+
+    # Enrich with user info
+    user_ids = [r.user_id for r in rows]
+    if user_ids:
+        users_result = await db.execute(select(User).where(User.id.in_(user_ids)))
+        users_map = {u.id: u for u in users_result.scalars().all()}
+    else:
+        users_map = {}
+
+    items = []
+    for r in rows:
+        u = users_map.get(r.user_id)
+        items.append({
+            "user_id": r.user_id,
+            "name": u.name if u else "Deleted",
+            "email": u.email if u else "—",
+            "tier": u.tier if u else "—",
+            "role": u.role if u else "—",
+            "is_staff": u.is_staff if u else False,
+            "requests": r.requests,
+            "total_tokens": r.total_tokens or 0,
+            "total_cost": round(r.total_cost or 0, 6),
+            "credits_balance": round(u.credits_balance or 0, 4) if u else 0,
+        })
+
+    return {"users": items, "total": total_users, "page": page, "per_page": per_page}
+
+
+@router.get("/billing/daily")
+async def billing_daily(
+    admin: User = Depends(require_permission("stats.read")),
+    db: AsyncSession = Depends(get_db),
+    days: int = Query(30, ge=1, le=365),
+):
+    """Get daily token usage and cost for the last N days (for charts)."""
+    since = datetime.now(timezone.utc) - timedelta(days=days)
+
+    rows = (await db.execute(
+        select(
+            func.date(TokenUsage.created_at).label("day"),
+            func.count(TokenUsage.id).label("requests"),
+            func.sum(TokenUsage.total_tokens).label("total_tokens"),
+            func.sum(TokenUsage.prompt_tokens).label("prompt_tokens"),
+            func.sum(TokenUsage.completion_tokens).label("completion_tokens"),
+            func.sum(TokenUsage.total_cost).label("total_cost"),
+        )
+        .where(TokenUsage.created_at >= since)
+        .group_by(func.date(TokenUsage.created_at))
+        .order_by(func.date(TokenUsage.created_at))
+    )).all()
+
+    return {
+        "days": [
+            {
+                "date": str(r.day),
+                "requests": r.requests,
+                "total_tokens": r.total_tokens or 0,
+                "prompt_tokens": r.prompt_tokens or 0,
+                "completion_tokens": r.completion_tokens or 0,
+                "total_cost": round(r.total_cost or 0, 6),
+            }
+            for r in rows
+        ],
+    }
+
+
+@router.get("/billing/users/{user_id}")
+async def billing_user_detail(
+    user_id: str,
+    admin: User = Depends(require_permission("users.read")),
+    db: AsyncSession = Depends(get_db),
+    page: int = Query(1, ge=1),
+    per_page: int = Query(50, ge=1, le=200),
+):
+    """Get detailed token usage history for a specific user."""
+    result = await db.execute(select(User).where(User.id == user_id))
+    target = result.scalar_one_or_none()
+    if not target:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+
+    offset = (page - 1) * per_page
+    total = (await db.execute(
+        select(func.count(TokenUsage.id)).where(TokenUsage.user_id == user_id)
+    )).scalar() or 0
+
+    rows = (await db.execute(
+        select(TokenUsage)
+        .where(TokenUsage.user_id == user_id)
+        .order_by(TokenUsage.created_at.desc())
+        .offset(offset)
+        .limit(per_page)
+    )).scalars().all()
+
+    return {
+        "user": {
+            "id": target.id,
+            "name": target.name,
+            "email": target.email,
+            "tier": target.tier,
+            "total_tokens_used": target.total_tokens_used or 0,
+            "total_cost": round(target.total_cost or 0, 6),
+            "credits_balance": round(target.credits_balance or 0, 4),
+            "monthly_budget": round(target.monthly_budget or 0, 2),
+        },
+        "usage": [
+            {
+                "id": u.id,
+                "model": u.model,
+                "endpoint": u.endpoint,
+                "prompt_tokens": u.prompt_tokens,
+                "completion_tokens": u.completion_tokens,
+                "total_tokens": u.total_tokens,
+                "total_cost": round(u.total_cost, 6),
+                "created_at": u.created_at.isoformat(),
+            }
+            for u in rows
+        ],
+        "total": total,
+        "page": page,
+        "per_page": per_page,
+    }
+
+
+class CreditUpdate(BaseModel):
+    amount: float = Field(..., description="Credits to add (positive) or deduct (negative)")
+    reason: str = Field(default="Manual adjustment", max_length=200)
+
+
+@router.post("/billing/users/{user_id}/credits")
+async def update_user_credits(
+    user_id: str,
+    req: CreditUpdate,
+    admin: User = Depends(require_permission("users.write")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Add or deduct credits from a user's balance."""
+    result = await db.execute(select(User).where(User.id == user_id))
+    target = result.scalar_one_or_none()
+    if not target:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+
+    old_balance = target.credits_balance or 0
+    target.credits_balance = old_balance + req.amount
+    await db.flush()
+
+    return {
+        "user_id": user_id,
+        "old_balance": round(old_balance, 4),
+        "adjustment": req.amount,
+        "new_balance": round(target.credits_balance, 4),
+        "reason": req.reason,
+    }
+
+
+class BudgetUpdate(BaseModel):
+    monthly_budget: float = Field(..., ge=0, description="Monthly budget in USD (0 = no limit)")
+
+
+@router.patch("/billing/users/{user_id}/budget")
+async def update_user_budget(
+    user_id: str,
+    req: BudgetUpdate,
+    admin: User = Depends(require_permission("users.write")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Set monthly budget limit for a user."""
+    result = await db.execute(select(User).where(User.id == user_id))
+    target = result.scalar_one_or_none()
+    if not target:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+
+    target.monthly_budget = req.monthly_budget
+    await db.flush()
+
+    return {
+        "user_id": user_id,
+        "monthly_budget": round(target.monthly_budget, 2),
+    }
+
+
+@router.get("/billing/pricing")
+async def get_pricing(admin: User = Depends(require_staff())):
+    """Return current model pricing configuration."""
+    from app.services.chat_ai import MODEL_PRICING, DEFAULT_MODEL
+    return {
+        "default_model": DEFAULT_MODEL,
+        "models": MODEL_PRICING,
+    }
+
+
+# ── Session Management ───────────────────────────────────────
+
+@router.get("/sessions")
+async def admin_sessions(
+    admin: User = Depends(require_permission("users.read")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Get active session counts for all users."""
+    counts = get_all_session_counts()
+    if not counts:
+        return {"sessions": []}
+
+    # Enrich with user info
+    user_ids = list(counts.keys())
+    result = await db.execute(select(User).where(User.id.in_(user_ids)))
+    users = {u.id: u for u in result.scalars().all()}
+
+    sessions = []
+    for uid, count in counts.items():
+        u = users.get(uid)
+        if u:
+            sessions.append({
+                "user_id": uid,
+                "name": u.name,
+                "email": u.email,
+                "role": u.role,
+                "is_staff": u.is_staff,
+                "active_sessions": count,
+                "last_login": u.last_login.isoformat() if u.last_login else None,
+            })
+    sessions.sort(key=lambda s: s["active_sessions"], reverse=True)
+    return {"sessions": sessions}
+
+
+@router.get("/users/{user_id}/sessions")
+async def admin_user_sessions(
+    user_id: str,
+    admin: User = Depends(require_permission("users.read")),
+):
+    """Get active session count for a specific user."""
+    count = get_active_session_count(user_id)
+    return {"user_id": user_id, "active_sessions": count}
+
+
+@router.post("/users/{user_id}/force-logout")
+async def admin_force_logout(
+    user_id: str,
+    admin: User = Depends(require_permission("users.write")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Force-logout a user: invalidate all their tokens."""
+    if user_id == admin.id:
+        raise HTTPException(status.HTTP_400_BAD_REQUEST, "Cannot force-logout yourself")
+
+    result = await db.execute(select(User).where(User.id == user_id))
+    target = result.scalar_one_or_none()
+    if not target:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "User not found")
+
+    # Protect superadmin from non-superadmins
+    if target.role == "superadmin" and admin.role != "superadmin":
+        raise HTTPException(status.HTTP_403_FORBIDDEN, "Cannot force-logout a superadmin")
+
+    force_logout_user(user_id)
+    return {"message": f"All sessions for {target.email} have been invalidated.", "email": target.email}
+
+
+@router.get("/token-config")
+async def admin_token_config(admin: User = Depends(require_staff())):
+    """Return current token duration config."""
+    from app.middleware.auth import (
+        STAFF_ACCESS_HOURS, STAFF_REFRESH_DAYS,
+        USER_ACCESS_HOURS, USER_REFRESH_DAYS,
+    )
+    return {
+        "staff": {"access_hours": STAFF_ACCESS_HOURS, "refresh_days": STAFF_REFRESH_DAYS},
+        "user": {"access_hours": USER_ACCESS_HOURS, "refresh_days": USER_REFRESH_DAYS},
+    }
+
+
+# ── Server Health (admin only) ───────────────────────────────
+
+@router.get("/health")
+async def admin_server_health(admin: User = Depends(require_staff())):
+    """Detailed server health stats (admin only)."""
+    from app.services.server_monitor import get_monitor, MAX_CONCURRENT_REQUESTS, CPU_THRESHOLD, MEMORY_THRESHOLD
+    monitor = get_monitor()
+    stats = monitor.get_stats()
+    return {
+        "status": monitor.get_status_level(),
+        "active_requests": stats.active_requests,
+        "total_requests": stats.total_requests,
+        "total_errors": stats.total_errors,
+        "total_rejected": stats.total_rejected,
+        "error_rate": round(stats.total_errors / max(stats.total_requests, 1) * 100, 2),
+        "cpu_percent": stats.cpu_percent,
+        "memory_percent": stats.memory_percent,
+        "memory_used_mb": stats.memory_used_mb,
+        "memory_total_mb": stats.memory_total_mb,
+        "avg_response_time_ms": stats.avg_response_time_ms,
+        "uptime_seconds": stats.uptime_seconds,
+        "is_overloaded": stats.is_overloaded,
+        "overload_reason": stats.overload_reason,
+        "limits": {
+            "max_concurrent": MAX_CONCURRENT_REQUESTS,
+            "cpu_threshold": CPU_THRESHOLD,
+            "memory_threshold": MEMORY_THRESHOLD,
+        },
     }

@@ -1,10 +1,17 @@
 """
 Ekodi – JWT authentication middleware and helpers.
-Supports access tokens (1 h), refresh tokens (7 d), and token blacklisting.
+Supports access tokens, refresh tokens, token blacklisting,
+per-user force-logout, and session tracking.
+
+Token durations:
+  - Staff: 24h access, 30d refresh
+  - Regular users: 1h access, 7d refresh
 """
 
 import hashlib
 import secrets
+import time
+from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 
 from fastapi import Depends, HTTPException, status, Request
@@ -22,10 +29,23 @@ from app.models.api_key import ApiKey
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 security = HTTPBearer(auto_error=False)
 
-# ── In-memory token blacklist (use Redis in production) ───────
+# ── In-memory stores (use Redis in production) ────────────────
 _token_blacklist: set[str] = set()
 
+# Per-user invalidation: tokens issued before this timestamp are rejected
+# { user_id: timestamp }
+_user_invalidated_before: dict[str, float] = {}
+
+# Active session tracking: { user_id: set of (token_jti) }
+_active_sessions: dict[str, set[str]] = defaultdict(set)
+
 STAFF_ROLES = {"superadmin", "admin", "support", "marketing", "finance", "moderator", "developer"}
+
+# ── Token durations ───────────────────────────────────────────
+STAFF_ACCESS_HOURS = 24
+STAFF_REFRESH_DAYS = 30
+USER_ACCESS_HOURS = 1
+USER_REFRESH_DAYS = 7
 
 
 def hash_password(password: str) -> str:
@@ -38,25 +58,43 @@ def verify_password(plain: str, hashed: str) -> bool:
 
 def create_access_token(user_id: str, role: str = "user") -> str:
     settings = get_settings()
-    expire = datetime.now(timezone.utc) + timedelta(hours=1)
+    is_staff = role in STAFF_ROLES
+    hours = STAFF_ACCESS_HOURS if is_staff else USER_ACCESS_HOURS
+    expire = datetime.now(timezone.utc) + timedelta(hours=hours)
+    jti = secrets.token_hex(16)
     payload = {
         "sub": user_id,
         "role": role,
         "type": "access",
+        "jti": jti,
+        "iat": datetime.now(timezone.utc).timestamp(),
         "exp": expire,
     }
-    return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+    token = jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+
+    # Track session
+    _active_sessions[user_id].add(jti)
+
+    return token
 
 
-def create_refresh_token(user_id: str) -> str:
+def create_refresh_token(user_id: str, is_staff: bool = False) -> str:
     settings = get_settings()
-    expire = datetime.now(timezone.utc) + timedelta(days=7)
+    days = STAFF_REFRESH_DAYS if is_staff else USER_REFRESH_DAYS
+    expire = datetime.now(timezone.utc) + timedelta(days=days)
+    jti = secrets.token_hex(16)
     payload = {
         "sub": user_id,
         "type": "refresh",
+        "jti": jti,
+        "iat": datetime.now(timezone.utc).timestamp(),
         "exp": expire,
     }
-    return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+    token = jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
+
+    _active_sessions[user_id].add(jti)
+
+    return token
 
 
 def decode_token(token: str) -> dict:
@@ -64,14 +102,50 @@ def decode_token(token: str) -> dict:
     if token in _token_blacklist:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Token revoked")
     try:
-        return jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
+        payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM])
     except JWTError:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid token")
+
+    # Check per-user invalidation
+    user_id = payload.get("sub")
+    iat = payload.get("iat", 0)
+    if user_id and user_id in _user_invalidated_before:
+        if iat < _user_invalidated_before[user_id]:
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Session expired, please login again")
+
+    return payload
 
 
 def blacklist_token(token: str):
     """Add a token to the blacklist."""
     _token_blacklist.add(token)
+    # Also remove from session tracking
+    try:
+        settings = get_settings()
+        payload = jwt.decode(token, settings.JWT_SECRET, algorithms=[settings.JWT_ALGORITHM],
+                             options={"verify_exp": False})
+        user_id = payload.get("sub")
+        jti = payload.get("jti")
+        if user_id and jti and jti in _active_sessions.get(user_id, set()):
+            _active_sessions[user_id].discard(jti)
+    except Exception:
+        pass
+
+
+def force_logout_user(user_id: str):
+    """Invalidate ALL tokens for a user (force-logout)."""
+    _user_invalidated_before[user_id] = time.time()
+    _active_sessions[user_id] = set()
+
+
+def get_active_session_count(user_id: str) -> int:
+    """Get number of active sessions for a user."""
+    return len(_active_sessions.get(user_id, set()))
+
+
+def get_all_session_counts() -> dict[str, int]:
+    """Get session counts for all users with active sessions."""
+    return {uid: len(jtis) for uid, jtis in _active_sessions.items() if jtis}
 
 
 async def get_current_user(

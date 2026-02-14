@@ -234,7 +234,14 @@
     "delete_account": "Supprimer mon compte",
     "delete_account_desc": "Supprimer definitivement votre compte et toutes les donnees associees. Cette action est irreversible.",
     "delete_confirm_text": "Entrez votre mot de passe pour confirmer la suppression :",
-    "confirm_delete": "Supprimer definitivement"
+    "confirm_delete": "Supprimer definitivement",
+    "usage": "Utilisation",
+    "month_tokens": "Tokens ce mois",
+    "month_cost": "Coût ce mois",
+    "total_tokens": "Total tokens",
+    "total_cost": "Coût total",
+    "credits": "Solde crédits",
+    "total_requests": "Total requêtes"
   },
   "privacy": {
     "title": "Politique de confidentialite",
@@ -298,5 +305,10 @@
     "delete": "Supprimer",
     "close": "Fermer",
     "back": "Retour"
+  },
+  "server": {
+    "busy_title": "Serveur occupé",
+    "busy_message": "Trop de requêtes en ce moment. Veuillez patienter un instant et réessayer.",
+    "retry_in": "Réessayer dans"
   }
 }

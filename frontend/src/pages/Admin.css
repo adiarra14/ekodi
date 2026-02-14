@@ -423,9 +423,344 @@
 .chat-msg p { margin: 4px 0; color: #e4e4e8; font-size: 0.85rem; line-height: 1.5; }
 .chat-msg-time { font-size: 0.7rem; color: #52525b; }
 
+/* ── Billing ─────────────────────────────────────────────── */
+.billing-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.billing-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 1.25rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+.billing-card.small {
+  padding: 0.75rem;
+}
+.billing-card-label {
+  font-size: 0.72rem;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.billing-card-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #e4e4e8;
+  font-variant-numeric: tabular-nums;
+}
+.billing-card-value.cost {
+  color: #34d399;
+}
+.billing-card-sub {
+  font-size: 0.72rem;
+  color: #52525b;
+}
+.billing-breakdown {
+  margin-bottom: 1.5rem;
+}
+.billing-breakdown h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.cost-cell {
+  color: #34d399;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.active-model td { background: rgba(139, 92, 246, 0.08); }
+.badge-active {
+  display: inline-block;
+  font-size: 0.6rem;
+  padding: 1px 6px;
+  border-radius: 8px;
+  background: rgba(52, 211, 153, 0.18);
+  color: #34d399;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+.billing-endpoint-chips {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.billing-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.6rem 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+}
+.billing-chip-label {
+  font-size: 0.75rem;
+  color: #a1a1aa;
+  font-weight: 600;
+}
+.billing-chip-val {
+  font-size: 0.72rem;
+  color: #71717a;
+}
+/* Daily bar chart */
+.billing-daily-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+  height: 120px;
+  padding: 0.5rem 0;
+  overflow-x: auto;
+}
+.billing-bar-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  min-width: 18px;
+  height: 100%;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+.billing-bar {
+  width: 100%;
+  max-width: 24px;
+  background: linear-gradient(180deg, #a78bfa, #6d28d9);
+  border-radius: 3px 3px 0 0;
+  transition: opacity 0.2s;
+}
+.billing-bar-wrap:hover .billing-bar { opacity: 0.7; }
+.billing-bar-label {
+  font-size: 0.55rem;
+  color: #52525b;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+/* Billing user detail modal */
+.billing-modal {
+  max-width: 800px;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+.billing-user-summary {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+.billing-credit-form {
+  margin-bottom: 1.25rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+}
+.billing-credit-form h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: #a78bfa;
+}
+.billing-credit-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.billing-credit-row input {
+  flex: 1;
+  padding: 0.4rem 0.6rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #e4e4e8;
+  font-size: 0.82rem;
+}
+.billing-usage-list { margin-top: 1rem; }
+.billing-usage-list h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.8rem;
+  color: #a78bfa;
+}
+.admin-table.compact td, .admin-table.compact th {
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}
+
+/* ── Health ──────────────────────────────────────────────── */
+.health-status-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+.health-healthy { background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.25); }
+.health-warning { background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); }
+.health-critical { background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.25); }
+.health-status-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  animation: healthPulse 2s infinite;
+}
+.health-healthy .health-status-dot { background: #34d399; }
+.health-warning .health-status-dot { background: #f59e0b; }
+.health-critical .health-status-dot { background: #ef4444; }
+@keyframes healthPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.health-status-text { font-size: 0.88rem; color: #e4e4e8; font-weight: 600; }
+.health-overload-reason {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-left: auto;
+}
+.health-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+.health-card {
+  display: flex;
+  gap: 12px;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+.health-card-icon { color: #a78bfa; flex-shrink: 0; margin-top: 2px; }
+.health-card-body { flex: 1; display: flex; flex-direction: column; gap: 0.25rem; }
+.health-card-label { font-size: 0.72rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.04em; }
+.health-card-value { font-size: 1.3rem; font-weight: 700; color: #e4e4e8; font-variant-numeric: tabular-nums; }
+.health-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.health-bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+.health-counters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.25rem;
+}
+.health-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.75rem 1.25rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  min-width: 100px;
+}
+.health-counter-val { font-size: 1.2rem; font-weight: 700; color: #e4e4e8; font-variant-numeric: tabular-nums; }
+.health-counter-val.text-red { color: #ef4444; }
+.health-counter-val.text-yellow { color: #f59e0b; }
+.health-counter-label { font-size: 0.68rem; color: #71717a; text-transform: uppercase; letter-spacing: 0.04em; }
+.health-limits {
+  padding: 1rem;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 10px;
+}
+.health-limits h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.health-limits-grid {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: #a1a1aa;
+}
+.health-limits-grid strong { color: #e4e4e8; }
+
+/* ── Sessions ────────────────────────────────────────────── */
+.admin-token-config {
+  margin-bottom: 1.5rem;
+  padding: 1rem 1.25rem;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: 10px;
+}
+.admin-token-config h4 {
+  margin: 0 0 0.75rem;
+  font-size: 0.85rem;
+  color: #a78bfa;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.token-config-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+.token-config-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+}
+.token-config-label {
+  font-size: 0.72rem;
+  color: #71717a;
+  text-align: center;
+}
+.token-config-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #e4e4e8;
+  font-variant-numeric: tabular-nums;
+}
+.session-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 6px;
+  background: rgba(139, 92, 246, 0.18);
+  color: #c4b5fd;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
 @media (max-width: 768px) {
   .admin-page { padding: 5rem 1rem 2rem; }
   .admin-toolbar { gap: 6px; }
   .chat-viewer { grid-template-columns: 1fr; height: auto; }
   .chat-viewer-list { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); padding-right: 0; padding-bottom: 12px; max-height: 200px; }
+  .token-config-grid { grid-template-columns: repeat(2, 1fr); }
+  .billing-cards { grid-template-columns: repeat(2, 1fr); }
+  .billing-user-summary { grid-template-columns: repeat(2, 1fr); }
+  .billing-credit-row { flex-direction: column; }
+  .billing-modal { max-width: 95vw; }
+  .health-cards { grid-template-columns: repeat(2, 1fr); }
+  .health-counters { justify-content: center; }
 }

@@ -234,7 +234,14 @@
     "delete_account": "N ka jateminɛ bɔ",
     "delete_account_desc": "I ka jateminɛ ni kunnafoni bɛɛ bɔ ka ban. A tɛ se ka segin.",
     "delete_confirm_text": "I ka daɲɛgafe sɛbɛn ka jateminɛ bɔli lakodɔn:",
-    "confirm_delete": "Bɔ ka ban"
+    "confirm_delete": "Bɔ ka ban",
+    "usage": "Baara kɛli",
+    "month_tokens": "Kalo in na tokens",
+    "month_cost": "Kalo in sɔngɔ",
+    "total_tokens": "Tokens bɛɛ",
+    "total_cost": "Sɔngɔ bɛɛ",
+    "credits": "Wari tɔ",
+    "total_requests": "Ɲininkali bɛɛ"
   },
   "privacy": {
     "title": "Gundokoɲɛna sariya",
@@ -298,5 +305,10 @@
     "delete": "Bɔ",
     "close": "Datugu",
     "back": "Segin"
+  },
+  "server": {
+    "busy_title": "Sɛbɛn bɛ baara la",
+    "busy_message": "Ɲininkali caman bɛ yen sisan. I ka mɛnɛ dɔɔnin k'a lajɛ kokura.",
+    "retry_in": "Ka lajɛ kokura"
   }
 }

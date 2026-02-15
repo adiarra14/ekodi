@@ -3,6 +3,7 @@ Ekodi – Email service for verification, password reset, and notifications.
 """
 
 import logging
+import re
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -10,6 +11,14 @@ from email.mime.multipart import MIMEMultipart
 from app.config import get_settings
 
 logger = logging.getLogger(__name__)
+
+
+def _extract_email(from_str: str) -> str:
+    """Extract bare email from 'Display Name <email>' format."""
+    match = re.search(r'<([^>]+)>', from_str)
+    if match:
+        return match.group(1)
+    return from_str.strip()
 
 
 def _send_email(to: str, subject: str, html_body: str):
@@ -26,16 +35,19 @@ def _send_email(to: str, subject: str, html_body: str):
     msg["To"] = to
     msg.attach(MIMEText(html_body, "html"))
 
+    # Envelope sender must be bare email (OVH and many SMTP servers reject display name format)
+    envelope_from = _extract_email(settings.SMTP_FROM)
+
     try:
-        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT) as server:
+        with smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=30) as server:
             server.ehlo()
             server.starttls()
             server.ehlo()
             server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
-            server.sendmail(settings.SMTP_FROM, to, msg.as_string())
+            server.sendmail(envelope_from, to, msg.as_string())
         logger.info("Email sent to %s: %s", to, subject)
     except Exception as e:
-        logger.error("Failed to send email to %s: %s", to, e)
+        logger.error("Failed to send email to %s: %s – %s", to, subject, e)
 
 
 def _email_header(settings) -> str:

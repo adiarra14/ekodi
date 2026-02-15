@@ -5,7 +5,8 @@ import { useAuth } from '../context/AuthContext';
 import { chatAPI, feedbackAPI, authAPI } from '../services/api';
 import {
   Plus, MessageSquare, Trash2, Send, Mic, MicOff, Volume2,
-  ThumbsUp, ThumbsDown, LogOut, ChevronLeft, Pencil, Check, X, Settings, Mail, RefreshCw,
+  ThumbsUp, ThumbsDown, LogOut, ChevronLeft, Pencil, Check, X,
+  Settings, Mail, RefreshCw, Shield, Key, User as UserIcon, ChevronUp,
 } from 'lucide-react';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher';
 import AudioWaveform from '../components/AudioWaveform';
@@ -32,6 +33,7 @@ export default function Chat() {
   const [recording, setRecording] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
 
   // Audio waveform state
   const [playingMsgId, setPlayingMsgId] = useState(null);
@@ -449,10 +451,38 @@ export default function Chat() {
 
         <div className="sidebar-footer">
           <LanguageSwitcher />
-          <div className="sidebar-user">
-            <span>{user.name}</span>
-            <button onClick={() => { logout(); navigate('/'); }} title={t('nav.logout')}>
-              <LogOut size={16} />
+
+          {/* ── User profile menu ── */}
+          <div className="sidebar-profile">
+            {profileMenuOpen && (
+              <div className="profile-menu">
+                <button onClick={() => { navigate('/settings'); setProfileMenuOpen(false); }}>
+                  <Settings size={15} /> {t('nav.settings') || 'Settings'}
+                </button>
+                <button onClick={() => { navigate('/api-keys'); setProfileMenuOpen(false); }}>
+                  <Key size={15} /> {t('nav.api') || 'API Keys'}
+                </button>
+                {['superadmin','admin','support','marketing','finance','moderator','developer'].includes(user.role) && (
+                  <button onClick={() => { navigate('/admin'); setProfileMenuOpen(false); }}>
+                    <Shield size={15} /> {t('nav.admin') || 'Admin'}
+                  </button>
+                )}
+                <div className="profile-menu-divider" />
+                <button className="profile-menu-logout" onClick={() => { logout(); navigate('/'); }}>
+                  <LogOut size={15} /> {t('nav.logout') || 'Logout'}
+                </button>
+              </div>
+            )}
+            <button
+              className="sidebar-user-btn"
+              onClick={() => setProfileMenuOpen(!profileMenuOpen)}
+            >
+              <div className="sidebar-user-avatar">{user.name?.[0] || 'U'}</div>
+              <div className="sidebar-user-info">
+                <span className="sidebar-user-name">{user.name}</span>
+                <span className="sidebar-user-email">{user.email}</span>
+              </div>
+              <ChevronUp size={16} className={`sidebar-user-chevron ${profileMenuOpen ? 'open' : ''}`} />
             </button>
           </div>
         </div>

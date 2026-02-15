@@ -28,22 +28,25 @@ export default function App() {
       <AuthProvider>
         {!splashDone && <SplashScreen onDone={handleSplashDone} />}
         <Routes>
-          {/* Pages with navbar */}
+          {/* ── Public pages (with website navbar) ── */}
           <Route element={<Layout />}>
             <Route path="/" element={<Landing />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/reset-password/:token" element={<ResetPassword />} />
-            <Route path="/verify/:token" element={<VerifyEmail />} />
-            <Route path="/api-keys" element={<ApiKeys />} />
-            <Route path="/admin" element={<Admin />} />
             <Route path="/partners" element={<PartnerForm />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path="/settings" element={<UserSettings />} />
           </Route>
-          {/* Chat has its own full-screen layout */}
+
+          {/* ── Auth pages (no navbar, standalone) ── */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+          <Route path="/verify/:token" element={<VerifyEmail />} />
+
+          {/* ── App pages (own layout, no website navbar) ── */}
           <Route path="/chat" element={<Chat />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/api-keys" element={<ApiKeys />} />
+          <Route path="/settings" element={<UserSettings />} />
         </Routes>
         <ConsentBanner />
         <ServerBusyBanner />

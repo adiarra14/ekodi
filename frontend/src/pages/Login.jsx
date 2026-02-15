@@ -22,8 +22,10 @@ export default function Login() {
     setError('');
     setLoading(true);
     try {
-      await login(email, password);
-      navigate('/chat');
+      const u = await login(email, password);
+      // Staff → admin dashboard, regular users → chat
+      const staffRoles = ['superadmin','admin','support','marketing','finance','moderator','developer'];
+      navigate(staffRoles.includes(u.role) ? '/admin' : '/chat');
     } catch (err) {
       setError(err.message);
     } finally {

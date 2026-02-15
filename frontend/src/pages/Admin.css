@@ -20,8 +20,15 @@
 .admin-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 12px;
   margin-bottom: 1.8rem;
+  flex-wrap: wrap;
+}
+.admin-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 .admin-header h1 {
   display: flex;
@@ -30,6 +37,34 @@
   font-size: 1.6rem;
   color: #fafafa;
   margin: 0;
+}
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.admin-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #d4d4d8;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.admin-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+.admin-nav-logout {
+  color: #ef4444;
+  border-color: rgba(239, 68, 68, 0.15);
+}
+.admin-nav-logout:hover {
+  background: rgba(239, 68, 68, 0.08);
 }
 .admin-role-badge {
   background: linear-gradient(135deg, #a78bfa33, #6d28d933);

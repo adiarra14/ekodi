@@ -16,7 +16,7 @@ const STAFF_ROLES = ['superadmin', 'admin', 'support', 'marketing', 'finance', '
 
 export default function Admin() {
   const { t } = useTranslation();
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
 
   const [adminInfo, setAdminInfo] = useState(null);
@@ -324,8 +324,18 @@ export default function Admin() {
     <div className="admin-page">
       <div className="admin-container">
         <div className="admin-header">
-          <h1><Shield size={28} /> {t('admin.title')}</h1>
-          <span className="admin-role-badge">{adminInfo?.role}</span>
+          <div className="admin-header-left">
+            <h1><Shield size={28} /> {t('admin.title')}</h1>
+            <span className="admin-role-badge">{adminInfo?.role}</span>
+          </div>
+          <div className="admin-header-actions">
+            <button className="admin-nav-btn" onClick={() => navigate('/chat')}>
+              <MessageSquare size={16} /> Chat
+            </button>
+            <button className="admin-nav-btn admin-nav-logout" onClick={() => { logout(); navigate('/'); }}>
+              <LogOut size={16} /> {t('nav.logout') || 'Logout'}
+            </button>
+          </div>
         </div>
 
         {actionMsg && <div className="admin-flash">{actionMsg}</div>}

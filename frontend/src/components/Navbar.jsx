@@ -1,18 +1,18 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useAuth } from '../context/AuthContext';
 import LanguageSwitcher from './ui/LanguageSwitcher';
-import { MessageSquare, Key, Shield, LogOut, Menu, X, Settings } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import './Navbar.css';
 
+/**
+ * Public website navbar – only for the landing page and auth pages.
+ * Does NOT appear inside the app (chat, admin, settings, api-keys).
+ */
 export default function Navbar() {
   const { t } = useTranslation();
-  const { user, logout } = useAuth();
   const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-
-  if (location.pathname === '/chat') return null;
 
   const isHome = location.pathname === '/';
 
@@ -40,7 +40,7 @@ export default function Navbar() {
         </button>
 
         <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
-          {/* Section anchors (visible on landing or navigate to landing) */}
+          {/* Landing page sections */}
           <button className="nav-link nav-section" onClick={() => scrollTo('features')}>
             {t('nav.section_ekodi')}
           </button>
@@ -56,36 +56,12 @@ export default function Navbar() {
 
           <span className="nav-divider" />
 
-          {user ? (
-            <>
-              <Link to="/chat" className="nav-link" onClick={() => setMenuOpen(false)}>
-                <MessageSquare size={16} /> {t('nav.chat')}
-              </Link>
-              <Link to="/api-keys" className="nav-link" onClick={() => setMenuOpen(false)}>
-                <Key size={16} /> {t('nav.api')}
-              </Link>
-              {['superadmin','admin','support','marketing','finance','moderator','developer'].includes(user.role) && (
-                <Link to="/admin" className="nav-link" onClick={() => setMenuOpen(false)}>
-                  <Shield size={16} /> {t('nav.admin')}
-                </Link>
-              )}
-              <Link to="/settings" className="nav-link" onClick={() => setMenuOpen(false)}>
-                <Settings size={16} /> {t('nav.settings')}
-              </Link>
-              <button className="nav-link nav-logout" onClick={() => { logout(); setMenuOpen(false); }}>
-                <LogOut size={16} /> {t('nav.logout')}
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" className="nav-link" onClick={() => setMenuOpen(false)}>
-                {t('nav.login')}
-              </Link>
-              <Link to="/register" className="nav-link nav-cta" onClick={() => setMenuOpen(false)}>
-                {t('nav.register')}
-              </Link>
-            </>
-          )}
+          <Link to="/login" className="nav-link" onClick={() => setMenuOpen(false)}>
+            {t('nav.login')}
+          </Link>
+          <Link to="/register" className="nav-link nav-cta" onClick={() => setMenuOpen(false)}>
+            {t('nav.register')}
+          </Link>
 
           <LanguageSwitcher />
         </div>

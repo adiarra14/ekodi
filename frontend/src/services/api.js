@@ -92,6 +92,7 @@ export const authAPI = {
   logout: () => request('/auth/logout', { method: 'POST' }),
   verify: (token) => request(`/auth/verify/${token}`),
   resendVerification: () => request('/auth/resend-verification', { method: 'POST' }),
+  resendVerificationPublic: (email) => request('/auth/resend-verification-public', { method: 'POST', body: JSON.stringify({ email }) }),
   forgotPassword: (email) => request('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ email }) }),
   resetPassword: (token, new_password) => request('/auth/reset-password', { method: 'POST', body: JSON.stringify({ token, new_password }) }),
   deleteAccount: (password) => request('/auth/account', { method: 'DELETE', body: JSON.stringify({ password }) }),

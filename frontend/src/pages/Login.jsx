@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock } from 'lucide-react';
+import { authAPI } from '../services/api';
+import { Mail, Lock, RefreshCw } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher';
@@ -16,10 +17,13 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [needsVerification, setNeedsVerification] = useState(false);
+  const [resending, setResending] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setNeedsVerification(false);
     setLoading(true);
     try {
       const u = await login(email, password);
@@ -27,9 +31,26 @@ export default function Login() {
       const staffRoles = ['superadmin','admin','support','marketing','finance','moderator','developer'];
       navigate(staffRoles.includes(u.role) ? '/admin' : '/chat');
     } catch (err) {
-      setError(err.message);
+      const msg = err.message || '';
+      // Detect email verification error
+      if (msg.toLowerCase().includes('verify your email') || msg.toLowerCase().includes('verify')) {
+        setNeedsVerification(true);
+      }
+      setError(msg);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResend = async () => {
+    setResending(true);
+    try {
+      await authAPI.resendVerificationPublic(email);
+      alert(t('auth.verify_resent') || 'Verification email sent! Check your inbox.');
+    } catch {
+      alert(t('auth.verify_resend_error') || 'Failed to send email.');
+    } finally {
+      setResending(false);
     }
   };
 
@@ -57,7 +78,25 @@ export default function Login() {
         </div>
 
         <form onSubmit={handleSubmit} className="auth-form">
-          {error && <div className="auth-error">{error}</div>}
+          {error && (
+            <div className="auth-error">
+              {error}
+              {needsVerification && (
+                <button
+                  type="button"
+                  className="auth-error-resend"
+                  onClick={handleResend}
+                  disabled={resending}
+                >
+                  <RefreshCw size={14} className={resending ? 'spinning' : ''} />
+                  {resending
+                    ? (t('common.sending') || 'Sending...')
+                    : (t('auth.resend_verification') || 'Resend Verification Email')
+                  }
+                </button>
+              )}
+            </div>
+          )}
 
           <Input
             label={t('auth.email')}

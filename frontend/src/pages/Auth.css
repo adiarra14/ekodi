@@ -130,6 +130,31 @@
   color: #ef4444;
   font-size: 0.82rem;
 }
+
+.auth-error-resend {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem 0.7rem;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 6px;
+  color: #a78bfa;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.auth-error-resend:hover {
+  background: rgba(167, 139, 250, 0.18);
+}
+.auth-error-resend:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.auth-error-resend .spinning {
+  animation: spin 1s linear infinite;
+}
 .auth-submit { width: 100%; margin-top: 0.5rem; }
 
 .auth-switch {

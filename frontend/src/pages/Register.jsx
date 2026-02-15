@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 import { authAPI } from '../services/api';
 import { Mail, Lock, User, RefreshCw } from 'lucide-react';
 import Button from '../components/ui/Button';
@@ -11,8 +10,6 @@ import './Auth.css';
 
 export default function Register() {
   const { t } = useTranslation();
-  const { register } = useAuth();
-  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -98,7 +95,8 @@ export default function Register() {
 
     setLoading(true);
     try {
-      await register(email, name, password, consent, captchaToken);
+      // Call API directly – does NOT auto-login
+      await authAPI.register({ email, name, password, consent, captcha_token: captchaToken });
       setRegistered(true); // Show "check your email" screen
     } catch (err) {
       // Translate known backend errors
@@ -120,7 +118,7 @@ export default function Register() {
   const handleResend = async () => {
     setResending(true);
     try {
-      await authAPI.resendVerification();
+      await authAPI.resendVerificationPublic(email);
       alert(t('auth.verify_resent') || 'Verification email sent!');
     } catch {
       alert(t('auth.verify_resend_error') || 'Failed to send email.');

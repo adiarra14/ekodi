@@ -145,9 +145,9 @@ async def _verify_captcha(token: str | None):
         pass  # If Google is unreachable, don't block registration
 
 
-@router.post("/register", response_model=AuthResponse)
+@router.post("/register")
 async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
-    """Create a new user account."""
+    """Create a new user account. Does NOT auto-login – user must verify email first."""
     # Verify CAPTCHA
     await _verify_captcha(req.captcha_token)
 
@@ -170,17 +170,10 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
         verification_token = secrets.token_urlsafe(48)
         existing.verification_token = verification_token
         await db.flush()
-        await db.refresh(existing)
 
         send_verification_email(existing.email, existing.name, verification_token)
 
-        token = create_access_token(existing.id, existing.role)
-        refresh = create_refresh_token(existing.id, is_staff=existing.is_staff)
-        return AuthResponse(
-            token=token,
-            refresh_token=refresh,
-            user=_user_dict(existing),
-        )
+        return {"message": "Verification email sent", "email": existing.email}
 
     # ── New user ──
     verification_token = secrets.token_urlsafe(48)
@@ -197,18 +190,11 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     )
     db.add(user)
     await db.flush()
-    await db.refresh(user)
 
-    # Send verification email (non-blocking, logged on failure)
+    # Send verification email
     send_verification_email(user.email, user.name, verification_token)
 
-    token = create_access_token(user.id, user.role)
-    refresh = create_refresh_token(user.id, is_staff=user.is_staff)
-    return AuthResponse(
-        token=token,
-        refresh_token=refresh,
-        user=_user_dict(user),
-    )
+    return {"message": "Verification email sent", "email": user.email}
 
 
 # ── Email Verification ───────────────────────────────────────
@@ -231,7 +217,7 @@ async def verify_email(token: str, db: AsyncSession = Depends(get_db)):
 
 @router.post("/resend-verification")
 async def resend_verification(user: User = Depends(get_current_user), db: AsyncSession = Depends(get_db)):
-    """Resend verification email."""
+    """Resend verification email (authenticated)."""
     if user.email_verified:
         return {"message": "Email already verified"}
 
@@ -240,6 +226,27 @@ async def resend_verification(user: User = Depends(get_current_user), db: AsyncS
     await db.flush()
     send_verification_email(user.email, user.name, token)
     return {"message": "Verification email sent"}
+
+
+class ResendRequest(BaseModel):
+    email: EmailStr
+
+
+@router.post("/resend-verification-public")
+async def resend_verification_public(req: ResendRequest, db: AsyncSession = Depends(get_db)):
+    """Resend verification email (public – no auth needed). Rate-limited by design."""
+    result = await db.execute(select(User).where(User.email == req.email))
+    user = result.scalar_one_or_none()
+
+    # Always return success to avoid email enumeration
+    if not user or user.email_verified:
+        return {"message": "If that email is registered, a verification link has been sent."}
+
+    token = secrets.token_urlsafe(48)
+    user.verification_token = token
+    await db.flush()
+    send_verification_email(user.email, user.name, token)
+    return {"message": "If that email is registered, a verification link has been sent."}
 
 
 # ── Login ─────────────────────────────────────────────────────
@@ -263,6 +270,13 @@ async def login(req: LoginRequest, request: Request, db: AsyncSession = Depends(
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Account is deactivated. Contact support.",
+        )
+
+    # Non-staff users must verify email before login
+    if not user.email_verified and not user.is_staff:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Please verify your email before logging in. Check your inbox for the verification link.",
         )
 
     # Update last login

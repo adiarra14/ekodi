@@ -518,10 +518,9 @@ export default function Chat() {
                 <p className="welcome-examples-label">{t('chat.try_asking') || 'Try asking:'}</p>
                 <div className="welcome-examples-grid">
                   {[
-                    t('chat.example_1') || "Qu'est-ce que le Mali ?",
-                    t('chat.example_2') || 'Bamanankan de, "Bonjour" ye mun ye?',
-                    t('chat.example_3') || 'Raconte-moi une histoire en bambara',
-                    t('chat.example_4') || "Comment dit-on 'merci' en bamanankan ?",
+                    t('chat.example_1') || 'Parle-moi de la lune',
+                    t('chat.example_2') || 'Je veux apprendre à bien cultiver le riz',
+                    t('chat.example_3') || "Qu'est-ce qui se passe dans le monde ?",
                   ].map((ex, i) => (
                     <button
                       key={i}

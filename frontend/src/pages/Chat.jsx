@@ -37,6 +37,7 @@ export default function Chat() {
   const [playingMsgId, setPlayingMsgId] = useState(null);
   const [playAnalyser, setPlayAnalyser] = useState(null);
   const [recAnalyser, setRecAnalyser] = useState(null);
+  const [recSeconds, setRecSeconds] = useState(0); // recording duration counter
 
   // Feedback state: { messageId: rating (1 or -1) }
   const [feedbackMap, setFeedbackMap] = useState({});
@@ -46,6 +47,14 @@ export default function Chat() {
   const chunksRef = useRef([]);
   const audioCtxRef = useRef(null);
   const recAudioCtxRef = useRef(null);
+  const vadRef = useRef(null); // Voice Activity Detection interval
+
+  // Recording duration timer
+  useEffect(() => {
+    if (!recording) { setRecSeconds(0); return; }
+    const t = setInterval(() => setRecSeconds((s) => s + 1), 1000);
+    return () => clearInterval(t);
+  }, [recording]);
 
   // Load conversations
   const loadConversations = useCallback(async () => {
@@ -166,16 +175,21 @@ export default function Chat() {
     }
   };
 
-  // Voice recording with live waveform
+  // Voice recording with live waveform + Voice Activity Detection (auto-stop on silence)
+  const stopRecording = useCallback(() => {
+    if (vadRef.current) { clearInterval(vadRef.current); vadRef.current = null; }
+    mediaRecorderRef.current?.stop();
+    setRecording(false);
+    setRecAnalyser(null);
+    if (recAudioCtxRef.current) {
+      try { recAudioCtxRef.current.close(); } catch { /* ignore */ }
+      recAudioCtxRef.current = null;
+    }
+  }, []);
+
   const toggleRecording = async () => {
     if (recording) {
-      mediaRecorderRef.current?.stop();
-      setRecording(false);
-      setRecAnalyser(null);
-      if (recAudioCtxRef.current) {
-        try { recAudioCtxRef.current.close(); } catch { /* ignore */ }
-        recAudioCtxRef.current = null;
-      }
+      stopRecording();
       return;
     }
 
@@ -184,7 +198,7 @@ export default function Chat() {
       const recorder = new MediaRecorder(stream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4' });
       chunksRef.current = [];
 
-      // Create analyser for live mic waveform
+      // Create analyser for live mic waveform + VAD
       const recCtx = new (window.AudioContext || window.webkitAudioContext)();
       recAudioCtxRef.current = recCtx;
       const micSource = recCtx.createMediaStreamSource(stream);
@@ -198,17 +212,53 @@ export default function Chat() {
       recorder.onstop = async () => {
         stream.getTracks().forEach((t) => t.stop());
         setRecAnalyser(null);
+        if (vadRef.current) { clearInterval(vadRef.current); vadRef.current = null; }
         if (recAudioCtxRef.current) {
           try { recAudioCtxRef.current.close(); } catch { /* ignore */ }
           recAudioCtxRef.current = null;
         }
         const blob = new Blob(chunksRef.current, { type: recorder.mimeType });
-        await sendVoice(blob);
+        // Only send if we have meaningful audio (> 0.5s worth of data)
+        if (blob.size > 5000) {
+          await sendVoice(blob);
+        }
       };
 
-      recorder.start();
+      recorder.start(250); // collect data every 250ms for responsiveness
       mediaRecorderRef.current = recorder;
       setRecording(true);
+
+      // ── Voice Activity Detection (VAD) ──
+      // Auto-stop when user is silent for ~1.8 seconds
+      const VAD_SILENCE_THRESHOLD = 12;   // audio level below this = silence (0–255 scale)
+      const VAD_SILENCE_DURATION = 1800;  // ms of silence before auto-stop
+      const VAD_MIN_SPEECH_TIME = 600;    // minimum recording time before VAD kicks in
+      const VAD_CHECK_INTERVAL = 100;     // check every 100ms
+      const dataArray = new Uint8Array(analyser.frequencyBinCount);
+      let silentSince = null;
+      const startTime = Date.now();
+
+      vadRef.current = setInterval(() => {
+        // Don't auto-stop too early (let user start speaking)
+        if (Date.now() - startTime < VAD_MIN_SPEECH_TIME) return;
+
+        analyser.getByteFrequencyData(dataArray);
+        // Compute average volume level
+        let sum = 0;
+        for (let i = 0; i < dataArray.length; i++) sum += dataArray[i];
+        const avgLevel = sum / dataArray.length;
+
+        if (avgLevel < VAD_SILENCE_THRESHOLD) {
+          if (!silentSince) silentSince = Date.now();
+          if (Date.now() - silentSince >= VAD_SILENCE_DURATION) {
+            // User has been silent long enough → auto-stop
+            stopRecording();
+          }
+        } else {
+          silentSince = null; // speaking, reset silence timer
+        }
+      }, VAD_CHECK_INTERVAL);
+
     } catch {
       alert('Microphone access denied');
     }
@@ -544,6 +594,10 @@ export default function Chat() {
 
             {recording && recAnalyser ? (
               <div className="input-rec-wave">
+                <span className="rec-timer">
+                  <span className="rec-dot" />
+                  {Math.floor(recSeconds / 60)}:{String(recSeconds % 60).padStart(2, '0')}
+                </span>
                 <AudioWaveform
                   analyserNode={recAnalyser}
                   active={recording}
@@ -552,6 +606,7 @@ export default function Chat() {
                   barWidth={2.5}
                   barGap={1.5}
                 />
+                <span className="rec-hint">{t('chat.auto_stop_hint') || 'Auto-stops on silence'}</span>
               </div>
             ) : (
               <input

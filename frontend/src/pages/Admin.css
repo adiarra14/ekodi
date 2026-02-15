@@ -278,7 +278,13 @@
   margin-right: 6px;
 }
 .status-dot.active { background: #22c55e; }
+.status-dot.pending { background: #f59e0b; animation: pendingPulse 1.5s ease-in-out infinite; }
 .status-dot.inactive { background: #ef4444; }
+
+@keyframes pendingPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
 
 .positive { color: #14b8a6; }
 .negative { color: #ef4444; }

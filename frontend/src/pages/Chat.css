@@ -439,6 +439,40 @@
   flex: 1;
   min-width: 0;
   padding: 0 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rec-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #ef4444;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ef4444;
+  animation: rec-blink 1s ease-in-out infinite;
+}
+
+@keyframes rec-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.25; }
+}
+
+.rec-hint {
+  font-size: 0.65rem;
+  color: #71717a;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .input-row--recording {
   border-color: rgba(239, 68, 68, 0.25);

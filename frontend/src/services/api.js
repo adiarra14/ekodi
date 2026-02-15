@@ -212,4 +212,7 @@ export const adminAPI = {
     method: 'PATCH',
     body: JSON.stringify({ settings }),
   }),
+
+  // Test email
+  testEmail: () => request('/admin/test-email', { method: 'POST' }),
 };

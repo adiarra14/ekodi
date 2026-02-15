@@ -204,6 +204,7 @@
     "delete_confirm": "Kuma nin bɔ?",
     "mic_tap": "Digi ka kuma",
     "mic_recording": "Mɛnni...",
+    "auto_stop_hint": "A bɛ lɔ ni maana tɛ",
     "mic_processing": "Baara la..."
   },
   "api_page": {

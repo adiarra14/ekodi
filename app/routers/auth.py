@@ -152,11 +152,37 @@ async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     await _verify_captcha(req.captcha_token)
 
     result = await db.execute(select(User).where(User.email == req.email))
-    if result.scalar_one_or_none():
-        raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT, detail="Email already registered"
+    existing = result.scalar_one_or_none()
+
+    if existing:
+        if existing.email_verified:
+            # Already verified – cannot re-register
+            raise HTTPException(
+                status_code=status.HTTP_409_CONFLICT,
+                detail="Email already registered",
+            )
+
+        # ── Pending user: update info, resend verification ──
+        existing.name = req.name
+        existing.password_hash = hash_password(req.password)
+        existing.consent_given = bool(req.consent)
+        existing.consent_date = datetime.now(timezone.utc) if req.consent else existing.consent_date
+        verification_token = secrets.token_urlsafe(48)
+        existing.verification_token = verification_token
+        await db.flush()
+        await db.refresh(existing)
+
+        send_verification_email(existing.email, existing.name, verification_token)
+
+        token = create_access_token(existing.id, existing.role)
+        refresh = create_refresh_token(existing.id, is_staff=existing.is_staff)
+        return AuthResponse(
+            token=token,
+            refresh_token=refresh,
+            user=_user_dict(existing),
         )
 
+    # ── New user ──
     verification_token = secrets.token_urlsafe(48)
 
     user = User(

@@ -29,7 +29,7 @@ services:
       - SMTP_PORT=${SMTP_PORT:-587}
       - SMTP_USER=${SMTP_USER:-}
       - SMTP_PASSWORD=${SMTP_PASSWORD:-}
-      - SMTP_FROM=${SMTP_FROM:-ekodi.ai <noreply@ekodi.ai>}
+      - "SMTP_FROM=${SMTP_FROM:-Ekodi <noreply@ekodi.ai>}"
       - BASE_URL=${BASE_URL:-https://ekodi.ai}
       - DATA_RETENTION_DAYS=${DATA_RETENTION_DAYS:-365}
       - EKODI_MAX_CONCURRENT=${EKODI_MAX_CONCURRENT:-20}

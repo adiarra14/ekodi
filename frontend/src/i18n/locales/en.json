@@ -204,6 +204,7 @@
     "delete_confirm": "Delete this conversation?",
     "mic_tap": "Tap to speak",
     "mic_recording": "Recording...",
+    "auto_stop_hint": "Auto-stops on silence",
     "mic_processing": "Processing..."
   },
   "api_page": {

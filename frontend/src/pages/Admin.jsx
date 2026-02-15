@@ -8,7 +8,7 @@ import {
   ThumbsUp, ThumbsDown, Shield, UserPlus, Search, Download,
   ChevronLeft, ChevronRight, Trash2, Eye, X, Check, Ban,
   RefreshCw, Settings, LogOut, Monitor, DollarSign,
-  Heart, Cpu, HardDrive, Zap, AlertTriangle,
+  Heart, Cpu, HardDrive, Zap, AlertTriangle, Mail,
 } from 'lucide-react';
 import './Admin.css';
 
@@ -427,7 +427,14 @@ export default function Admin() {
                           <option value="business">business</option>
                         </select>
                       </td>
-                      <td><span className={`status-dot ${u.is_active ? 'active' : 'inactive'}`} />{u.is_active ? 'Active' : 'Inactive'}</td>
+                      <td>
+                        {!u.is_active
+                          ? <><span className="status-dot inactive" />Inactive</>
+                          : !u.email_verified
+                            ? <><span className="status-dot pending" />Pending</>
+                            : <><span className="status-dot active" />Active</>
+                        }
+                      </td>
                       <td>{u.email_verified ? <Check size={14} className="text-green" /> : <X size={14} className="text-red" />}</td>
                       <td>{u.last_login ? new Date(u.last_login).toLocaleDateString() : '—'}</td>
                       <td>{new Date(u.created_at).toLocaleDateString()}</td>
@@ -1036,6 +1043,41 @@ export default function Admin() {
                     <p className="settings-hint">
                       {settingsSaving ? 'Saving...' : 'Changes apply immediately to new messages. If the chosen engine fails, the other is used as fallback.'}
                     </p>
+                  </div>
+                </div>
+
+                {/* ── SMTP Test ── */}
+                <div className="settings-card">
+                  <div className="settings-card-header">
+                    <h4>Email (SMTP)</h4>
+                    <p className="settings-hint" style={{ marginTop: 4 }}>
+                      Send a test email to verify SMTP is configured correctly.
+                    </p>
+                  </div>
+                  <div className="settings-card-body">
+                    <button
+                      className="admin-action-btn"
+                      onClick={async () => {
+                        try {
+                          const res = await adminAPI.testEmail();
+                          if (res.success) {
+                            alert(`✓ Test email sent to ${res.diagnostic?.to || 'your address'}.\nCheck your inbox (and spam).`);
+                          } else {
+                            alert(
+                              `✗ Email failed!\n\nError: ${res.error}\n\n` +
+                              `SMTP Host: ${res.diagnostic?.smtp_host}:${res.diagnostic?.smtp_port}\n` +
+                              `SMTP User: ${res.diagnostic?.smtp_user}\n` +
+                              `SMTP From: ${res.diagnostic?.smtp_from}\n` +
+                              `Password set: ${res.diagnostic?.smtp_password_set}`
+                            );
+                          }
+                        } catch (err) {
+                          alert(`Request failed: ${err.message}`);
+                        }
+                      }}
+                    >
+                      <Mail size={14} /> Send Test Email
+                    </button>
                   </div>
                 </div>
               </div>

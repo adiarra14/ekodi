@@ -1121,3 +1121,74 @@ async def update_platform_settings(
         invalidate_engine_cache()
 
     return {"updated": updated, "message": "Settings updated"}
+
+
+# ── Test Email (diagnose SMTP) ────────────────────────────────
+
+@router.post("/test-email")
+async def send_test_email(
+    admin: User = Depends(get_admin_user),
+):
+    """Send a test email to the admin's address to verify SMTP configuration."""
+    require_permission(admin, "manage_settings")
+
+    import smtplib
+    import re
+    from email.mime.text import MIMEText
+    from email.mime.multipart import MIMEMultipart
+    from app.config import get_settings
+
+    settings = get_settings()
+
+    # Diagnostic info
+    diag = {
+        "smtp_host": settings.SMTP_HOST,
+        "smtp_port": settings.SMTP_PORT,
+        "smtp_user": settings.SMTP_USER or "(empty)",
+        "smtp_from": settings.SMTP_FROM or "(empty)",
+        "smtp_password_set": bool(settings.SMTP_PASSWORD),
+        "to": admin.email,
+    }
+
+    if not settings.SMTP_USER or not settings.SMTP_PASSWORD:
+        return {
+            "success": False,
+            "error": "SMTP_USER or SMTP_PASSWORD not configured",
+            "diagnostic": diag,
+        }
+
+    # Build test email
+    msg = MIMEMultipart("alternative")
+    msg["Subject"] = "Ekodi SMTP Test"
+    msg["From"] = settings.SMTP_FROM
+    msg["To"] = admin.email
+    msg.attach(MIMEText(
+        "<h2 style='color:#a78bfa;'>SMTP is working!</h2>"
+        "<p>This test email was sent from your Ekodi admin dashboard.</p>"
+        f"<p style='color:#71717a;font-size:12px;'>Host: {settings.SMTP_HOST}:{settings.SMTP_PORT}</p>",
+        "html",
+    ))
+
+    # Extract bare email for envelope sender
+    match = re.search(r'<([^>]+)>', settings.SMTP_FROM)
+    envelope_from = match.group(1) if match else settings.SMTP_FROM.strip()
+
+    try:
+        server = smtplib.SMTP(settings.SMTP_HOST, settings.SMTP_PORT, timeout=30)
+        server.ehlo()
+        server.starttls()
+        server.ehlo()
+        server.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
+        server.sendmail(envelope_from, admin.email, msg.as_string())
+        server.quit()
+        return {
+            "success": True,
+            "message": f"Test email sent to {admin.email}",
+            "diagnostic": diag,
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "error": str(e),
+            "diagnostic": diag,
+        }

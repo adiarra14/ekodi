@@ -686,7 +686,7 @@
 
 /* ── Input Area ───────────────────────────────────── */
 .chat-input-area {
-  padding: 0.85rem 1.5rem 1.25rem;
+  padding: 0.75rem 1.5rem 1.4rem;
   max-width: 760px;
   margin: 0 auto;
   width: 100%;
@@ -695,7 +695,7 @@
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.55rem;
 }
 .input-lang-label {
   font-size: 0.75rem;
@@ -728,61 +728,93 @@
 .input-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.55rem;
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
-  padding: 0.35rem 0.45rem;
-  transition: border-color 0.2s;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 0.4rem 0.5rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 .input-row:focus-within {
-  border-color: rgba(255, 122, 47, 0.25);
+  border-color: rgba(167, 139, 250, 0.3);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.06);
 }
 
+/* ── Mic button ── */
 .input-mic {
-  background: none;
-  border: none;
-  color: #7c7c8a;
+  background: rgba(167, 139, 250, 0.1);
+  border: 1px solid rgba(167, 139, 250, 0.15);
+  color: #a78bfa;
   cursor: pointer;
-  padding: 0.45rem;
-  border-radius: 10px;
+  padding: 0.6rem;
+  border-radius: 12px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
-.input-mic:hover { color: #e4e4e8; background: rgba(255,255,255,0.04); }
+.input-mic:hover {
+  background: rgba(167, 139, 250, 0.18);
+  color: #c4b5fd;
+  transform: scale(1.05);
+}
+.input-mic:active {
+  transform: scale(0.95);
+}
 .input-mic.recording {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.25);
   color: #ef4444;
-  animation: pulse 1.5s infinite;
+  animation: micPulse 1.5s infinite;
 }
-@keyframes pulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.25); }
-  50% { box-shadow: 0 0 0 6px rgba(239,68,68,0); }
+@keyframes micPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); }
+  50% { box-shadow: 0 0 0 8px rgba(239,68,68,0); }
 }
 
+/* ── Text input ── */
 .input-text {
   flex: 1;
   background: none;
   border: none;
   color: #fafafa;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   font-family: inherit;
   outline: none;
-  padding: 0.45rem;
+  padding: 0.55rem 0.35rem;
+  min-height: 22px;
 }
-.input-text::placeholder { color: #444; }
+.input-text::placeholder { color: #52525b; }
 
+/* ── Send button ── */
 .input-send {
-  background: #ff7a2f;
+  background: linear-gradient(135deg, #ff7a2f, #ff5722);
   border: none;
   color: #fff;
   cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 10px;
+  padding: 0.6rem;
+  border-radius: 12px;
   display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all 0.2s;
+  flex-shrink: 0;
 }
-.input-send:hover { background: #ff9e5c; }
-.input-send:disabled { opacity: 0.25; cursor: not-allowed; }
+.input-send:hover {
+  background: linear-gradient(135deg, #ff9e5c, #ff7a2f);
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(255, 122, 47, 0.25);
+}
+.input-send:active {
+  transform: scale(0.95);
+}
+.input-send:disabled {
+  opacity: 0.2;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
 
 /* ── Mobile ───────────────────────────────────────── */
 @media (max-width: 768px) {
@@ -795,4 +827,29 @@
     box-shadow: 4px 0 20px rgba(0,0,0,0.6);
   }
   .chat-sidebar:not(.open) { margin-left: -260px; }
+
+  .chat-input-area {
+    padding: 0.6rem 0.75rem 1rem;
+  }
+  .input-row {
+    gap: 0.4rem;
+    padding: 0.35rem 0.4rem;
+    border-radius: 14px;
+  }
+  .input-mic {
+    padding: 0.65rem;
+    border-radius: 12px;
+    min-width: 42px;
+    min-height: 42px;
+  }
+  .input-send {
+    padding: 0.65rem;
+    border-radius: 12px;
+    min-width: 42px;
+    min-height: 42px;
+  }
+  .input-text {
+    font-size: 1rem;
+    padding: 0.5rem 0.25rem;
+  }
 }

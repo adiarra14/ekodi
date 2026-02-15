@@ -658,7 +658,7 @@ export default function Chat() {
               disabled={loading}
               title={recording ? t('chat.mic_recording') : t('chat.mic_tap')}
             >
-              {recording ? <MicOff size={20} /> : <Mic size={20} />}
+              {recording ? <MicOff size={22} /> : <Mic size={22} />}
             </button>
 
             {recording && recAnalyser ? (
@@ -694,8 +694,9 @@ export default function Chat() {
               className="input-send"
               onClick={sendMessage}
               disabled={(!input.trim() || loading) && !recording}
+              title={t('chat.send') || 'Send'}
             >
-              <Send size={18} />
+              <Send size={20} />
             </button>
           </div>
         </div>

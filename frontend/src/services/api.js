@@ -84,6 +84,7 @@ async function request(path, options = {}) {
 
 // Auth
 export const authAPI = {
+  publicConfig: () => request('/auth/public-config'),
   register: (data) => request('/auth/register', { method: 'POST', body: JSON.stringify(data) }),
   login: (data) => request('/auth/login', { method: 'POST', body: JSON.stringify(data) }),
   me: () => request('/auth/me'),

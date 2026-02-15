@@ -37,6 +37,7 @@ services:
       - EKODI_MEMORY_THRESHOLD=${EKODI_MEMORY_THRESHOLD:-90}
       - EKODI_TRANSLATION_ENGINE=${EKODI_TRANSLATION_ENGINE:-nllb}
       - RECAPTCHA_SECRET_KEY=${RECAPTCHA_SECRET_KEY:-}
+      - RECAPTCHA_SITE_KEY=${RECAPTCHA_SITE_KEY:-}
     volumes:
       - model-cache:/root/.cache
     networks:

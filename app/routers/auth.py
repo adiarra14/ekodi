@@ -111,6 +111,16 @@ def _user_dict(user: User) -> dict:
     }
 
 
+# ── Public Config (serves reCAPTCHA site key, etc.) ──────────
+
+@router.get("/public-config")
+async def public_config():
+    """Return public client-side configuration (no auth required)."""
+    return {
+        "recaptcha_site_key": os.getenv("RECAPTCHA_SITE_KEY", ""),
+    }
+
+
 # ── Register ──────────────────────────────────────────────────
 
 async def _verify_captcha(token: str | None):

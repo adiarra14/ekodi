@@ -171,6 +171,7 @@
     "reset_success_desc": "Votre mot de passe a ete reinitialise. Vous pouvez maintenant vous connecter.",
     "passwords_mismatch": "Les mots de passe ne correspondent pas",
     "consent_required": "Vous devez accepter la politique de confidentialite pour creer un compte.",
+    "email_already_registered": "Cet email est deja enregistre. Veuillez vous connecter.",
     "consent_text": "J'accepte la politique de confidentialite et les conditions d'utilisation.",
     "privacy_link": "Politique de confidentialite",
     "verifying": "Verification...",

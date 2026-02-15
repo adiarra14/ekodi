@@ -1,15 +1,13 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { authAPI } from '../services/api';
-import { Mail, Lock, User, CheckCircle, RefreshCw } from 'lucide-react';
+import { Mail, Lock, User, RefreshCw } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher';
 import './Auth.css';
-
-const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
 
 export default function Register() {
   const { t } = useTranslation();
@@ -23,13 +21,50 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const [registered, setRegistered] = useState(false);
   const [resending, setResending] = useState(false);
+
+  // CAPTCHA state – fetched dynamically from backend
+  const [siteKey, setSiteKey] = useState('');
   const captchaRef = useRef(null);
   const captchaWidgetRef = useRef(null);
+  const scriptLoadedRef = useRef(false);
 
-  // Load reCAPTCHA script
+  // ── Fetch reCAPTCHA site key from backend ──
   useEffect(() => {
-    if (!RECAPTCHA_SITE_KEY) return;
-    if (document.getElementById('recaptcha-script')) return;
+    authAPI.publicConfig()
+      .then((cfg) => {
+        if (cfg.recaptcha_site_key) {
+          setSiteKey(cfg.recaptcha_site_key);
+        }
+      })
+      .catch(() => { /* CAPTCHA disabled if config fails */ });
+  }, []);
+
+  // ── Render CAPTCHA widget once we have the key + DOM ref ──
+  const renderCaptcha = useCallback(() => {
+    if (!siteKey || !captchaRef.current || captchaWidgetRef.current !== null) return;
+    if (!window.grecaptcha) return;
+    try {
+      window.grecaptcha.ready(() => {
+        captchaWidgetRef.current = window.grecaptcha.render(captchaRef.current, {
+          sitekey: siteKey,
+          theme: 'dark',
+        });
+      });
+    } catch { /* already rendered */ }
+  }, [siteKey]);
+
+  // ── Load reCAPTCHA script when site key arrives ──
+  useEffect(() => {
+    if (!siteKey) return;
+    if (scriptLoadedRef.current) {
+      renderCaptcha();
+      return;
+    }
+    if (document.getElementById('recaptcha-script')) {
+      scriptLoadedRef.current = true;
+      renderCaptcha();
+      return;
+    }
 
     const script = document.createElement('script');
     script.id = 'recaptcha-script';
@@ -37,32 +72,11 @@ export default function Register() {
     script.async = true;
     script.defer = true;
     script.onload = () => {
-      if (window.grecaptcha && captchaRef.current && captchaWidgetRef.current === null) {
-        window.grecaptcha.ready(() => {
-          captchaWidgetRef.current = window.grecaptcha.render(captchaRef.current, {
-            sitekey: RECAPTCHA_SITE_KEY,
-            theme: 'dark',
-          });
-        });
-      }
+      scriptLoadedRef.current = true;
+      renderCaptcha();
     };
     document.head.appendChild(script);
-  }, []);
-
-  // Render captcha when ref is ready (if script loaded before component)
-  useEffect(() => {
-    if (!RECAPTCHA_SITE_KEY) return;
-    if (window.grecaptcha && captchaRef.current && captchaWidgetRef.current === null) {
-      try {
-        window.grecaptcha.ready(() => {
-          captchaWidgetRef.current = window.grecaptcha.render(captchaRef.current, {
-            sitekey: RECAPTCHA_SITE_KEY,
-            theme: 'dark',
-          });
-        });
-      } catch { /* already rendered */ }
-    }
-  }, []);
+  }, [siteKey, renderCaptcha]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -72,9 +86,9 @@ export default function Register() {
       return;
     }
 
-    // Get CAPTCHA token
+    // Get CAPTCHA token (only if CAPTCHA is active)
     let captchaToken = null;
-    if (RECAPTCHA_SITE_KEY && window.grecaptcha) {
+    if (siteKey && window.grecaptcha) {
       captchaToken = window.grecaptcha.getResponse(captchaWidgetRef.current);
       if (!captchaToken) {
         setError(t('auth.captcha_required') || 'Please complete the CAPTCHA verification.');
@@ -87,9 +101,15 @@ export default function Register() {
       await register(email, name, password, consent, captchaToken);
       setRegistered(true); // Show "check your email" screen
     } catch (err) {
-      setError(err.message);
+      // Translate known backend errors
+      const msg = err.message;
+      if (msg && msg.toLowerCase().includes('already registered')) {
+        setError(t('auth.email_already_registered') || msg);
+      } else {
+        setError(msg);
+      }
       // Reset CAPTCHA on error
-      if (RECAPTCHA_SITE_KEY && window.grecaptcha) {
+      if (siteKey && window.grecaptcha) {
         try { window.grecaptcha.reset(captchaWidgetRef.current); } catch { /* ignore */ }
       }
     } finally {
@@ -208,8 +228,8 @@ export default function Register() {
             </span>
           </label>
 
-          {/* reCAPTCHA widget */}
-          {RECAPTCHA_SITE_KEY && (
+          {/* reCAPTCHA widget – rendered dynamically from backend config */}
+          {siteKey && (
             <div className="auth-captcha">
               <div ref={captchaRef} />
             </div>

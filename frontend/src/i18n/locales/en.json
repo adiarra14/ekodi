@@ -171,6 +171,7 @@
     "reset_success_desc": "Your password has been reset. You can now log in with your new password.",
     "passwords_mismatch": "Passwords do not match",
     "consent_required": "You must accept the privacy policy to create an account.",
+    "email_already_registered": "This email is already registered. Please log in instead.",
     "consent_text": "I accept the privacy policy and terms of service.",
     "privacy_link": "Privacy Policy",
     "verifying": "Verifying...",

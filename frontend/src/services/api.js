@@ -204,4 +204,11 @@ export const adminAPI = {
 
   // Server Health
   serverHealth: () => request('/admin/health'),
+
+  // Platform Settings
+  settings: () => request('/admin/settings'),
+  updateSettings: (settings) => request('/admin/settings', {
+    method: 'PATCH',
+    body: JSON.stringify({ settings }),
+  }),
 };

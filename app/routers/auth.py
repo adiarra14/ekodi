@@ -4,10 +4,12 @@ register, login, me, verify email, forgot/reset password,
 token refresh, logout, account deletion, data export.
 """
 
+import os
 import secrets
 import json
 import io
 import zipfile
+import httpx
 from datetime import datetime, timedelta, timezone
 
 from pydantic import BaseModel, EmailStr, Field
@@ -50,6 +52,7 @@ class RegisterRequest(BaseModel):
     name: str = Field(..., min_length=1, max_length=100)
     password: str = Field(..., min_length=6, max_length=100)
     consent: bool = False
+    captcha_token: str | None = None
 
 
 class LoginRequest(BaseModel):
@@ -110,9 +113,34 @@ def _user_dict(user: User) -> dict:
 
 # ── Register ──────────────────────────────────────────────────
 
+async def _verify_captcha(token: str | None):
+    """Verify reCAPTCHA token with Google. Skip if secret key not configured."""
+    secret = os.getenv("RECAPTCHA_SECRET_KEY", "")
+    if not secret:
+        return  # CAPTCHA not configured, skip
+    if not token:
+        raise HTTPException(400, "CAPTCHA verification required")
+    try:
+        async with httpx.AsyncClient() as client:
+            resp = await client.post(
+                "https://www.google.com/recaptcha/api/siteverify",
+                data={"secret": secret, "response": token},
+            )
+            data = resp.json()
+            if not data.get("success"):
+                raise HTTPException(400, "CAPTCHA verification failed. Please try again.")
+    except HTTPException:
+        raise
+    except Exception:
+        pass  # If Google is unreachable, don't block registration
+
+
 @router.post("/register", response_model=AuthResponse)
 async def register(req: RegisterRequest, db: AsyncSession = Depends(get_db)):
     """Create a new user account."""
+    # Verify CAPTCHA
+    await _verify_captcha(req.captcha_token)
+
     result = await db.execute(select(User).where(User.email == req.email))
     if result.scalar_one_or_none():
         raise HTTPException(

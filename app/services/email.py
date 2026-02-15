@@ -38,26 +38,59 @@ def _send_email(to: str, subject: str, html_body: str):
         logger.error("Failed to send email to %s: %s", to, e)
 
 
+def _email_header(settings) -> str:
+    """Shared HTML header with Ekodi logo for all emails."""
+    logo_url = f"{settings.BASE_URL}/logo-ekodi-std.png"
+    return f"""
+    <div style="font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:520px;margin:0 auto;padding:0;background:#09090b;border-radius:12px;overflow:hidden;">
+        <!-- Header band -->
+        <div style="background:linear-gradient(135deg,#1a1a2e 0%,#16132b 100%);padding:28px 32px;text-align:center;border-bottom:1px solid #27272a;">
+            <a href="{settings.BASE_URL}" style="text-decoration:none;" target="_blank">
+                <img src="{logo_url}" alt="ekodi.ai" width="52" height="52"
+                     style="display:inline-block;border-radius:12px;vertical-align:middle;" />
+                <span style="display:inline-block;vertical-align:middle;margin-left:12px;font-size:26px;font-weight:700;color:#a78bfa;letter-spacing:-0.5px;">
+                    ekodi<span style="color:#6d28d9;">.ai</span>
+                </span>
+            </a>
+        </div>
+        <!-- Body -->
+        <div style="padding:32px;color:#e4e4e7;">
+    """
+
+
+_EMAIL_FOOTER = """
+        </div>
+        <!-- Footer -->
+        <div style="padding:16px 32px;text-align:center;border-top:1px solid #27272a;">
+            <p style="color:#52525b;font-size:11px;margin:0;">&copy; 2025 Ynnov &middot; ekodi.ai &mdash; Bamanankan AI Assistant</p>
+        </div>
+    </div>
+    """
+
+
 def send_verification_email(to: str, name: str, token: str):
     """Send email verification link."""
     settings = get_settings()
     verify_url = f"{settings.BASE_URL}/verify/{token}"
-    html = f"""
-    <div style="font-family:sans-serif;max-width:500px;margin:0 auto;padding:32px;background:#09090b;color:#e4e4e7;border-radius:12px;">
-        <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#a78bfa;margin:0;">ekodi.ai</h1>
-        </div>
-        <h2 style="color:#fafafa;">Welcome, {name}!</h2>
-        <p>Please verify your email address to activate your ekodi account.</p>
-        <div style="text-align:center;margin:32px 0;">
-            <a href="{verify_url}" style="background:linear-gradient(135deg,#a78bfa,#6d28d9);color:white;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
-                Verify Email
-            </a>
-        </div>
-        <p style="color:#71717a;font-size:12px;">If you did not create an account, you can ignore this email.</p>
-        <p style="color:#71717a;font-size:12px;">Link: {verify_url}</p>
-    </div>
-    """
+    html = f"""{_email_header(settings)}
+            <h2 style="color:#fafafa;margin:0 0 8px;">Welcome, {name}!</h2>
+            <p style="margin:0 0 24px;line-height:1.6;">
+                Please verify your email address to activate your <strong>ekodi</strong> account.
+            </p>
+            <div style="text-align:center;margin:28px 0;">
+                <a href="{verify_url}"
+                   style="background:linear-gradient(135deg,#a78bfa,#6d28d9);color:white;padding:14px 36px;
+                          border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;display:inline-block;">
+                    &#x2713;&ensp;Verify Email
+                </a>
+            </div>
+            <p style="color:#71717a;font-size:12px;line-height:1.5;">
+                If you did not create an account, you can safely ignore this email.
+            </p>
+            <p style="color:#52525b;font-size:11px;word-break:break-all;">
+                {verify_url}
+            </p>
+    {_EMAIL_FOOTER}"""
     _send_email(to, "Verify your ekodi.ai account", html)
 
 
@@ -65,36 +98,43 @@ def send_password_reset_email(to: str, name: str, token: str):
     """Send password reset link."""
     settings = get_settings()
     reset_url = f"{settings.BASE_URL}/reset-password/{token}"
-    html = f"""
-    <div style="font-family:sans-serif;max-width:500px;margin:0 auto;padding:32px;background:#09090b;color:#e4e4e7;border-radius:12px;">
-        <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#a78bfa;margin:0;">ekodi.ai</h1>
-        </div>
-        <h2 style="color:#fafafa;">Password Reset</h2>
-        <p>Hi {name}, you requested a password reset. Click the button below to set a new password.</p>
-        <div style="text-align:center;margin:32px 0;">
-            <a href="{reset_url}" style="background:linear-gradient(135deg,#a78bfa,#6d28d9);color:white;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:bold;display:inline-block;">
-                Reset Password
-            </a>
-        </div>
-        <p style="color:#71717a;font-size:12px;">This link expires in 1 hour. If you didn't request this, ignore this email.</p>
-        <p style="color:#71717a;font-size:12px;">Link: {reset_url}</p>
-    </div>
-    """
+    html = f"""{_email_header(settings)}
+            <h2 style="color:#fafafa;margin:0 0 8px;">Password Reset</h2>
+            <p style="margin:0 0 24px;line-height:1.6;">
+                Hi <strong>{name}</strong>, you requested a password reset.
+                Click the button below to set a new password.
+            </p>
+            <div style="text-align:center;margin:28px 0;">
+                <a href="{reset_url}"
+                   style="background:linear-gradient(135deg,#a78bfa,#6d28d9);color:white;padding:14px 36px;
+                          border-radius:8px;text-decoration:none;font-weight:600;font-size:15px;display:inline-block;">
+                    &#x1F512;&ensp;Reset Password
+                </a>
+            </div>
+            <p style="color:#71717a;font-size:12px;line-height:1.5;">
+                This link expires in 1 hour. If you didn&rsquo;t request this, ignore this email.
+            </p>
+            <p style="color:#52525b;font-size:11px;word-break:break-all;">
+                {reset_url}
+            </p>
+    {_EMAIL_FOOTER}"""
     _send_email(to, "Reset your ekodi.ai password", html)
 
 
 def send_account_deleted_email(to: str, name: str):
     """Send confirmation that account has been deleted."""
-    html = f"""
-    <div style="font-family:sans-serif;max-width:500px;margin:0 auto;padding:32px;background:#09090b;color:#e4e4e7;border-radius:12px;">
-        <div style="text-align:center;margin-bottom:24px;">
-            <h1 style="color:#a78bfa;margin:0;">ekodi.ai</h1>
-        </div>
-        <h2 style="color:#fafafa;">Account Deleted</h2>
-        <p>Hi {name}, your ekodi.ai account and all associated data have been permanently deleted.</p>
-        <p>We're sorry to see you go. If you'd like to come back, you're always welcome.</p>
-        <p style="color:#71717a;font-size:12px;">This is an automated message. No reply needed.</p>
-    </div>
-    """
+    settings = get_settings()
+    html = f"""{_email_header(settings)}
+            <h2 style="color:#fafafa;margin:0 0 8px;">Account Deleted</h2>
+            <p style="margin:0 0 16px;line-height:1.6;">
+                Hi <strong>{name}</strong>, your ekodi.ai account and all associated data
+                have been permanently deleted.
+            </p>
+            <p style="line-height:1.6;">
+                We&rsquo;re sorry to see you go. If you&rsquo;d like to come back, you&rsquo;re always welcome.
+            </p>
+            <p style="color:#71717a;font-size:12px;margin-top:24px;">
+                This is an automated message. No reply needed.
+            </p>
+    {_EMAIL_FOOTER}"""
     _send_email(to, "Your ekodi.ai account has been deleted", html)

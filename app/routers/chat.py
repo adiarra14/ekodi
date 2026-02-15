@@ -28,6 +28,15 @@ logger = logging.getLogger(__name__)
 router = APIRouter(tags=["chat"])
 
 
+def _require_verified(user: User):
+    """Raise 403 if the user's email is not verified (staff bypass)."""
+    if not user.is_staff and not user.email_verified:
+        raise HTTPException(
+            status_code=403,
+            detail="Email not verified. Please check your inbox and verify your email before using the chat.",
+        )
+
+
 class ChatRequest(BaseModel):
     text: str = Field(..., min_length=1, max_length=2000)
     input_lang: str = Field(default="fr")
@@ -226,6 +235,7 @@ async def text_chat(
     db: AsyncSession = Depends(get_db),
 ):
     """Text chat with conversation persistence and token usage tracking."""
+    _require_verified(user)
     try:
         # Check daily prompt limit
         await check_user_prompt_limit(user, db)
@@ -249,7 +259,11 @@ async def text_chat(
 
         # Translate if Bambara input
         if req.input_lang == "bm":
-            user_text_fr = translate_bambara_to_french(req.text)
+            try:
+                user_text_fr = translate_bambara_to_french(req.text)
+            except Exception as e:
+                logger.warning("All bm→fr translation failed: %s — sending raw Bambara to GPT", e)
+                user_text_fr = req.text  # GPT-4o has some native Bambara understanding
             user_text_bm = req.text
         else:
             user_text_fr = req.text
@@ -277,8 +291,20 @@ async def text_chat(
         # GPT response (returns ChatResult with usage data)
         chat_result: ChatResult = gpt_chat_with_history(gpt_history, user_text_fr)
         ai_text_fr = chat_result.text
-        ai_text_bm = translate_to_bambara(ai_text_fr)
-        audio_b64 = synthesize_to_b64(ai_text_bm)
+
+        # Translate response to Bambara
+        try:
+            ai_text_bm = translate_to_bambara(ai_text_fr)
+        except Exception as e:
+            logger.warning("All fr→bm translation failed: %s — using French as fallback", e)
+            ai_text_bm = ai_text_fr
+
+        # TTS
+        try:
+            audio_b64 = synthesize_to_b64(ai_text_bm)
+        except Exception as e:
+            logger.warning("TTS failed: %s", e)
+            audio_b64 = None
 
         # Save AI message
         ai_msg = Message(
@@ -327,6 +353,7 @@ async def voice_chat(
     db: AsyncSession = Depends(get_db),
 ):
     """Voice pipeline: audio → ASR → GPT → translate → TTS, with token tracking."""
+    _require_verified(user)
     # Check daily prompt limit
     await check_user_prompt_limit(user, db)
 
@@ -340,7 +367,14 @@ async def voice_chat(
         # ASR
         if input_lang == "bm":
             user_text = transcribe_bambara(tmp_path)
-            user_text_fr = translate_bambara_to_french(user_text) if user_text else ""
+            if user_text:
+                try:
+                    user_text_fr = translate_bambara_to_french(user_text)
+                except Exception as e:
+                    logger.warning("All bm→fr translation failed: %s — sending raw Bambara to GPT", e)
+                    user_text_fr = user_text
+            else:
+                user_text_fr = ""
         else:
             user_text = transcribe_french(tmp_path)
             user_text_fr = user_text
@@ -396,8 +430,17 @@ async def voice_chat(
     ai_text_fr = chat_result.text
 
     # Translate + TTS
-    ai_text_bm = translate_to_bambara(ai_text_fr)
-    audio_b64 = synthesize_to_b64(ai_text_bm)
+    try:
+        ai_text_bm = translate_to_bambara(ai_text_fr)
+    except Exception as e:
+        logger.warning("All fr→bm translation failed: %s — using French as fallback", e)
+        ai_text_bm = ai_text_fr
+
+    try:
+        audio_b64 = synthesize_to_b64(ai_text_bm)
+    except Exception as e:
+        logger.warning("TTS failed: %s", e)
+        audio_b64 = None
 
     # Save AI message
     ai_msg = Message(

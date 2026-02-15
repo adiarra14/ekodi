@@ -60,6 +60,11 @@ export default function Admin() {
   // Health
   const [serverHealth, setServerHealth] = useState(null);
 
+  // Platform Settings
+  const [platformSettings, setPlatformSettings] = useState(null);
+  const [settingsSchema, setSettingsSchema] = useState(null);
+  const [settingsSaving, setSettingsSaving] = useState(false);
+
   // Billing
   const [billingOverview, setBillingOverview] = useState(null);
   const [billingUsers, setBillingUsers] = useState([]);
@@ -135,6 +140,27 @@ export default function Admin() {
     try { setServerHealth(await adminAPI.serverHealth()); } catch { /* ignore */ }
   };
 
+  const loadSettings = async () => {
+    try {
+      const data = await adminAPI.settings();
+      setPlatformSettings(data.settings || {});
+      setSettingsSchema(data.schema || {});
+    } catch { /* ignore */ }
+  };
+
+  const saveSettings = async (key, value) => {
+    setSettingsSaving(true);
+    try {
+      await adminAPI.updateSettings({ [key]: value });
+      flash(`Setting "${key}" updated to "${value}"`);
+      loadSettings();
+    } catch (e) {
+      flash(e.message || 'Failed to save setting');
+    } finally {
+      setSettingsSaving(false);
+    }
+  };
+
   const loadBilling = async () => {
     try {
       const [overview, usersRes, daily, pricing] = await Promise.all([
@@ -180,6 +206,7 @@ export default function Admin() {
     if (tab === 'sessions') loadSessions();
     if (tab === 'billing') loadBilling();
     if (tab === 'health') loadHealth();
+    if (tab === 'settings') loadSettings();
   }, [tab, loadUsers, loadFeedback]);
 
   // ── Actions ──
@@ -332,6 +359,7 @@ export default function Admin() {
               {t_ === 'sessions' && 'Sessions'}
               {t_ === 'billing' && 'Billing'}
               {t_ === 'health' && 'Health'}
+              {t_ === 'settings' && 'Settings'}
             </button>
           ))}
         </div>
@@ -948,6 +976,71 @@ export default function Admin() {
               </>
             ) : (
               <p className="admin-hint">Loading health data...</p>
+            )}
+          </div>
+        )}
+
+        {/* ── Settings Tab ── */}
+        {tab === 'settings' && (
+          <div className="admin-section">
+            <div className="admin-toolbar">
+              <h3><Settings size={18} /> Platform Settings</h3>
+              <button className="admin-action-btn" onClick={loadSettings}><RefreshCw size={14} /> Refresh</button>
+            </div>
+
+            {platformSettings ? (
+              <div className="settings-cards">
+                {/* Translation Engine */}
+                <div className="settings-card">
+                  <div className="settings-card-header">
+                    <h4>Translation Engine</h4>
+                    <p className="settings-card-desc">
+                      Choose which engine translates between Bambara and French in the chat.
+                    </p>
+                  </div>
+                  <div className="settings-card-body">
+                    <label className={`settings-radio ${platformSettings.translation_engine === 'gpt' ? 'active' : ''}`}>
+                      <input
+                        type="radio"
+                        name="translation_engine"
+                        value="gpt"
+                        checked={platformSettings.translation_engine === 'gpt'}
+                        onChange={() => saveSettings('translation_engine', 'gpt')}
+                        disabled={settingsSaving}
+                      />
+                      <div className="settings-radio-content">
+                        <strong>GPT-4o-mini</strong>
+                        <span className="settings-radio-desc">
+                          Uses OpenAI API. Better conversational quality, no local model needed.
+                          Cost: ~$0.0001 per message (negligible).
+                        </span>
+                      </div>
+                    </label>
+                    <label className={`settings-radio ${platformSettings.translation_engine === 'nllb' ? 'active' : ''}`}>
+                      <input
+                        type="radio"
+                        name="translation_engine"
+                        value="nllb"
+                        checked={platformSettings.translation_engine === 'nllb'}
+                        onChange={() => saveSettings('translation_engine', 'nllb')}
+                        disabled={settingsSaving}
+                      />
+                      <div className="settings-radio-content">
+                        <strong>NLLB (Local)</strong>
+                        <span className="settings-radio-desc">
+                          Meta NLLB model running locally. Free, but requires ~3GB RAM and model download.
+                          Purpose-built for low-resource languages.
+                        </span>
+                      </div>
+                    </label>
+                    <p className="settings-hint">
+                      {settingsSaving ? 'Saving...' : 'Changes apply immediately to new messages. If the chosen engine fails, the other is used as fallback.'}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <p className="admin-hint">Loading settings...</p>
             )}
           </div>
         )}

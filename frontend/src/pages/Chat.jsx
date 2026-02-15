@@ -2,12 +2,13 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { chatAPI, feedbackAPI } from '../services/api';
+import { chatAPI, feedbackAPI, authAPI } from '../services/api';
 import {
   Plus, MessageSquare, Trash2, Send, Mic, MicOff, Volume2,
-  ThumbsUp, ThumbsDown, LogOut, ChevronLeft, Pencil, Check, X, Settings,
+  ThumbsUp, ThumbsDown, LogOut, ChevronLeft, Pencil, Check, X, Settings, Mail, RefreshCw,
 } from 'lucide-react';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher';
+import AudioWaveform from '../components/AudioWaveform';
 import './Chat.css';
 
 export default function Chat() {
@@ -32,9 +33,19 @@ export default function Chat() {
   const [editingId, setEditingId] = useState(null);
   const [editTitle, setEditTitle] = useState('');
 
+  // Audio waveform state
+  const [playingMsgId, setPlayingMsgId] = useState(null);
+  const [playAnalyser, setPlayAnalyser] = useState(null);
+  const [recAnalyser, setRecAnalyser] = useState(null);
+
+  // Feedback state: { messageId: rating (1 or -1) }
+  const [feedbackMap, setFeedbackMap] = useState({});
+
   const messagesEndRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
+  const audioCtxRef = useRef(null);
+  const recAudioCtxRef = useRef(null);
 
   // Load conversations
   const loadConversations = useCallback(async () => {
@@ -145,8 +156,8 @@ export default function Chat() {
         return [...filtered, userMsg, aiMsg];
       });
 
-      // Play audio
-      if (data.audio_base64) playAudio(data.audio_base64);
+      // Play audio with waveform
+      if (data.audio_base64) playAudio(data.audio_base64, data.message_id || 'ai-' + Date.now());
     } catch (err) {
       setMessages((prev) => prev.filter((m) => m.id !== 'temp-user'));
       alert(err.message);
@@ -155,11 +166,16 @@ export default function Chat() {
     }
   };
 
-  // Voice recording
+  // Voice recording with live waveform
   const toggleRecording = async () => {
     if (recording) {
       mediaRecorderRef.current?.stop();
       setRecording(false);
+      setRecAnalyser(null);
+      if (recAudioCtxRef.current) {
+        try { recAudioCtxRef.current.close(); } catch { /* ignore */ }
+        recAudioCtxRef.current = null;
+      }
       return;
     }
 
@@ -168,9 +184,24 @@ export default function Chat() {
       const recorder = new MediaRecorder(stream, { mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4' });
       chunksRef.current = [];
 
+      // Create analyser for live mic waveform
+      const recCtx = new (window.AudioContext || window.webkitAudioContext)();
+      recAudioCtxRef.current = recCtx;
+      const micSource = recCtx.createMediaStreamSource(stream);
+      const analyser = recCtx.createAnalyser();
+      analyser.fftSize = 256;
+      analyser.smoothingTimeConstant = 0.65;
+      micSource.connect(analyser);
+      setRecAnalyser(analyser);
+
       recorder.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
       recorder.onstop = async () => {
         stream.getTracks().forEach((t) => t.stop());
+        setRecAnalyser(null);
+        if (recAudioCtxRef.current) {
+          try { recAudioCtxRef.current.close(); } catch { /* ignore */ }
+          recAudioCtxRef.current = null;
+        }
         const blob = new Blob(chunksRef.current, { type: recorder.mimeType });
         await sendVoice(blob);
       };
@@ -225,7 +256,7 @@ export default function Chat() {
         return [...filtered, ...msgs];
       });
 
-      if (data.audio_base64) playAudio(data.audio_base64);
+      if (data.audio_base64) playAudio(data.audio_base64, data.message_id || 'ai-' + Date.now());
     } catch (err) {
       setMessages((prev) => prev.filter((m) => m.id !== 'temp-voice'));
       alert(err.message);
@@ -234,16 +265,45 @@ export default function Chat() {
     }
   };
 
-  // Audio playback
-  const playAudio = (b64) => {
+  // Audio playback with waveform visualiser
+  const playAudio = (b64, msgId) => {
+    // Stop any previous playback context
+    if (audioCtxRef.current) {
+      try { audioCtxRef.current.close(); } catch { /* ignore */ }
+    }
+
     const audio = new Audio(`data:audio/wav;base64,${b64}`);
-    audio.play().catch(() => {});
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    audioCtxRef.current = ctx;
+
+    const source = ctx.createMediaElementSource(audio);
+    const analyser = ctx.createAnalyser();
+    analyser.fftSize = 256;
+    analyser.smoothingTimeConstant = 0.7;
+
+    source.connect(analyser);
+    analyser.connect(ctx.destination);
+
+    setPlayAnalyser(analyser);
+    if (msgId) setPlayingMsgId(msgId);
+
+    audio.addEventListener('ended', () => {
+      setPlayingMsgId(null);
+      setPlayAnalyser(null);
+      try { ctx.close(); } catch { /* ignore */ }
+    });
+
+    audio.play().catch(() => {
+      setPlayingMsgId(null);
+      setPlayAnalyser(null);
+    });
   };
 
-  // Feedback
+  // Feedback with visual confirmation
   const sendFeedback = async (messageId, rating) => {
     try {
       await feedbackAPI.submit({ message_id: messageId, rating });
+      setFeedbackMap((prev) => ({ ...prev, [messageId]: rating }));
     } catch {
       // Ignore
     }
@@ -258,6 +318,38 @@ export default function Chat() {
   };
 
   if (!user) return null;
+
+  // ── Email verification gate ──
+  if (!user.email_verified && !user.is_staff) {
+    return (
+      <div className="chat-page">
+        <div className="verify-gate">
+          <Mail size={48} className="verify-gate-icon" />
+          <h2>{t('auth.verify_required_title') || 'Verify Your Email'}</h2>
+          <p>{t('auth.verify_required_desc') || 'Please verify your email address to access the chat. Check your inbox for the verification link.'}</p>
+          <p className="verify-gate-email">{user.email}</p>
+          <div className="verify-gate-actions">
+            <button
+              className="verify-gate-resend"
+              onClick={async () => {
+                try {
+                  await authAPI.resendVerification();
+                  alert(t('auth.verify_resent') || 'Verification email sent! Check your inbox.');
+                } catch {
+                  alert(t('auth.verify_resend_error') || 'Failed to send verification email.');
+                }
+              }}
+            >
+              <RefreshCw size={16} /> {t('auth.resend_verification') || 'Resend Verification Email'}
+            </button>
+            <button className="verify-gate-logout" onClick={() => { logout(); navigate('/'); }}>
+              <LogOut size={16} /> {t('nav.logout') || 'Logout'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="chat-page">
@@ -353,21 +445,45 @@ export default function Chat() {
                 )}
               </div>
               <div className="msg-content">
-                <div className="msg-bubble">
+                <div className={`msg-bubble ${playingMsgId === msg.id ? 'speaking' : ''}`}>
                   {msg.text_bm && <p className="msg-text-main">{msg.text_bm}</p>}
                   {msg.text_fr && <p className="msg-text-sub">{msg.text_fr}</p>}
+                  {/* Playback waveform inside bubble when this message is speaking */}
+                  {playingMsgId === msg.id && playAnalyser && (
+                    <AudioWaveform
+                      analyserNode={playAnalyser}
+                      active={true}
+                      color="#ff7a2f"
+                      height={28}
+                      barWidth={2.5}
+                      barGap={1.5}
+                      className="msg-waveform"
+                    />
+                  )}
                 </div>
                 {msg.role === 'assistant' && msg.id && !msg.id.startsWith('temp') && (
                   <div className="msg-actions">
                     {msg.audio_base64 && (
-                      <button onClick={() => playAudio(msg.audio_base64)} title="Play">
+                      <button
+                        onClick={() => playAudio(msg.audio_base64, msg.id)}
+                        title="Play"
+                        className={playingMsgId === msg.id ? 'playing' : ''}
+                      >
                         <Volume2 size={14} />
                       </button>
                     )}
-                    <button onClick={() => sendFeedback(msg.id, 1)} title="Good">
+                    <button
+                      onClick={() => sendFeedback(msg.id, 1)}
+                      title="Good"
+                      className={feedbackMap[msg.id] === 1 ? 'fb-active fb-good' : ''}
+                    >
                       <ThumbsUp size={14} />
                     </button>
-                    <button onClick={() => sendFeedback(msg.id, -1)} title="Bad">
+                    <button
+                      onClick={() => sendFeedback(msg.id, -1)}
+                      title="Bad"
+                      className={feedbackMap[msg.id] === -1 ? 'fb-active fb-bad' : ''}
+                    >
                       <ThumbsDown size={14} />
                     </button>
                   </div>
@@ -382,8 +498,12 @@ export default function Chat() {
                 <img src="/logo-ekodi-innactif.png" alt="Ekodi thinking" />
               </div>
               <div className="msg-content">
-                <div className="msg-bubble typing">
-                  <span className="dot" /><span className="dot" /><span className="dot" />
+                <div className="msg-bubble typing wave-loader">
+                  <span className="wave-bar" />
+                  <span className="wave-bar" />
+                  <span className="wave-bar" />
+                  <span className="wave-bar" />
+                  <span className="wave-bar" />
                 </div>
               </div>
             </div>
@@ -412,7 +532,7 @@ export default function Chat() {
             </div>
           </div>
 
-          <div className="input-row">
+          <div className={`input-row ${recording ? 'input-row--recording' : ''}`}>
             <button
               className={`input-mic ${recording ? 'recording' : ''}`}
               onClick={toggleRecording}
@@ -421,20 +541,35 @@ export default function Chat() {
             >
               {recording ? <MicOff size={20} /> : <Mic size={20} />}
             </button>
-            <input
-              type="text"
-              className="input-text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder={t('chat.type_message')}
-              disabled={loading}
-              maxLength={2000}
-            />
+
+            {recording && recAnalyser ? (
+              <div className="input-rec-wave">
+                <AudioWaveform
+                  analyserNode={recAnalyser}
+                  active={recording}
+                  color="#ef4444"
+                  height={28}
+                  barWidth={2.5}
+                  barGap={1.5}
+                />
+              </div>
+            ) : (
+              <input
+                type="text"
+                className="input-text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={t('chat.type_message')}
+                disabled={loading}
+                maxLength={2000}
+              />
+            )}
+
             <button
               className="input-send"
               onClick={sendMessage}
-              disabled={!input.trim() || loading}
+              disabled={(!input.trim() || loading) && !recording}
             >
               <Send size={18} />
             </button>

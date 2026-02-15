@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { CheckCircle, XCircle, Loader2 } from 'lucide-react';
 import { authAPI } from '../services/api';
 import './Auth.css';
@@ -8,8 +8,10 @@ import './Auth.css';
 export default function VerifyEmail() {
   const { t } = useTranslation();
   const { token } = useParams();
+  const navigate = useNavigate();
   const [status, setStatus] = useState('loading'); // loading | success | error
   const [message, setMessage] = useState('');
+  const [countdown, setCountdown] = useState(5);
 
   useEffect(() => {
     authAPI.verify(token)
@@ -22,6 +24,22 @@ export default function VerifyEmail() {
         setMessage(err.message || t('auth.verify_error'));
       });
   }, [token, t]);
+
+  // Auto-redirect to login after successful verification
+  useEffect(() => {
+    if (status !== 'success') return;
+    const timer = setInterval(() => {
+      setCountdown((c) => {
+        if (c <= 1) {
+          clearInterval(timer);
+          navigate('/login');
+          return 0;
+        }
+        return c - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [status, navigate]);
 
   return (
     <div className="auth-page">
@@ -38,6 +56,9 @@ export default function VerifyEmail() {
               <CheckCircle size={48} className="auth-success-icon" />
               <h1>{t('auth.verify_success_title')}</h1>
               <p>{message}</p>
+              <p className="auth-redirect-hint">
+                {t('auth.redirect_to_login') || 'Redirecting to login'} ({countdown}s)
+              </p>
             </>
           )}
           {status === 'error' && (

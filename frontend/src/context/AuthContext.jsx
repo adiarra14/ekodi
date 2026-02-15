@@ -40,8 +40,8 @@ export function AuthProvider({ children }) {
     return data.user;
   };
 
-  const register = async (email, name, password, consent = false) => {
-    const data = await authAPI.register({ email, name, password, consent });
+  const register = async (email, name, password, consent = false, captcha_token = null) => {
+    const data = await authAPI.register({ email, name, password, consent, captcha_token });
     localStorage.setItem('ekodi_token', data.token);
     localStorage.setItem('ekodi_refresh_token', data.refresh_token);
     localStorage.setItem('ekodi_user', JSON.stringify(data.user));

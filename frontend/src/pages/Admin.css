@@ -751,6 +751,81 @@
   font-weight: 600;
 }
 
+/* ── Settings Tab ─────────────────────────────────── */
+.settings-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.settings-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  overflow: hidden;
+}
+.settings-card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+.settings-card-header h4 {
+  margin: 0 0 0.25rem;
+  font-size: 0.95rem;
+  color: #fafafa;
+}
+.settings-card-desc {
+  font-size: 0.8rem;
+  color: #71717a;
+  margin: 0;
+}
+.settings-card-body {
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.settings-radio {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.settings-radio:hover {
+  border-color: rgba(255, 122, 47, 0.15);
+  background: rgba(255, 122, 47, 0.02);
+}
+.settings-radio.active {
+  border-color: rgba(255, 122, 47, 0.3);
+  background: rgba(255, 122, 47, 0.06);
+}
+.settings-radio input[type="radio"] {
+  margin-top: 3px;
+  accent-color: #ff7a2f;
+}
+.settings-radio-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.settings-radio-content strong {
+  color: #e4e4e8;
+  font-size: 0.88rem;
+}
+.settings-radio-desc {
+  font-size: 0.78rem;
+  color: #71717a;
+  line-height: 1.4;
+}
+.settings-hint {
+  font-size: 0.75rem;
+  color: #555;
+  margin-top: 0.25rem;
+  font-style: italic;
+}
+
 @media (max-width: 768px) {
   .admin-page { padding: 5rem 1rem 2rem; }
   .admin-toolbar { gap: 6px; }

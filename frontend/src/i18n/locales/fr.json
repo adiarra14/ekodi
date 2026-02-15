@@ -177,7 +177,16 @@
     "verify_success_title": "Email verifie",
     "verify_success": "Votre email a ete verifie. Vous avez acces a toutes les fonctionnalites.",
     "verify_error_title": "Echec de la verification",
-    "verify_error": "Lien de verification invalide ou expire."
+    "verify_error": "Lien de verification invalide ou expire.",
+    "redirect_to_login": "Redirection vers la connexion",
+    "captcha_required": "Veuillez completer la verification CAPTCHA.",
+    "check_email_title": "Consultez votre email",
+    "check_email_desc": "Nous avons envoye un lien de verification a votre adresse email. Cliquez sur le lien pour activer votre compte et acceder au chat.",
+    "verify_required_title": "Verifiez votre email",
+    "verify_required_desc": "Veuillez verifier votre adresse email pour acceder au chat. Consultez votre boite de reception.",
+    "resend_verification": "Renvoyer l'email de verification",
+    "verify_resent": "Email de verification envoye ! Consultez votre boite de reception.",
+    "verify_resend_error": "Echec de l'envoi. Veuillez reessayer plus tard."
   },
   "chat": {
     "new_chat": "Nouveau Chat",

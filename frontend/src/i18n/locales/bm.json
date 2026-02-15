@@ -177,7 +177,16 @@
     "verify_success_title": "Email sɛgɛsɛgɛra",
     "verify_success": "I ka email sɛgɛsɛgɛra. I bɛ se ka fɛn bɛɛ kɛ sisan.",
     "verify_error_title": "Sɛgɛsɛgɛli ma se",
-    "verify_error": "Sɛbɛnni man ɲi walima a waati tɛmɛna."
+    "verify_error": "Sɛbɛnni man ɲi walima a waati tɛmɛna.",
+    "redirect_to_login": "Donnili yɔrɔ la taali",
+    "captcha_required": "I ka CAPTCHA sɛgɛsɛgɛli kɛ.",
+    "check_email_title": "I ka bataki lajɛ",
+    "check_email_desc": "An ye sɛgɛsɛgɛli link ci i ka email la. A digi walasa ka i ka jatebɔ kɛ.",
+    "verify_required_title": "I ka email sɛgɛsɛgɛ",
+    "verify_required_desc": "I ka email sɛgɛsɛgɛ walasa ka kuma ekodi fɛ. I ka i ka bataki lajɛ.",
+    "resend_verification": "Sɛgɛsɛgɛli bataki ci kokura",
+    "verify_resent": "Sɛgɛsɛgɛli bataki cira! I ka i ka bataki lajɛ.",
+    "verify_resend_error": "Bataki cili ma se. A mɛn dɔɔni."
   },
   "chat": {
     "new_chat": "Kuma Kura",

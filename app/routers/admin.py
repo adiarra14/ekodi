@@ -27,6 +27,7 @@ from app.models.conversation import Conversation, Message
 from app.models.api_key import ApiKey
 from app.models.feedback import Feedback
 from app.models.token_usage import TokenUsage
+from app.models.platform_setting import PlatformSetting
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -1047,3 +1048,76 @@ async def admin_server_health(admin: User = Depends(require_staff())):
             "memory_threshold": MEMORY_THRESHOLD,
         },
     }
+
+
+# ── Platform Settings ─────────────────────────────────────────
+
+# Known settings with their valid values and defaults
+SETTINGS_SCHEMA = {
+    "translation_engine": {"values": ["gpt", "nllb"], "default": "nllb"},
+}
+
+
+@router.get("/settings")
+async def get_platform_settings(
+    admin: User = Depends(require_staff()),
+    db: AsyncSession = Depends(get_db),
+):
+    """Return all platform settings as a dict."""
+    result = await db.execute(select(PlatformSetting))
+    rows = result.scalars().all()
+    settings_dict = {r.key: r.value for r in rows}
+
+    # Fill defaults for any missing keys
+    for key, schema in SETTINGS_SCHEMA.items():
+        if key not in settings_dict:
+            settings_dict[key] = schema["default"]
+
+    return {
+        "settings": settings_dict,
+        "schema": {k: {"values": v["values"], "default": v["default"]} for k, v in SETTINGS_SCHEMA.items()},
+    }
+
+
+class UpdateSettingsBody(BaseModel):
+    settings: dict[str, str]
+
+
+@router.patch("/settings")
+async def update_platform_settings(
+    body: UpdateSettingsBody,
+    admin: User = Depends(require_permission("manage_settings")),
+    db: AsyncSession = Depends(get_db),
+):
+    """Update one or more platform settings (superadmin only)."""
+    updated = []
+    for key, value in body.settings.items():
+        # Validate against schema
+        if key not in SETTINGS_SCHEMA:
+            raise HTTPException(400, f"Unknown setting: {key}")
+        schema = SETTINGS_SCHEMA[key]
+        if value not in schema["values"]:
+            raise HTTPException(400, f"Invalid value for {key}: {value}. Must be one of {schema['values']}")
+
+        # Upsert
+        result = await db.execute(
+            select(PlatformSetting).where(PlatformSetting.key == key)
+        )
+        setting = result.scalar_one_or_none()
+        if setting:
+            setting.value = value
+            setting.updated_by = admin.id
+        else:
+            setting = PlatformSetting(key=key, value=value, updated_by=admin.id)
+            db.add(setting)
+
+        updated.append(key)
+
+    await db.flush()
+
+    # Invalidate translation engine cache if it was updated
+    if "translation_engine" in updated:
+        from app.services.translation import invalidate_engine_cache
+        invalidate_engine_cache()
+
+    return {"updated": updated, "message": "Settings updated"}

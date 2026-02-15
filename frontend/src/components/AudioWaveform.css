@@ -1,0 +1,7 @@
+/* ── AudioWaveform component ─────────────────────── */
+
+.audio-waveform {
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+}

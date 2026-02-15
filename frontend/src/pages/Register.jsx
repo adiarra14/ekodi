@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Mail, Lock, User, CheckSquare } from 'lucide-react';
+import { authAPI } from '../services/api';
+import { Mail, Lock, User, CheckCircle, RefreshCw } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
 import LanguageSwitcher from '../components/ui/LanguageSwitcher';
 import './Auth.css';
+
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
 
 export default function Register() {
   const { t } = useTranslation();
@@ -18,6 +21,48 @@ export default function Register() {
   const [consent, setConsent] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [registered, setRegistered] = useState(false);
+  const [resending, setResending] = useState(false);
+  const captchaRef = useRef(null);
+  const captchaWidgetRef = useRef(null);
+
+  // Load reCAPTCHA script
+  useEffect(() => {
+    if (!RECAPTCHA_SITE_KEY) return;
+    if (document.getElementById('recaptcha-script')) return;
+
+    const script = document.createElement('script');
+    script.id = 'recaptcha-script';
+    script.src = 'https://www.google.com/recaptcha/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      if (window.grecaptcha && captchaRef.current && captchaWidgetRef.current === null) {
+        window.grecaptcha.ready(() => {
+          captchaWidgetRef.current = window.grecaptcha.render(captchaRef.current, {
+            sitekey: RECAPTCHA_SITE_KEY,
+            theme: 'dark',
+          });
+        });
+      }
+    };
+    document.head.appendChild(script);
+  }, []);
+
+  // Render captcha when ref is ready (if script loaded before component)
+  useEffect(() => {
+    if (!RECAPTCHA_SITE_KEY) return;
+    if (window.grecaptcha && captchaRef.current && captchaWidgetRef.current === null) {
+      try {
+        window.grecaptcha.ready(() => {
+          captchaWidgetRef.current = window.grecaptcha.render(captchaRef.current, {
+            sitekey: RECAPTCHA_SITE_KEY,
+            theme: 'dark',
+          });
+        });
+      } catch { /* already rendered */ }
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -26,17 +71,74 @@ export default function Register() {
       setError(t('auth.consent_required'));
       return;
     }
+
+    // Get CAPTCHA token
+    let captchaToken = null;
+    if (RECAPTCHA_SITE_KEY && window.grecaptcha) {
+      captchaToken = window.grecaptcha.getResponse(captchaWidgetRef.current);
+      if (!captchaToken) {
+        setError(t('auth.captcha_required') || 'Please complete the CAPTCHA verification.');
+        return;
+      }
+    }
+
     setLoading(true);
     try {
-      await register(email, name, password, consent);
-      navigate('/chat');
+      await register(email, name, password, consent, captchaToken);
+      setRegistered(true); // Show "check your email" screen
     } catch (err) {
       setError(err.message);
+      // Reset CAPTCHA on error
+      if (RECAPTCHA_SITE_KEY && window.grecaptcha) {
+        try { window.grecaptcha.reset(captchaWidgetRef.current); } catch { /* ignore */ }
+      }
     } finally {
       setLoading(false);
     }
   };
 
+  const handleResend = async () => {
+    setResending(true);
+    try {
+      await authAPI.resendVerification();
+      alert(t('auth.verify_resent') || 'Verification email sent!');
+    } catch {
+      alert(t('auth.verify_resend_error') || 'Failed to send email.');
+    } finally {
+      setResending(false);
+    }
+  };
+
+  // ── Post-registration: "Check your email" screen ──
+  if (registered) {
+    return (
+      <div className="auth-page">
+        <div className="auth-card">
+          <div className="auth-header">
+            <Mail size={48} className="auth-verify-icon" />
+            <h1>{t('auth.check_email_title') || 'Check Your Email'}</h1>
+            <p>{t('auth.check_email_desc') || 'We sent a verification link to your email. Click the link to activate your account.'}</p>
+            <p className="auth-verify-email">{email}</p>
+          </div>
+          <div className="auth-verify-actions">
+            <Button
+              variant="secondary"
+              onClick={handleResend}
+              loading={resending}
+              className="auth-submit"
+            >
+              <RefreshCw size={16} /> {t('auth.resend_verification') || 'Resend Verification Email'}
+            </Button>
+            <Link to="/login" className="auth-back-link">
+              {t('auth.back_to_login') || 'Back to Login'}
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // ── Registration form ──
   return (
     <div className="auth-page">
       <div className="auth-card">
@@ -105,6 +207,13 @@ export default function Register() {
               <Link to="/privacy" target="_blank">{t('auth.privacy_link')}</Link>
             </span>
           </label>
+
+          {/* reCAPTCHA widget */}
+          {RECAPTCHA_SITE_KEY && (
+            <div className="auth-captcha">
+              <div ref={captchaRef} />
+            </div>
+          )}
 
           <Button type="submit" variant="primary" size="lg" loading={loading} className="auth-submit">
             {t('auth.register_btn')}

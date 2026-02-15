@@ -204,3 +204,37 @@
   margin-top: 16px;
 }
 .auth-back-link:hover { text-decoration: underline; }
+
+/* ── Post-registration verify screen ── */
+.auth-verify-icon {
+  color: #ff7a2f;
+  margin: 0 auto 8px;
+}
+.auth-verify-email {
+  color: #ff7a2f;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+.auth-verify-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+/* ── CAPTCHA widget ── */
+.auth-captcha {
+  display: flex;
+  justify-content: center;
+  margin: 0.4rem 0;
+}
+
+/* ── Redirect countdown ── */
+.auth-redirect-hint {
+  color: #71717a;
+  font-size: 0.8rem;
+  margin-top: 8px;
+  font-style: italic;
+}

@@ -177,7 +177,16 @@
     "verify_success_title": "Email Verified",
     "verify_success": "Your email has been verified. You can now access all features.",
     "verify_error_title": "Verification Failed",
-    "verify_error": "Invalid or expired verification link."
+    "verify_error": "Invalid or expired verification link.",
+    "redirect_to_login": "Redirecting to login",
+    "captcha_required": "Please complete the CAPTCHA verification.",
+    "check_email_title": "Check Your Email",
+    "check_email_desc": "We sent a verification link to your email address. Click the link to activate your account and access the chat.",
+    "verify_required_title": "Verify Your Email",
+    "verify_required_desc": "Please verify your email address to access the chat. Check your inbox for the verification link.",
+    "resend_verification": "Resend Verification Email",
+    "verify_resent": "Verification email sent! Check your inbox.",
+    "verify_resend_error": "Failed to send verification email. Please try again later."
   },
   "chat": {
     "new_chat": "New Chat",

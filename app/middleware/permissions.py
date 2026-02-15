@@ -26,6 +26,7 @@ ROLE_PERMISSIONS: dict[str, list[str]] = {
         "stats.read",
         "chats.read", "chats.delete",
         "export.read",
+        "manage_settings",
     ],
     "support": [
         "users.read",
@@ -149,8 +150,8 @@ def require_staff():
 # ── Visible tabs per role (for frontend) ─────────────────────
 
 ROLE_TABS: dict[str, list[str]] = {
-    "superadmin": ["stats", "users", "team", "apikeys", "feedback", "chats", "sessions", "billing", "health"],
-    "admin": ["stats", "users", "team", "apikeys", "feedback", "chats", "sessions", "billing", "health"],
+    "superadmin": ["stats", "users", "team", "apikeys", "feedback", "chats", "sessions", "billing", "health", "settings"],
+    "admin": ["stats", "users", "team", "apikeys", "feedback", "chats", "sessions", "billing", "health", "settings"],
     "support": ["stats", "users", "feedback"],
     "marketing": ["stats"],
     "finance": ["stats", "apikeys", "billing"],

@@ -512,6 +512,46 @@ export default function Chat() {
               <img src="/logo-ekodi-std.png" alt="Ekodi" className="welcome-logo" />
               <h2>{t('chat.welcome')}</h2>
               <p>{t('chat.welcome_hint')}</p>
+
+              {/* ── Example prompts ── */}
+              <div className="welcome-examples">
+                <p className="welcome-examples-label">{t('chat.try_asking') || 'Try asking:'}</p>
+                <div className="welcome-examples-grid">
+                  {[
+                    t('chat.example_1') || "Qu'est-ce que le Mali ?",
+                    t('chat.example_2') || 'Bamanankan de, "Bonjour" ye mun ye?',
+                    t('chat.example_3') || 'Raconte-moi une histoire en bambara',
+                    t('chat.example_4') || "Comment dit-on 'merci' en bamanankan ?",
+                  ].map((ex, i) => (
+                    <button
+                      key={i}
+                      className="welcome-example-btn"
+                      onClick={() => { setInput(ex); }}
+                    >
+                      <MessageSquare size={14} />
+                      <span>{ex}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── Feedback explanation ── */}
+              <div className="welcome-feedback-info">
+                <p className="welcome-feedback-title">{t('chat.feedback_title') || 'Help ekodi learn!'}</p>
+                <div className="welcome-feedback-items">
+                  <div className="welcome-fb-item">
+                    <ThumbsUp size={16} className="welcome-fb-good" />
+                    <span>{t('chat.feedback_good') || 'Good answer – helps ekodi improve'}</span>
+                  </div>
+                  <div className="welcome-fb-item">
+                    <ThumbsDown size={16} className="welcome-fb-bad" />
+                    <span>{t('chat.feedback_bad') || 'Bad answer – tells ekodi to do better'}</span>
+                  </div>
+                </div>
+                <p className="welcome-feedback-hint">
+                  {t('chat.feedback_hint') || 'Your feedback helps train the AI to better understand Bamanankan.'}
+                </p>
+              </div>
             </div>
           )}
 

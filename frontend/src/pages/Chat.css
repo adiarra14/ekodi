@@ -395,6 +395,107 @@
   font-size: 0.88rem;
 }
 
+/* ── Example prompts ── */
+.welcome-examples {
+  margin-top: 1.2rem;
+  width: 100%;
+  max-width: 560px;
+}
+
+.welcome-examples-label {
+  font-size: 0.75rem;
+  color: #52525b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.6rem;
+}
+
+.welcome-examples-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .welcome-examples-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.welcome-example-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 0.7rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  color: #d4d4d8;
+  font-size: 0.8rem;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  line-height: 1.35;
+}
+
+.welcome-example-btn:hover {
+  background: rgba(167, 139, 250, 0.08);
+  border-color: rgba(167, 139, 250, 0.2);
+}
+
+.welcome-example-btn svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: #71717a;
+}
+
+/* ── Feedback explanation ── */
+.welcome-feedback-info {
+  margin-top: 1.5rem;
+  padding: 1rem 1.2rem;
+  background: rgba(167, 139, 250, 0.04);
+  border: 1px solid rgba(167, 139, 250, 0.1);
+  border-radius: 12px;
+  max-width: 440px;
+  width: 100%;
+}
+
+.welcome-feedback-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a78bfa;
+  margin-bottom: 0.6rem;
+}
+
+.welcome-feedback-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.welcome-fb-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: #d4d4d8;
+}
+
+.welcome-fb-good {
+  color: #22c55e;
+}
+
+.welcome-fb-bad {
+  color: #ef4444;
+}
+
+.welcome-feedback-hint {
+  margin-top: 0.6rem;
+  font-size: 0.72rem;
+  color: #52525b;
+  line-height: 1.4;
+}
+
 .chat-msg {
   display: flex;
   gap: 0.7rem;
